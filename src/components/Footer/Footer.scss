@@ -1,0 +1,159 @@
+@import 'src/assets/styles/reset';
+@import 'src/assets/styles/shared';
+@import 'src/assets/styles/typography';
+@import 'src/assets/styles/variables';
+p {
+  font-size: 2rem;
+}
+.container {
+  justify-content: space-between;
+}
+.newsletter {
+  background-color: $bg-primary;
+  .footer-newsletter {
+    height: 10.6rem;
+    justify-content: space-between;
+    align-items: center;
+    .newsletter-left {
+      align-items: center;
+    }
+    .logo {
+      width: 4.5rem;
+      height: 100%;
+    }
+    .box-content {
+      padding: 0rem 1rem;
+      color: white;
+      .box-title {
+        font-size: 1.6rem;
+      }
+      .introduce {
+        font-size: 1.3rem;
+      }
+    }
+    .form {
+      padding: 0rem 1rem;
+      padding-right: 0rem;
+      flex: 1;
+      input {
+        padding: 0.85rem 2rem;
+        height: 4.7rem;
+        width: 100%;
+        outline: none;
+        border: none;
+        border-radius: 0.4rem;
+        margin-right: 1rem;
+      }
+      button {
+        color: white;
+        align-items: center;
+        justify-content: space-around;
+        border: $text-primary;
+        background-color: $text-primary;
+        font-weight: 600;
+        font-size: 1.4rem;
+        padding: 0.93em 1.85em;
+        border-radius: 0.4rem;
+        img {
+          margin-left: 1rem;
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+      }
+      button:hover {
+        border: $btn-subscribe;
+        background-color: $btn-subscribe;
+      }
+    }
+  }
+}
+.footer-bottom {
+  padding-top: 6.8rem;
+  .contact {
+    * {
+      margin-bottom: 1rem;
+    }
+    .social-contact {
+      a {
+        margin-right: 1rem;
+        display: flex;
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        img {
+          line-height: inherit;
+          width: 2rem;
+          margin: 0rem;
+          height: 2rem;
+        }
+      }
+      .facebook {
+        background-color: $bg-facebook;
+      }
+      .twitter {
+        background-color: $bg-twitter;
+      }
+      .instagram {
+        background-color: $bg-instagram;
+      }
+      .youtube {
+        background-color: $bg-youtube;
+      }
+      .pinterest {
+        background-color: $bg-pinterest;
+      }
+    }
+    img {
+      width: 14.4rem;
+      height: 4.5rem;
+    }
+    p {
+      font-size: 1.3rem;
+      color: $text-semi-light;
+    }
+    p.widget-about-title {
+      color: $text-primary;
+      font-weight: 500;
+    }
+    a {
+      color: $text-primary;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    .telephone:hover {
+      color: $hover-color;
+    }
+    .widget-about-desc {
+      width: 28rem;
+      line-height: 2.15rem;
+      margin-bottom: 2.1rem;
+    }
+  }
+  .company,
+  .my-account,
+  .customer-service {
+    h3 {
+      padding-bottom: 0.6rem;
+      margin-bottom: 2rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: $text-primary;
+    }
+    ul {
+      li {
+        margin-bottom: 1.5rem;
+        line-height: 1.6rem;
+        a {
+          color: $text-semi-light;
+          font-size: 1.4rem;
+          line-height: 1.6rem;
+        }
+        a:hover {
+          color: $hover-color;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import 'variables';
+.container {
+  max-width: 120rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin: 0 auto;
+}
+.d-flex {
+  display: flex;
+}
+.d-block {
+  display: block;
+}
+.text-decoration {
+  text-decoration: none;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.color-facebook,
+.color-instagram,
+.color-youtube,
+.color-twitter,
+.color-pinterest,
+.color-envelope-regular,
+.color-arrow-right {
+  filter: $bg-icon;
+}
