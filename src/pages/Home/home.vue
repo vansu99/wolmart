@@ -24,14 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/assets/styles/reset';
-@import 'src/assets/styles/mixins';
-@import 'src/assets/styles/shared';
-@import 'src/assets/styles/variables';
-@import 'src/assets/styles/typography';
-
 .text {
   @include flexCenter();
-  // background-color:rgb(172, 72, 72);
 }
 </style>
