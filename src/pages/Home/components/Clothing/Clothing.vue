@@ -94,6 +94,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './../shared/';
 @import './Clothing';
 </style>

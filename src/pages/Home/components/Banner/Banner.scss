@@ -1,4 +1,16 @@
-@import './../shared/index.scss';
+.banner {
+  &-list {
+    padding: 5rem 0 3rem;
+  }
+  &-item {
+    height: 28.3rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
 
 .box {
   @include flexCenter();
