@@ -76,6 +76,35 @@
         </div>
       </div>
     </div>
+    <div class="header-bottom">
+      <div class="container">
+        <div class="header-bottom-wrapper">
+          <ul class="header-bottom-list">
+            <li class="header-bottom-item">
+              <router-link :to="{ name: 'Home' }">Home</router-link>
+            </li>
+            <li class="header-bottom-item">
+              <router-link to="/about">About</router-link>
+            </li>
+            <li class="header-bottom-item">
+              <router-link to="/shop">Shop</router-link>
+            </li>
+            <li class="header-bottom-item">
+              <router-link to="/contact">Contact</router-link>
+            </li>
+          </ul>
+          <div class="header-bottom-right">
+            <router-link to="/order" class="right-text">
+              <i class="fas fa-map-marker-alt right-icon"></i>
+              Track order
+            </router-link>
+            <router-link to="/order" class="right-text">
+              <i class="fas fa-tag right-icon"></i>daily deals
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
