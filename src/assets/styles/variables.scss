@@ -4,6 +4,7 @@ $font-primary: 'Poppins', sans-serif;
 // Colors
 $bg-primary: #336699;
 $bg-second: #333;
+$bg-contrary: #fff;
 $bg-facebook: #1b4f9b;
 $bg-twitter: #00adef;
 $bg-instagram: #cc0001;
@@ -16,6 +17,32 @@ $text-semi-light: #666;
 $hover-color: #336699;
 $btn-subscribe: #454545;
 $bg-icon: invert(100%) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
+
+$filter-banner-icon: invert(37%) sepia(10%) saturate(2869%) hue-rotate(169deg) brightness(97%)
+  contrast(95%);
+
+$filter-star-normal: invert(74%) sepia(1%) saturate(0%) hue-rotate(167deg) brightness(83%)
+  contrast(87%);
+$filter-star-checked: invert(58%) sepia(80%) saturate(2141%) hue-rotate(343deg) brightness(99%)
+  contrast(95%);
+
+$filter-icon-hover: invert(99%) sepia(99%) saturate(0%) hue-rotate(83deg) brightness(108%)
+  contrast(100%);
+$filter-icon-normal: invert(60%) sepia(8%) saturate(13%) hue-rotate(339deg) brightness(100%)
+  contrast(89%);
+
+$secondary-color: #f77c29;
+
+// Color white
+
+$text-extra-dark: #c4c4c5;
+$text-white-dark: #eee;
+$text-white-semi: #f5f5f5;
+$text-white-light: #fff;
+
+// Box shadow
+$box-shadow: 0rem 0.5rem 2rem rgba(0, 0, 0, 0.08);
+
 // Breakpoints
 $info-screen-1200: 'only screen and (max-width : 1199px)';
 $info-screen-992: 'only screen and (max-width : 991px)';
