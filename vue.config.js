@@ -8,6 +8,7 @@ module.exports = {
           @import "@/assets/styles/mixins.scss";
           @import "@/assets/styles/variables.scss";
           @import "@/assets/styles/typography.scss";
+          @import "@/assets/styles/transition.scss";
         `,
       },
     },
