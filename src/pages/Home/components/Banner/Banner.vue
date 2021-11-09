@@ -1,6 +1,11 @@
 <template>
   <div class="banner">
     <div class="container">
+      <div class="banner-list">
+        <div class="banner-item">
+          <img :src="require('@/assets/images/banner1.jpg')" alt="">
+        </div>
+      </div>
       <div class="boxs">
         <div class="box" v-for="(item, index) in bannerBoxes" :key="index">
           <img :src="require(`@/assets/images/Home/Banner/icon/${item.image}`)" :alt="item.image" />
