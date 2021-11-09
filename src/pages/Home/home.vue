@@ -42,4 +42,5 @@ export default {
 
 <style lang="scss" scoped>
 @import 'src/assets/styles/index';
+
 </style>
