@@ -6,5 +6,5 @@ export default {
   LOGOUT(state) {
     state.isAuthenticated = false;
     state.currentUser = null;
-  }
+  },
 };

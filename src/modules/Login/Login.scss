@@ -96,7 +96,7 @@
       color: $bg-second;
     }
     &:before {
-      content: "";
+      content: '';
       width: 100%;
       height: 1px;
       position: absolute;
@@ -110,7 +110,7 @@
     .social-item {
       cursor: pointer;
       @include flexCenter;
-      padding: .6rem 0;
+      padding: 0.6rem 0;
       font-size: 1.5rem;
       margin-bottom: 1.2rem;
       border-radius: 4px;
