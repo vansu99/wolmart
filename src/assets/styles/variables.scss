@@ -24,7 +24,6 @@ $hover-color: #336699;
 $btn-subscribe: #454545;
 $secondary-color: #f77c29;
 
-
 $bg-icon: invert(100%) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
 
 $filter-banner-icon: invert(37%) sepia(10%) saturate(2869%) hue-rotate(169deg) brightness(97%)
@@ -39,10 +38,8 @@ $filter-icon-hover: invert(99%) sepia(99%) saturate(0%) hue-rotate(83deg) bright
   contrast(100%);
 $filter-icon-normal: invert(60%) sepia(8%) saturate(13%) hue-rotate(339deg) brightness(100%)
   contrast(89%);
-$filter-arrow:  invert(21%) sepia(92%) saturate(1448%) hue-rotate(199deg) brightness(92%)
-            contrast(89%);
-
-
+$filter-arrow: invert(21%) sepia(92%) saturate(1448%) hue-rotate(199deg) brightness(92%)
+  contrast(89%);
 
 // Box shadow
 $box-shadow: 0rem 0.5rem 2rem rgba(0, 0, 0, 0.08);
