@@ -4,10 +4,10 @@
       <div class="container">
         <div class="clothing__top">
           <h2 class="section__title">{{ category.name }}</h2>
-          <a @click="handleClick(category.slug)"
+          <router-link :to="`/categories/${category.slug}`"
             ><div>More Products</div>
             <img src="@/assets/images/Shared/arrow-right-solid.svg" alt="arrow" />
-          </a>
+          </router-link>
         </div>
         <hr class="section__divider" />
         <div class="clothing__content">
@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="products">
-            <div class="product" v-for="item in products" :key="item.id">
+            <div class="product" v-for="(item, index) in products" :key="`${category.slug}-${index}`">
               <div class="product__top">
                 <a href="" class="product__link"><img :src="item.img_path" :alt="item.name" /></a>
                 <div class="product__btns">
@@ -55,7 +55,7 @@
                       src="@/assets/images/Shared/star-solid.svg"
                       alt="star"
                       v-for="n in 5 - star"
-                      :key="n"
+                      :key="n+5"
                     />
                   </span>
                   <a class="product__desription">({{ review }} reviews)</a>
@@ -91,23 +91,18 @@ export default {
     category: {},
   },
   created() {
-    this.callAPI();
+    this.getProducts();
   },
   methods: {
-    async callAPI() {
+    async getProducts() {
       const data = (await axios.get(`/categories/${this.category.id}`)).data;
       this.products = data;
-      console.log(this.products);
-    },
-    handleClick(slug) {
-      this.$router.push(`/categories/${slug}`);
     },
     formatPrice(value) {
-      
       return value.toLocaleString('vi-VN', {
         style: 'currency',
-        currency: 'VND'
-    })
+        currency: 'VND',
+      });
     },
   },
   computed: {

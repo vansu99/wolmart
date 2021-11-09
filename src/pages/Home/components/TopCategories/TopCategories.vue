@@ -8,14 +8,15 @@
         <div
           class="top-categories__card"
           v-for="(item, index) in categories"
-          @click="handleClick(item.slug)"
           :key="item.id"
         >
-          <img
-            :src="require(`@/assets/images/Home/TopCategories/${categories_img[index]}`)"
-            :alt="item.name"
-          />
-          <div>{{ item.name }}</div>
+          <router-link :to="`/categories/${item.slug}`">
+            <img
+              :src="require(`@/assets/images/Home/TopCategories/${categories_img[index]}`)"
+              :alt="item.name"
+            />
+            <div>{{ item.name }}</div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -38,12 +39,7 @@ export default {
       ],
     };
   },
-  props: { categories: [] },
-  methods: {
-    handleClick(slug) {
-      this.$router.push(`/categories/${slug}`);
-    },
-  },
+  props: { categories: [] }
 };
 </script>
 

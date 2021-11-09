@@ -17,7 +17,7 @@ export default {
   name: 'home',
   data() {
     return {
-      categories: []
+      categories: [],
     };
   },
   components: {
@@ -27,10 +27,10 @@ export default {
     Clothing,
   },
   created() {
-    this.callAPI();
+    this.getCategories();
   },
   methods: {
-    async callAPI() {
+    async getCategories() {
       this.isLoading = true;
       const data = (await axios.get('/home/categories')).data;
       this.categories = data;

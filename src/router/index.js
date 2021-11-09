@@ -18,5 +18,10 @@ export default new Router({
       name: 'Login',
       component: () => import('@/modules/Login'),
     },
+    {
+      path: '/categories/:category',
+      name: 'Category',
+      component: () => import('@/modules/Login'),
+    },
   ],
 });
