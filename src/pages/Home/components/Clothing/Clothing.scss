@@ -10,7 +10,6 @@
     & a {
       justify-content: flex-end;
       @include flexCenter();
-
       font-family: $font-primary;
       font-size: 1.4rem;
       font-weight: 600;
@@ -45,7 +44,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: $bg-second;
-
   border-radius: 0.5rem;
   &__content {
     padding: 3.7rem;
@@ -133,7 +131,6 @@
     & img {
       margin: auto 0;
       width: 100%;
-      // height: 100%;
       object-fit: cover;
       cursor: pointer;
     }
@@ -146,7 +143,6 @@
     height: 3.6rem;
     margin-bottom: 0.2rem;
     background: $bg-contrary;
-
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
