@@ -1,37 +1,45 @@
 <template>
   <div class="home">
     <Banner />
-    <TopCategories />
-    <Clothing />
-    <Clothing />
+    <TopCategories :categories="categories" />
+    <Clothing v-for="(item, index) in categories" :key="index" :category="item" />
     <Brand />
   </div>
 </template>
 
 <script>
+import axios from '@/utils/request';
+import TopCategories from './components/TopCategories/TopCategories';
+import Brand from './components/Brand/Brand';
+import Banner from './components/Banner/Banner';
+import Clothing from './components/Clothing/Clothing';
 export default {
   name: 'home',
   data() {
-    return {};
+    return {
+      categories: []
+    };
   },
   components: {
-    TopCategories: () => import('./components/TopCategories/TopCategories'),
-    Brand: () => import('./components/Brand/Brand'),
-    Banner: () => import('./components/Banner/Banner'),
-    Clothing: () => import('./components/Clothing/Clothing'),
+    TopCategories,
+    Brand,
+    Banner,
+    Clothing,
+  },
+  created() {
+    this.callAPI();
+  },
+  methods: {
+    async callAPI() {
+      this.isLoading = true;
+      const data = (await axios.get('/home/categories')).data;
+      this.categories = data;
+      this.isLoading = false;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import 'src/assets/styles/reset';
-@import 'src/assets/styles/mixins';
-@import 'src/assets/styles/shared';
-@import 'src/assets/styles/variables';
-@import 'src/assets/styles/typography';
-
-.text {
-  @include flexCenter();
-  // background-color:rgb(172, 72, 72);
-}
+@import 'src/assets/styles/index';
 </style>

@@ -5,12 +5,17 @@
         <h2 class="section-title">Top Categories Of The Month</h2>
       </div>
       <div class="top-categories__content">
-        <div class="top-categories__card" v-for="(item, index) in categories" :key="index">
+        <div
+          class="top-categories__card"
+          v-for="(item, index) in categories"
+          @click="handleClick(item.id)"
+          :key="item.id"
+        >
           <img
-            :src="require(`@/assets/images/Home/TopCategories/${item.image}`)"
-            :alt="item.category"
+            :src="require(`@/assets/images/Home/TopCategories/${categories_img[index]}`)"
+            :alt="item.name"
           />
-          <div>{{ item.category }}</div>
+          <div>{{ item.name }}</div>
         </div>
       </div>
     </div>
@@ -22,15 +27,22 @@ export default {
   name: 'TopCategories',
   data() {
     return {
-      categories: [
-        { image: 'fashion.jpg', category: 'fashion' },
-        { image: 'furniture.jpg', category: 'furniture' },
-        { image: 'shoes.jpg', category: 'shoes' },
-        { image: 'sports.jpg', category: 'sports' },
-        { image: 'games.jpg', category: 'games' },
-        { image: 'computers.jpg', category: 'computers' },
+      isLoading: false,
+      categories_img: [
+        'fashion.jpg',
+        'furniture.jpg',
+        'shoes.jpg',
+        'sports.jpg',
+        'games.jpg',
+        'computers.jpg',
       ],
     };
+  },
+  props: { categories: [] },
+  methods: {
+    handleClick(id) {
+      this.$router.push(`/categories/${id}`);
+    },
   },
 };
 </script>
