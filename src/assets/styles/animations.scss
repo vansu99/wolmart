@@ -1,0 +1,10 @@
+@keyframes __slideInDown {
+  0% {
+    visibility: hidden;
+    height: 0;
+  }
+  100% {
+    visibility: visible;
+    height: auto;
+  }
+}
