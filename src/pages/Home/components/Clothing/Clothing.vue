@@ -1,10 +1,10 @@
 <template>
-  <div :class="category.slut">
+  <div :class="category.slug">
     <div class="clothing">
       <div class="container">
         <div class="clothing__top">
           <h2 class="section__title">{{ category.name }}</h2>
-          <a @click="handleClick(category.id)"
+          <a @click="handleClick(category.slug)"
             ><div>More Products</div>
             <img src="@/assets/images/Shared/arrow-right-solid.svg" alt="arrow" />
           </a>
@@ -99,8 +99,8 @@ export default {
       this.products = data;
       console.log(this.products);
     },
-    handleClick(id) {
-      this.$router.push(`/categories/${id}`);
+    handleClick(slug) {
+      this.$router.push(`/categories/${slug}`);
     },
     formatPrice(value) {
       

@@ -8,7 +8,7 @@
         <div
           class="top-categories__card"
           v-for="(item, index) in categories"
-          @click="handleClick(item.id)"
+          @click="handleClick(item.slug)"
           :key="item.id"
         >
           <img
@@ -40,8 +40,8 @@ export default {
   },
   props: { categories: [] },
   methods: {
-    handleClick(id) {
-      this.$router.push(`/categories/${id}`);
+    handleClick(slug) {
+      this.$router.push(`/categories/${slug}`);
     },
   },
 };
