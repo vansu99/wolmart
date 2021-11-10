@@ -1,0 +1,94 @@
+.register {
+  @include flexCenter;
+  height: 100%;
+  &-wrapper {
+    width: 35rem;
+    padding: 3rem 3.5rem;
+  }
+  &-heading {
+    font-size: 2.6rem;
+    margin-bottom: 1.5rem;
+    color: $hover-color;
+    font-weight: bold;
+  }
+  &-success {
+    color: $text-primary;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    cursor: pointer;
+    b {
+      font-weight: bold;
+      color: $bg-primary;
+    }
+  }
+  &-error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    padding: 10px;
+  }
+  &-form {
+    .form-group {
+      margin-bottom: 2rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px 10px 10px 15px;
+      font-family: $font-primary;
+      color: $text-primary;
+      outline: none;
+      border: 1px solid #c9c9c9;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: transparent;
+      transition: border-color 0.2s ease-in;
+      &:focus {
+        border-color: $hover-color;
+      }
+    }
+    .form-error {
+      display: block;
+      color: $bg-danger;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    .form-forgot {
+      color: $text-primary;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      b {
+        color: $bg-primary;
+        font-weight: bold;
+      }
+    }
+    .form-button {
+      width: 100%;
+      font-size: 1.5rem;
+      font-weight: 500;
+      font-family: $font-primary;
+      display: block;
+      padding: 12px;
+      background-color: $bg-primary;
+      border: 0;
+      outline: 0;
+      color: #fff;
+      line-height: 1.2;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: capitalize;
+      &:hover {
+        opacity: 0.95;
+      }
+    }
+  }
+
+}

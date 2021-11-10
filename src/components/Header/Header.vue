@@ -55,9 +55,9 @@
                 </div>
               </div>
               <div v-else>
-                <a class="text-decoration" @click="openModal">Sign In</a>
+                <a class="text-decoration" @click="openModal('login')">Sign In</a>
                 <span>/</span>
-                <a class="text-decoration">Register</a>
+                <a class="text-decoration" @click="openModal('register')">Register</a>
               </div>
             </div>
           </div>
@@ -154,18 +154,25 @@
     <modal-login>
       <Login />
     </modal-login>
+    <modal-register>
+      <register />
+    </modal-register>
   </div>
 </template>
 
 <script>
 import ModalLogin from './modals/modal-login';
 import Login from '@/modules/Login';
+import Register from '@/modules/Register'
+import ModalRegister from './modals/modal-register'
 import { mapGetters } from 'vuex';
 export default {
   name: 'Header',
   components: {
+    Register,
     Login,
     ModalLogin,
+    ModalRegister
   },
   computed: {
     ...mapGetters({
@@ -174,8 +181,8 @@ export default {
     }),
   },
   methods: {
-    openModal() {
-      this.$modal.show('login');
+    openModal(type) {
+      this.$modal.show(type);
     },
     handleLogout() {
       this.$store.dispatch('auth/logout');

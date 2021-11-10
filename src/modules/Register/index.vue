@@ -1,0 +1,135 @@
+<template>
+  <div class="register">
+    <div class="register-wrapper">
+      <h2 class="register-heading">Wolmart</h2>
+      <div class="register-success" v-if="isSuccess">
+        Bạn đã đăng ký thành công với tài khoản <b>{{ accountName }}</b
+        >, bạn hãy nhấn vào <b @click="openModalLogin">đăng nhập</b>.
+      </div>
+      <div class="register-form" v-else>
+        <ValidationObserver v-slot="{ handleSubmit }">
+          <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
+            <ValidationProvider
+              class="form-group"
+              name="name"
+              rules="required"
+              v-slot="{ errors }"
+              tag="div"
+            >
+              <label class="form-label" for="name">Họ và tên</label>
+              <input
+                type="text"
+                id="name"
+                class="form-input"
+                v-model="formData.name"
+                placeholder="Nhập họ tên của bạn"
+              />
+              <span class="form-error">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <ValidationProvider
+              class="form-group"
+              name="Email"
+              rules="required|email"
+              v-slot="{ errors }"
+              tag="div"
+            >
+              <label class="form-label" for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-input"
+                v-model="formData.email"
+                placeholder="Nhập địa chỉ email của bạn"
+              />
+              <span class="form-error">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <ValidationProvider
+              class="form-group"
+              name="password"
+              rules="required|max:32|min:6"
+              v-slot="{ errors }"
+              tag="div"
+            >
+              <label class="form-label" for="email">Mật khẩu</label>
+              <input
+                type="password"
+                id="password"
+                class="form-input"
+                v-model="formData.password"
+                placeholder="Nhập mật khẩu của bạn"
+              />
+              <span class="form-error">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <ValidationProvider
+              class="form-group"
+              name="phone"
+              rules="required"
+              v-slot="{ errors }"
+              tag="div"
+            >
+              <label class="form-label" for="phone">Số điện thoại</label>
+              <input
+                type="text"
+                id="phone"
+                class="form-input"
+                v-model="formData.phone"
+                placeholder="Nhập số điện thoại của bạn"
+              />
+              <span class="form-error">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <button class="form-button" type="submit">đăng ký</button>
+          </form>
+        </ValidationObserver>
+        <p class="form-forgot">
+          Khi bạn nhấn Đăng ký, bạn đã đồng ý thực hiện mọi giao dịch mua bán theo điều kiện sử dụng
+          và chính sách của <b>Wolmart</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { userApis } from '@/apis';
+import Nprogress from 'nprogress';
+
+export default {
+  name: 'Register',
+  data() {
+    return {
+      formData: {
+        name: '',
+        email: '',
+        password: '',
+        phone: '',
+      },
+      accountName: '',
+      isSuccess: false,
+    };
+  },
+  methods: {
+    async onSubmit() {
+      try {
+        Nprogress.start();
+        const response = await userApis.register(this.formData);
+        if (response.status === 200) {
+          this.isSuccess = true;
+          this.accountName = response.data.email;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        Nprogress.done();
+      }
+    },
+    openModalLogin() {
+      this.$modal.hide('register')
+      this.$modal.show('login');
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import './register';
+</style>
