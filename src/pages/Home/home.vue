@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       categories: [],
+      isLoading: false
     };
   },
   components: {
@@ -32,8 +33,8 @@ export default {
   methods: {
     async getCategories() {
       this.isLoading = true;
-      const data = (await axios.get('/home/categories')).data;
-      this.categories = data;
+      const categoryData = (await axios.get('/home/categories')).data;
+      this.categories = categoryData;
       this.isLoading = false;
     },
   },
@@ -41,6 +42,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/assets/styles/index';
-
 </style>

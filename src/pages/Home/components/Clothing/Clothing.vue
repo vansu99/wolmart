@@ -21,26 +21,30 @@
             </div>
           </div>
           <div class="products">
-            <div class="product" v-for="(item, index) in products" :key="`${category.slug}-${index}`">
+            <div
+              class="product"
+              v-for="(item, index) in products"
+              :key="`${category.slug}-${index}`"
+            >
               <div class="product__top">
-                <a href="" class="product__link"><img :src="item.img_path" :alt="item.name" /></a>
+                <router-link :to="`/products/${item.id}`" href="" class="product__link"><img :src="item.img_path" :alt="item.name" /></router-link>
                 <div class="product__btns">
-                  <a class="product__btn" title="Add to cart"
+                  <router-link to="/cart" class="product__btn" title="Add to cart"
                     ><img
                       src="@/assets/images/Home/Clothing/icon/shopping-bag-solid.svg"
                       alt="add-to-cart"
-                  /></a>
-                  <a class="product__btn" title="Add to wishlist"
+                  /></router-link>
+                  <router-link to="wishlist" class="product__btn" title="Add to wishlist"
                     ><img
                       src="@/assets/images/Home/Clothing/icon/heart-solid.svg"
                       alt="add-to-wishlist"
-                  /></a>
+                  /></router-link>
                 </div>
                 <span class="product__sale" v-show="item.discount">{{ item.discount }}% off</span>
               </div>
               <div class="product__content">
                 <div class="product__name">
-                  <a>{{ item.name }}</a>
+                  <router-link :to="`/products/${item.id}`">{{ item.name }}</router-link>
                 </div>
                 <div class="product__rating">
                   <span class="product__stars" :star="`${star}.00`">
@@ -55,14 +59,14 @@
                       src="@/assets/images/Shared/star-solid.svg"
                       alt="star"
                       v-for="n in 5 - star"
-                      :key="n+5"
+                      :key="n + 5"
                     />
                   </span>
-                  <a class="product__desription">({{ review }} reviews)</a>
+                  <router-link :to="`/products/${item.id}`" class="product__desription">({{ review }} reviews)</router-link>
                 </div>
                 <div class="product__price">
                   <span class="product__price--new">{{
-                    formatPrice((item.original_price / 100) * (100 - item.discount))
+                    formatPrice(currentPrice(item.original_price, item.discount))
                   }}</span>
                   <span class="product__price--old">{{ formatPrice(item.original_price) }}</span>
                 </div>
@@ -77,6 +81,7 @@
 
 <script>
 import axios from '@/utils/request';
+import { formatPrice, currentPrice } from '@/utils/price';
 
 export default {
   name: 'Clothing',
@@ -84,7 +89,7 @@ export default {
     return {
       products: [],
       star: 3,
-      review: 12,
+      review: 12
     };
   },
   props: {
@@ -95,20 +100,11 @@ export default {
   },
   methods: {
     async getProducts() {
-      const data = (await axios.get(`/categories/${this.category.id}`)).data;
-      this.products = data;
+      const productData = (await axios.get(`/categories/${this.category.id}`)).data;
+      this.products = productData;
     },
-    formatPrice(value) {
-      return value.toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-      });
-    },
-  },
-  computed: {
-    currentPrice: () => {
-      return (this.item.original_price / 100) * (100 - this.item.discount);
-    },
+    formatPrice,
+    currentPrice,
   },
 };
 </script>

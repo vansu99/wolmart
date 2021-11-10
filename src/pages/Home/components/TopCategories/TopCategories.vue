@@ -2,7 +2,7 @@
   <div class="top-categories">
     <div class="container">
       <div class="top-categories__top">
-        <h2 class="section-title">Top Categories Of The Month</h2>
+        <h2 class="section__title">Top Categories Of The Month</h2>
       </div>
       <div class="top-categories__content">
         <div
@@ -28,7 +28,6 @@ export default {
   name: 'TopCategories',
   data() {
     return {
-      isLoading: false,
       categories_img: [
         'fashion.jpg',
         'furniture.jpg',
