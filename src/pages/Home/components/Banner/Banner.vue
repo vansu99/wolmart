@@ -20,7 +20,7 @@
         <div class="adv">
           <div class="adv__content">
             <div class="adv__sub-title">Get up to <span>20% off</span></div>
-            <div class="adv__title">SpORtS OuTFiTS</div>
+            <div class="adv__title">sports oufits</div>
             <div class="adv__type">collection</div>
             <div class="adv__description">Starting at <span>$170.00</span></div>
           </div>

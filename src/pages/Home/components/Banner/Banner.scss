@@ -1,3 +1,5 @@
+@import '../../';
+
 .banner {
   &-list {
     padding: 5rem 0 3rem;
@@ -11,7 +13,6 @@
     }
   }
 }
-
 .box {
   @include flexCenter();
   &s {
@@ -47,7 +48,7 @@
 .adv {
   position: relative;
   overflow: hidden;
-  background-color: $text-extra-dark;
+  background-color: $bg-contrary-dark;
   border-radius: 0.3rem;
 
   &s {
@@ -79,9 +80,6 @@
     }
     & span {
       text-transform: uppercase;
-    }
-    &.capitalize {
-      text-transform: capitalize;
     }
   }
   &__title {

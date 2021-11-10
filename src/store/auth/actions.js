@@ -3,6 +3,6 @@ export default {
     commit('LOGIN', value);
   },
   logout({ commit }) {
-    commit('LOGOUT')
-  }
+    commit('LOGOUT');
+  },
 };
