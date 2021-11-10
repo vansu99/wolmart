@@ -27,7 +27,9 @@
               :key="`${category.slug}-${index}`"
             >
               <div class="product__top">
-                <router-link :to="`/products/${item.id}`" href="" class="product__link"><img :src="item.img_path" :alt="item.name" /></router-link>
+                <router-link :to="`/products/${item.id}`" href="" class="product__link"
+                  ><img :src="item.img_path" :alt="item.name"
+                /></router-link>
                 <div class="product__btns">
                   <router-link to="/cart" class="product__btn" title="Add to cart"
                     ><img
@@ -62,13 +64,15 @@
                       :key="n + 5"
                     />
                   </span>
-                  <router-link :to="`/products/${item.id}`" class="product__desription">({{ review }} reviews)</router-link>
+                  <router-link :to="`/products/${item.id}`" class="product__desription"
+                    >({{ review }} reviews)</router-link
+                  >
                 </div>
                 <div class="product__price">
                   <span class="product__price--new">{{
-                    formatPrice(currentPrice(item.original_price, item.discount))
+                    item.original_price | calDiscountPrice(item.discount) | formatPrice
                   }}</span>
-                  <span class="product__price--old">{{ formatPrice(item.original_price) }}</span>
+                  <span class="product__price--old">{{ item.original_price | formatPrice }}</span>
                 </div>
               </div>
             </div>
@@ -81,7 +85,6 @@
 
 <script>
 import axios from '@/utils/request';
-import { formatPrice, currentPrice } from '@/utils/price';
 
 export default {
   name: 'Clothing',
@@ -89,7 +92,7 @@ export default {
     return {
       products: [],
       star: 3,
-      review: 12
+      review: 12,
     };
   },
   props: {
@@ -103,8 +106,6 @@ export default {
       const productData = (await axios.get(`/categories/${this.category.id}`)).data;
       this.products = productData;
     },
-    formatPrice,
-    currentPrice,
   },
 };
 </script>
