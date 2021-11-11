@@ -40,7 +40,7 @@ export default {
           this.categories = categoryData.data;
         }
       } catch {
-        console.log('error!!!');
+        console.log('getCategories error!!!');
       } finally {
         Nprogress.done();
       }

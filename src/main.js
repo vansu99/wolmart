@@ -15,9 +15,9 @@ Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 
 // setup global filters
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+});
 
 new Vue({
   router,

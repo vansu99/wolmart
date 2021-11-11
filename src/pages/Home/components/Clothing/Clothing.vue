@@ -84,13 +84,8 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import { categoryApis } from '@/apis/';
 import Nprogress from 'nprogress';
-import { formatPrice, currentPrice } from '@/utils/price';
-=======
-import axios from '@/utils/request';
->>>>>>> 485962316015725b417f75be0e6966273168f8cf
 
 export default {
   name: 'Clothing',
@@ -117,7 +112,7 @@ export default {
           this.products = productData.data;
         }
       } catch {
-        console.log('error!!!');
+        console.log('getProducts error!!!');
       } finally {
         Nprogress.done();
       }
