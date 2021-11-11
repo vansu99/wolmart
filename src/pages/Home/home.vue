@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import axios from '@/utils/request';
+import { categoryApis } from '@/apis/';
+import Nprogress from 'nprogress';
 import TopCategories from './components/TopCategories/TopCategories';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
@@ -18,7 +19,6 @@ export default {
   data() {
     return {
       categories: [],
-      isLoading: false
     };
   },
   components: {
@@ -32,10 +32,18 @@ export default {
   },
   methods: {
     async getCategories() {
-      this.isLoading = true;
-      const categoryData = (await axios.get('/home/categories')).data;
-      this.categories = categoryData;
-      this.isLoading = false;
+      // call API to get category list
+      try {
+        Nprogress.start();
+        const categoryData = await categoryApis.getCategoryList();
+        if (categoryData.status === 200) {
+          this.categories = categoryData.data;
+        }
+      } catch {
+        console.log('error!!!');
+      } finally {
+        Nprogress.done();
+      }
     },
   },
 };

@@ -27,7 +27,9 @@
               :key="`${category.slug}-${index}`"
             >
               <div class="product__top">
-                <router-link :to="`/products/${item.id}`" href="" class="product__link"><img :src="item.img_path" :alt="item.name" /></router-link>
+                <router-link :to="`/products/${item.id}`" href="" class="product__link"
+                  ><img :src="item.img_path" :alt="item.name"
+                /></router-link>
                 <div class="product__btns">
                   <router-link to="/cart" class="product__btn" title="Add to cart"
                     ><img
@@ -62,7 +64,9 @@
                       :key="n + 5"
                     />
                   </span>
-                  <router-link :to="`/products/${item.id}`" class="product__desription">({{ review }} reviews)</router-link>
+                  <router-link :to="`/products/${item.id}`" class="product__desription"
+                    >({{ review }} reviews)</router-link
+                  >
                 </div>
                 <div class="product__price">
                   <span class="product__price--new">{{
@@ -80,7 +84,8 @@
 </template>
 
 <script>
-import axios from '@/utils/request';
+import { categoryApis } from '@/apis/';
+import Nprogress from 'nprogress';
 import { formatPrice, currentPrice } from '@/utils/price';
 
 export default {
@@ -89,7 +94,7 @@ export default {
     return {
       products: [],
       star: 3,
-      review: 12
+      review: 12,
     };
   },
   props: {
@@ -100,8 +105,18 @@ export default {
   },
   methods: {
     async getProducts() {
-      const productData = (await axios.get(`/categories/${this.category.id}`)).data;
-      this.products = productData;
+      // call API to get product list
+      try {
+        Nprogress.start();
+        const productData = await categoryApis.getProductListBaseOnCategory(this.category.id);
+        if (productData.status === 200) {
+          this.products = productData.data;
+        }
+      } catch {
+        console.log('error!!!');
+      } finally {
+        Nprogress.done();
+      }
     },
     formatPrice,
     currentPrice,
