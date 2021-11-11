@@ -13,11 +13,6 @@ export default new Router({
       meta: { layout: PublicLayout },
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: () => import('@/modules/Login'),
-    },
-    {
       path: '/categories/:category',
       name: 'Category',
       component: () => import('@/modules/Login'),
