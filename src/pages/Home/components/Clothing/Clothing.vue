@@ -84,7 +84,8 @@
 </template>
 
 <script>
-import axios from '@/utils/request';
+import { categoryApis } from '@/apis/';
+import Nprogress from 'nprogress';
 
 export default {
   name: 'Clothing',
@@ -103,8 +104,18 @@ export default {
   },
   methods: {
     async getProducts() {
-      const productData = (await axios.get(`/categories/${this.category.id}`)).data;
-      this.products = productData;
+      // call API to get product list
+      try {
+        Nprogress.start();
+        const productData = await categoryApis.getProductListBaseOnCategory(this.category.id);
+        if (productData.status === 200) {
+          this.products = productData.data;
+        }
+      } catch {
+        console.log('error!!!');
+      } finally {
+        Nprogress.done();
+      }
     },
   },
 };
