@@ -70,9 +70,9 @@
                 </div>
                 <div class="product__price">
                   <span class="product__price--new">{{
-                    formatPrice(currentPrice(item.original_price, item.discount))
+                    item.original_price | calDiscountPrice(item.discount) | formatPrice
                   }}</span>
-                  <span class="product__price--old">{{ formatPrice(item.original_price) }}</span>
+                  <span class="product__price--old">{{ item.original_price | formatPrice }}</span>
                 </div>
               </div>
             </div>
@@ -84,9 +84,13 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { categoryApis } from '@/apis/';
 import Nprogress from 'nprogress';
 import { formatPrice, currentPrice } from '@/utils/price';
+=======
+import axios from '@/utils/request';
+>>>>>>> 485962316015725b417f75be0e6966273168f8cf
 
 export default {
   name: 'Clothing',
@@ -118,8 +122,6 @@ export default {
         Nprogress.done();
       }
     },
-    formatPrice,
-    currentPrice,
   },
 };
 </script>
