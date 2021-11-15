@@ -68,7 +68,9 @@
       <div class="row d-flex">
         <div class="header-left d-flex">
           <div class="logo">
-            <a href="#"><img src="../../assets/images/Header/logo.png" alt="" /></a>
+            <router-link to="/"
+              ><img src="../../assets/images/Header/logo.png" alt="Wolmart"
+            /></router-link>
           </div>
           <div class="form d-flex">
             <div class="search-input">
@@ -88,7 +90,6 @@
         <div class="header-right d-flex">
           <div class="contact items d-flex">
             <div><img src="../../assets/images/Header/Icon/phone-volume-solid.svg" alt="" /></div>
-            <!-- width: 3rem-->
             <div>
               <a class="text-decoration live-chat" href="">Live Chat </a>
               <span> or : </span>
@@ -163,8 +164,8 @@
 <script>
 import ModalLogin from './modals/modal-login';
 import Login from '@/modules/Login';
-import Register from '@/modules/Register'
-import ModalRegister from './modals/modal-register'
+import Register from '@/modules/Register';
+import ModalRegister from './modals/modal-register';
 import { mapGetters } from 'vuex';
 export default {
   name: 'Header',
@@ -172,7 +173,7 @@ export default {
     Register,
     Login,
     ModalLogin,
-    ModalRegister
+    ModalRegister,
   },
   computed: {
     ...mapGetters({

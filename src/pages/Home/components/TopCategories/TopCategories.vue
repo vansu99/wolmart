@@ -5,12 +5,13 @@
         <h2 class="section__title">Top Categories Of The Month</h2>
       </div>
       <div class="top-categories__content">
-        <div
-          class="top-categories__card"
-          v-for="(item, index) in categories"
-          :key="item.id"
-        >
-          <router-link :to="`/categories/${item.slug}`">
+        <div class="top-categories__card" v-for="(item, index) in categories" :key="item.id">
+          <router-link
+            :to="{
+              name: 'Products',
+              params: { slug: convertSlug(item.name), categoryId: item.id },
+            }"
+          >
             <img
               :src="require(`@/assets/images/Home/TopCategories/${categories_img[index]}`)"
               :alt="item.name"
@@ -24,8 +25,10 @@
 </template>
 
 <script>
+import mixins from '@/mixins';
 export default {
   name: 'TopCategories',
+  mixins: [mixins],
   data() {
     return {
       categories_img: [
@@ -38,7 +41,11 @@ export default {
       ],
     };
   },
-  props: { categories: [] }
+  computed: {
+    categories() {
+      return this.$store.getters['category/categories'];
+    },
+  },
 };
 </script>
 

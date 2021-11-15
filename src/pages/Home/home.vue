@@ -1,25 +1,24 @@
 <template>
   <div class="home">
     <Banner />
-    <TopCategories :categories="categories" />
-    <Clothing v-for="(item, index) in categories" :key="index" :category="item" />
+    <TopCategories />
+    <Clothing v-for="item in categories" :key="item.id" :category="item" />
     <Brand />
   </div>
 </template>
 
 <script>
-import { categoryApis } from '@/apis/';
+import { categoryApis } from '@/apis';
 import Nprogress from 'nprogress';
 import TopCategories from './components/TopCategories/TopCategories';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
 import Clothing from './components/Clothing/Clothing';
+
 export default {
   name: 'home',
   data() {
-    return {
-      categories: [],
-    };
+    return {};
   },
   components: {
     TopCategories,
@@ -27,17 +26,22 @@ export default {
     Banner,
     Clothing,
   },
+  computed: {
+    categories() {
+      return this.$store.getters['category/categories'];
+    },
+  },
   created() {
     this.getCategories();
   },
   methods: {
+    // call API to get category list
     async getCategories() {
-      // call API to get category list
       try {
         Nprogress.start();
         const categoryData = await categoryApis.getCategoryList();
         if (categoryData.status === 200) {
-          this.categories = categoryData.data;
+          await this.$store.dispatch('category/getCategories', categoryData.data);
         }
       } catch {
         console.log('error!!!');
@@ -49,5 +53,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
