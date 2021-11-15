@@ -12,9 +12,7 @@ export default new Router({
       name: 'Home',
       component: () => import('@/pages/Home/home'),
       meta: { layout: PublicLayout, breadcrumb: false },
-      children: [
-
-      ]
+      children: [],
     },
     {
       path: '/:slug/:categoryId',
@@ -22,7 +20,7 @@ export default new Router({
       component: () => import('@/pages/Products'),
       meta: {
         layout: PublicLayout,
-        breadcrumb: true
+        breadcrumb: true,
       },
     },
     {
@@ -33,6 +31,6 @@ export default new Router({
         layout: PublicLayout,
         breadcrumb: true,
       },
-    }
+    },
   ],
 });

@@ -7,7 +7,12 @@
         </div>
         <div class="product-list-right">
           <product-filter />
-          <product-list :products="products" />
+          <template v-if="isShow">
+            <custom-skeleton :count="20" />
+          </template>
+          <template v-else>
+            <product-list :products="products" />
+          </template>
         </div>
       </div>
     </div>
@@ -18,12 +23,14 @@
 import mixins from '@/mixins';
 import Nprogress from 'nprogress';
 import { categoryApis } from '@/apis';
+import CustomSkeleton from '@/components/Skeleton';
 import ProductFilter from './components/product-filter';
 import CategoryList from '@/pages/Products/components/category-list';
 import ProductList from '@/pages/Products/components/product-list';
 export default {
   name: 'products',
   components: {
+    CustomSkeleton,
     ProductList,
     CategoryList,
     ProductFilter,
@@ -32,6 +39,7 @@ export default {
   data() {
     return {
       products: [],
+      isShow: false,
     };
   },
   created() {
@@ -46,6 +54,7 @@ export default {
     async loadCategoryById() {
       try {
         Nprogress.start();
+        this.isShow = true;
         const id = this.$route.params.categoryId;
         const query = this.$route.query;
         const response = await categoryApis.getProductListBaseOnCategory(id, query);
@@ -56,6 +65,7 @@ export default {
       } catch (e) {
         console.log(e);
       } finally {
+        this.isShow = false;
         Nprogress.done();
       }
     },
