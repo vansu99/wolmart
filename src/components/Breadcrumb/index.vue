@@ -29,6 +29,13 @@ export default {
       handler(value) {
         this.breadcrumbs = [{ title: 'Home', path: '/' }];
 
+        if(this.$route.meta.title) {
+          this.breadcrumbs.push({
+            title: this.$route.meta.title,
+            path: value,
+          });
+        }
+
         if (this.breadcrumbs.filter((item) => item.path === value).length === 0) {
           this.breadcrumbs.push({
             title: titleCase(this.$route.params.slug.replace(/-/g, ' ')),

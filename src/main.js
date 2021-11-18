@@ -3,7 +3,7 @@ import App from './App.vue';
 import store from '@/store';
 import router from '@/router';
 import 'nprogress/nprogress.css';
-import './assets/styles/index.scss';
+import '@/assets/styles/index.scss';
 import VModal from 'vue-js-modal';
 import * as filters from '@/filters';
 import VueSkeletonLoader from 'skeleton-loader-vue';

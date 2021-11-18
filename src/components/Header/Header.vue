@@ -49,8 +49,10 @@
                   {{ currentUser.name }}
                 </div>
                 <div class="account-login-list">
-                  <span class="account-login-item">Thông tài tài khoản</span>
-                  <span class="account-login-item">Đơn mua</span>
+                  <router-link to="/user/account/profile" class="account-login-item"
+                    >Thông tài tài khoản
+                  </router-link>
+                  <router-link to="/user/purchase" class="account-login-item">Đơn mua</router-link>
                   <span class="account-login-item" @click="handleLogout">Đăng xuất</span>
                 </div>
               </div>

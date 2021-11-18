@@ -16,13 +16,33 @@
 </template>
 
 <script>
-import mixins from '@/mixins'
+import mixins from '@/mixins';
+import Nprogress from 'nprogress';
+import { categoryApis } from '@/apis';
 export default {
   name: 'category-list',
   mixins: [mixins],
-  computed: {
-    categories() {
-      return this.$store.getters['category/categories'];
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  created() {
+    this.getCategories();
+  },
+  methods: {
+    async getCategories() {
+      try {
+        Nprogress.start();
+        const categoryData = await categoryApis.getCategoryList();
+        if (categoryData.status === 200) {
+          this.categories = categoryData.data;
+        }
+      } catch {
+        console.log('error!!!');
+      } finally {
+        Nprogress.done();
+      }
     },
   },
 };

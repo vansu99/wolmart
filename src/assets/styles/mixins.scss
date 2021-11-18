@@ -1,7 +1,23 @@
 @mixin flexCenter() {
   display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin flexVerticalCenter() {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+}
+
+@mixin flexHorizontalCenter() {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  justify-content: center;
 }
 
 @mixin textClamp($rows: 1, $size: 100%) {

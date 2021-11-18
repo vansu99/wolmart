@@ -95,6 +95,7 @@
 <script>
 import { userApis } from '@/apis';
 import Nprogress from 'nprogress';
+import { TOKEN } from '@/constants';
 
 export default {
   name: 'Login',
@@ -114,6 +115,7 @@ export default {
         const response = await userApis.login(this.formData);
         if (response.status === 200) {
           await this.$store.dispatch('auth/login', response.data);
+          localStorage.setItem(TOKEN, response.data.token);
         }
       } catch ({ error }) {
         this.errorMsg = error.message;

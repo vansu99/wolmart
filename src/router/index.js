@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import PublicLayout from '@/layout/default';
+//import {checkAuth} from "@/utils";
 
 Vue.use(Router);
-export default new Router({
+
+const router = new Router({
   mode: 'history',
   scrollBehavior: () => ({ x: 0, y: 0 }),
   routes: [
@@ -32,5 +34,32 @@ export default new Router({
         breadcrumb: true,
       },
     },
+    {
+      path: '/user',
+      name: 'User',
+      component: () => import('@/pages/User'),
+      meta: {
+        layout: PublicLayout,
+        breadcrumb: true,
+        title: 'Thông tin tài khoản'
+      },
+      children: [
+        {
+          path: 'account/profile',
+          name: 'UserProfile',
+          component: () => import('@/pages/User/components/UserProfile'),
+          meta: {
+            layout: PublicLayout,
+            breadcrumb: true,
+            title: 'Thông tin tài khoản'
+          },
+        }
+      ]
+      //beforeEnter: checkAuth
+    }
   ],
 });
+
+//router.beforeEach(checkAuth);
+
+export default router;
