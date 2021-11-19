@@ -49,7 +49,7 @@
                   {{ currentUser.name }}
                 </div>
                 <div class="account-login-list">
-                  <router-link to="/user/account/profile" class="account-login-item"
+                  <router-link :to="{ name: 'UserProfile' }" class="account-login-item"
                     >Thông tài tài khoản
                   </router-link>
                   <router-link to="/user/purchase" class="account-login-item">Đơn mua</router-link>
@@ -169,6 +169,7 @@ import Login from '@/modules/Login';
 import Register from '@/modules/Register';
 import ModalRegister from './modals/modal-register';
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'Header',
   components: {
@@ -189,6 +190,8 @@ export default {
     },
     handleLogout() {
       this.$store.dispatch('auth/logout');
+      localStorage.clear();
+      this.$router.push({ name: 'Home' });
     },
   },
   watch: {

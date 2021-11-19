@@ -8,6 +8,9 @@ export default {
     state.currentUser = null;
   },
   setToken(state, value) {
-    state.token = value
-  }
+    state.token = value;
+  },
+  setUser(state, value) {
+    state.currentUser = value;
+  },
 };

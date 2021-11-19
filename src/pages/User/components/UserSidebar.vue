@@ -7,6 +7,9 @@
       <router-link to="/user/account/profile" class="user-sidebar-link"
         >Thông tin tài khoản
       </router-link>
+      <router-link to="/user/account/settings" class="user-sidebar-link"
+      >Đổi mật khẩu
+      </router-link>
     </div>
   </div>
 </template>
