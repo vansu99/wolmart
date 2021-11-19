@@ -23,7 +23,7 @@
           <div class="products">
             <div
               class="product"
-              v-for="(item, index) in products"
+              v-for="(item, index) in discountProduct"
               :key="`${category.slug}-${index}`"
             >
               <div class="product__top">
@@ -101,6 +101,11 @@ export default {
   },
   created() {
     this.getProducts();
+  },
+  computed: {
+    discountProduct() {
+      return this.products.filter((product) => product.discount >= 20);
+    },
   },
   methods: {
     async getProducts() {
