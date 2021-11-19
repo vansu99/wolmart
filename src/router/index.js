@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import PublicLayout from '@/layout/default';
-//import {checkAuth} from "@/utils";
+import {checkAuth} from "@/utils";
 
 Vue.use(Router);
 
@@ -39,6 +39,7 @@ const router = new Router({
       name: 'User',
       component: () => import('@/pages/User'),
       meta: {
+        isAuth: true,
         layout: PublicLayout,
         breadcrumb: true,
         title: 'Thông tin tài khoản'
@@ -49,13 +50,25 @@ const router = new Router({
           name: 'UserProfile',
           component: () => import('@/pages/User/components/UserProfile'),
           meta: {
+            isAuth: true,
+            layout: PublicLayout,
+            breadcrumb: true,
+            title: 'Thông tin tài khoản'
+          },
+        },
+        {
+          path: 'account/settings',
+          name: 'UserPassword',
+          component: () => import('@/pages/User/components/UserPassword'),
+          meta: {
+            isAuth: true,
             layout: PublicLayout,
             breadcrumb: true,
             title: 'Thông tin tài khoản'
           },
         }
-      ]
-      //beforeEnter: checkAuth
+      ],
+      beforeEnter: checkAuth
     }
   ],
 });
