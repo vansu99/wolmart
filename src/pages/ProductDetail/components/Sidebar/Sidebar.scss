@@ -1,0 +1,117 @@
+.sidebar {
+  &__slogan {
+    margin-bottom: 3rem;
+    border: 1px solid $bg-contrary-light;
+    border-radius: 0.5rem;
+    .slogan {
+      position: relative;
+      display: flex;
+      padding: 2rem;
+
+      &:not(:last-child):after {
+        content: '';
+        height: 1px;
+        background-color: $bg-contrary-light;
+        position: absolute;
+        bottom: 0;
+        left: 2rem;
+        right: 2rem;
+      }
+      & img {
+        width: 3.9rem;
+        height: 3.9rem;
+        margin-right: 1.3rem;
+        filter: $filter-icon-disabled;
+      }
+      &__description {
+        font-family: $font-primary;
+      }
+      &__text {
+        font-family: $font-primary;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: $text-primary;
+      }
+      &__sub-text {
+        font-family: $font-primary;
+        font-size: 1.3rem;
+        color: $text-semi-light;
+      }
+    }
+  }
+  &__banner {
+    .banner {
+      position: relative;
+      margin-bottom: 4.5rem;
+      max-width: 100%;
+      background: $bg-second;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      &__img {
+        width: 100%;
+        height: 22rem;
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      &__content {
+        position: absolute;
+        left: 3rem;
+        bottom: 3rem;
+        font-family: $font-primary;
+        color: $text-white-light;
+      }
+      &__sales {
+        display: flex;
+      }
+      &__number {
+        font-weight: 700;
+        font-size: 4.6rem;
+      }
+      &__unit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-weight: 600;
+        line-height: 1;
+      }
+      &__percent {
+        font-weight: 600;
+        font-size: 2.9rem;
+      }
+      &__state {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
+      &__text {
+        font-weight: 700;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+  &__widget {
+    .widget {
+      &__top {
+        @include flexSpaceBetween();
+        padding: 2rem 0;
+      }
+      &__title {
+        font-family: $font-primary;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: $text-primary;
+        text-transform: capitalize;
+      }
+      &__arrow {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+.hr-divider {
+  border-top-width: 0;
+  border-color: $bg-contrary-light;
+}

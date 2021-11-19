@@ -1,0 +1,88 @@
+<template>
+  <div class="product-detail">
+    <div class="container">
+      <div class="product-detail__container">
+        <div class="product-detail__left">
+          <Product :product="product" />
+          <DescriptionTabs :product="product" :star="star" :review="review" />
+          <RelatedProducts :productList="productList" :star="star" :review="review" />
+        </div>
+        <div class="product-detail__right">
+          <Sidebar :productList="productList" :star="star" :review="review" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { categoryApis, productApis } from '@/apis';
+import Nprogress from 'nprogress';
+import Product from './components/Product/Product';
+import DescriptionTabs from './components/DescriptionTabs/DescriptionTabs';
+import RelatedProducts from './components/RelatedProducts/RelatedProducts';
+import Sidebar from './components/Sidebar/Sidebar';
+export default {
+  name: 'ProductDetail',
+  data() {
+    return {
+      star: 3,
+      review: 13,
+      product: {},
+      productList: [],
+    };
+  },
+  components: {
+    Product,
+    DescriptionTabs,
+    RelatedProducts,
+    Sidebar,
+  },
+  created() {
+    this.getProductByID();
+  },
+  methods: {
+    async getProductByID() {
+      // call API to get product by product ID
+      try {
+        Nprogress.start();
+        const productID = Number(document.location.pathname.substring(10));
+        const productData = await productApis.getProductDetail(productID);
+        if (productData.status === 200) {
+          this.product = productData.data;
+          // call API to get product by category ID
+          this.getProductList(this.product.category_id, this.product.id);
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        Nprogress.done();
+      }
+    },
+    async getProductList(categoryID, productID) {
+      // call API to get products that belong to same category but have different ID from the original productID
+      try {
+        Nprogress.start();
+        const productListData = await categoryApis.getProductListBaseOnCategory(categoryID);
+        if (productListData.status === 200) {
+          this.productList = productListData.data.filter((item) => item.id !== productID);
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        Nprogress.done();
+      }
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.product-detail {
+  &__container {
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    gap: 3rem;
+  }
+}
+</style>

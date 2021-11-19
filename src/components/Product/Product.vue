@@ -1,0 +1,184 @@
+<template>
+  <div class="product__item">
+    <div class="product__top">
+      <router-link :to="`/products/${product.id}`" class="product__link"
+        ><img :src="product.img_path" :alt="product.name"
+      /></router-link>
+      <div class="product__action--vertical">
+        <router-link to="/cart" class="product__btn" title="Add to cart"
+          ><img src="@/assets/images/Home/Clothing/icon/shopping-bag-solid.svg" alt="add-to-cart"
+        /></router-link>
+        <router-link to="/wishlist" class="product__btn" title="Add to wishlist"
+          ><img src="@/assets/images/Home/Clothing/icon/heart-solid.svg" alt="add-to-wishlist"
+        /></router-link>
+      </div>
+      <span class="product__sale" v-show="product.discount">{{ product.discount }}% off</span>
+      <div class="product__action--horizontal"><a href="">Quick view</a></div>
+    </div>
+    <div class="product__content">
+      <div class="product__name">
+        <a>{{ product.name }}</a>
+      </div>
+      <RatingStar :star="star" :review="review" />
+      <div class="product__price">
+        <span class="product__price--new">{{
+          product.original_price | calDiscountPrice(product.discount) | formatPrice
+        }}</span>
+        <span class="product__price--old">{{ product.original_price | formatPrice }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import RatingStar from '@/components/RatingStarWithDescription/RatingStarWithDescription';
+export default {
+  components: { RatingStar },
+  props: { product: Object, star: Number, review: Number },
+};
+</script>
+
+<style lang="scss" scoped>
+.product {
+  &__item {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    &:hover .product__action {
+      &--vertical,
+      &--horizontal {
+        display: block;
+      }
+    }
+  }
+  &__top {
+    display: flex;
+    flex-shrink: 0;
+    position: relative;
+    width: 100%;
+    height: 30rem;
+    overflow: hidden;
+    font-size: 1rem;
+    & > a {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      color: $text-primary;
+      :hover img {
+        color: $hover-dark;
+      }
+    }
+    & img {
+      margin: auto 0;
+      width: 100%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+  &__action {
+    &--vertical {
+      display: none;
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+    &--horizontal {
+      display: none;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      padding: 1.14em 0;
+      background-color: $hover-color;
+      text-align: center;
+      transition: all 3s;
+      & a {
+        color: $text-white-light;
+        font-size: 1.4em;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+  }
+  &__btn {
+    @include flexCenter();
+    width: 3.6rem;
+    height: 3.6rem;
+    margin-bottom: 0.2rem;
+    background: $bg-contrary;
+    border: 1px solid $bg-contrary-light;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    transition: all 0.5s ease-out;
+    &:hover img {
+      filter: $filter-icon-hover;
+    }
+    &:hover {
+      background-color: $bg-primary;
+    }
+    & img {
+      width: 1.5rem;
+      object-fit: cover;
+      filter: $filter-icon-normal;
+    }
+  }
+  &__sale {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    padding: 0.6rem 1rem;
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    background: $secondary-color;
+    color: $text-white-light;
+    border-radius: 0.3rem;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: auto;
+    font-family: $font-primary;
+  }
+  &__name {
+    flex: 1;
+    @include textClamp(2);
+    margin-top: 1.4rem;
+    margin-bottom: 0.6rem;
+    font-family: $font-primary;
+    font-weight: 500;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    color: $text-primary;
+    transition: all 0.2s ease-in;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+    &:hover a {
+      color: $bg-facebook;
+    }
+    & > a {
+      color: $text-primary;
+    }
+  }
+  &__rating {
+    flex-shrink: 0;
+  }
+  &__price {
+    margin-top: 0.3rem;
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: $text-primary;
+    flex-shrink: 0;
+    &--old {
+      padding-left: 1rem;
+      font-weight: 400;
+      text-decoration: line-through;
+      color: $text-light;
+    }
+  }
+}
+</style>
