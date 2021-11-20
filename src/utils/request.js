@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '@/constants';
+import { BASE_URL, TOKEN } from '@/constants';
 import * as queryString from 'query-string';
 
 const httpClient = axios.create({
@@ -14,7 +14,7 @@ const httpClient = axios.create({
 // interceptor request
 httpClient.interceptors.request.use(
   (config) => {
-    const token = '';
+    const token = localStorage.getItem(TOKEN);
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },

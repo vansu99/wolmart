@@ -49,8 +49,10 @@
                   {{ currentUser.name }}
                 </div>
                 <div class="account-login-list">
-                  <span class="account-login-item">Thông tài tài khoản</span>
-                  <span class="account-login-item">Đơn mua</span>
+                  <router-link :to="{ name: 'UserProfile' }" class="account-login-item"
+                    >Thông tài tài khoản
+                  </router-link>
+                  <router-link to="/user/purchase" class="account-login-item">Đơn mua</router-link>
                   <span class="account-login-item" @click="handleLogout">Đăng xuất</span>
                 </div>
               </div>
@@ -68,7 +70,9 @@
       <div class="row d-flex">
         <div class="header-left d-flex">
           <div class="logo">
-            <a href="#"><img src="../../assets/images/Header/logo.png" alt="" /></a>
+            <router-link to="/"
+              ><img src="../../assets/images/Header/logo.png" alt="Wolmart"
+            /></router-link>
           </div>
           <div class="form d-flex">
             <div class="search-input">
@@ -88,7 +92,6 @@
         <div class="header-right d-flex">
           <div class="contact items d-flex">
             <div><img src="../../assets/images/Header/Icon/phone-volume-solid.svg" alt="" /></div>
-            <!-- width: 3rem-->
             <div>
               <a class="text-decoration live-chat" href="">Live Chat </a>
               <span> or : </span>
@@ -163,16 +166,17 @@
 <script>
 import ModalLogin from './modals/modal-login';
 import Login from '@/modules/Login';
-import Register from '@/modules/Register'
-import ModalRegister from './modals/modal-register'
+import Register from '@/modules/Register';
+import ModalRegister from './modals/modal-register';
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'Header',
   components: {
     Register,
     Login,
     ModalLogin,
-    ModalRegister
+    ModalRegister,
   },
   computed: {
     ...mapGetters({
@@ -186,6 +190,8 @@ export default {
     },
     handleLogout() {
       this.$store.dispatch('auth/logout');
+      localStorage.clear();
+      this.$router.push({ name: 'Home' });
     },
   },
   watch: {

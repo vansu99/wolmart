@@ -26,3 +26,86 @@
 .color-arrow-right {
   filter: $bg-icon;
 }
+
+.section {
+  &__title {
+    padding: 1.1rem 0;
+    font-size: 2rem;
+    font-family: $font-primary;
+    font-weight: 700;
+    color: $text-primary;
+  }
+  &__divider {
+    margin-bottom: 2rem;
+    border-top-width: 0;
+    border-color: $text-white-dark;
+  }
+}
+.capitalize {
+  text-transform: capitalize;
+}
+@keyframes zoom-in-out {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+// vuejs-datepicker
+.vdp-datepicker {
+  .vdp-datepicker__calendar .cell,
+  .vdp-datepicker__calendar .cell.day-header,
+  .vdp-datepicker__calendar span {
+    font-size: 1.4rem;
+  }
+}
+
+// Form
+.form {
+  &-group {
+    margin-bottom: 2rem;
+  }
+  &-label {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: $text-primary;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+  &-input {
+    width: 100%;
+    display: block;
+    font-family: $font-primary;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: $text-primary;
+    padding: 1rem;
+    outline: none;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    border: 1px solid $text-light;
+    transition: all 0.2s linear 0s;
+    &:focus {
+      border-color: $bg-primary;
+    }
+  }
+  &-button {
+    display: block;
+    padding: 1rem;
+    font-size: 1.4rem;
+    background-color: $bg-primary;
+    font-family: $font-primary;
+    color: #fff;
+    text-transform: uppercase;
+    width: 100%;
+    outline: none;
+    border: 0;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.95;
+    }
+  }
+}
