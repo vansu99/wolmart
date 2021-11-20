@@ -6,8 +6,8 @@ export function formatPrice(value) {
 }
 
 export function calDiscountPrice(price, discount) {
-  if (!price && !discount) {
-    return 0;
+  if (!price || !discount) {
+    return price;
   } else {
     return Math.ceil(price - (price * discount) / 100);
   }
