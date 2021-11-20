@@ -144,6 +144,7 @@
     height: 3.6rem;
     margin-bottom: 0.2rem;
     background: $bg-contrary;
+    border: 1px solid $text-white-dark;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
@@ -153,6 +154,7 @@
       filter: $filter-icon-hover;
     }
     &:hover {
+      border: 1px solid $bg-primary;
       background-color: $bg-primary;
     }
     &s {
