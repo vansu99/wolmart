@@ -2,9 +2,13 @@
 $font-primary: 'Roboto', sans-serif;
 
 // Colors
+// ------Background
 $bg-primary: #336699;
 $bg-second: #333;
+$bg-second-light: #666;
 $bg-contrary-dark: #c4c4c5;
+$bg-contrary-semi-dark: #cdcdcd;
+$bg-contrary-light: #eee;
 $bg-contrary: #fff;
 $bg-top-categories: #f5f5f5;
 $bg-facebook: #1b4f9b;
@@ -12,7 +16,14 @@ $bg-twitter: #00adef;
 $bg-instagram: #cc0001;
 $bg-youtube: #2c567e;
 $bg-pinterest: #f96a02;
+$bg-whatsapp: #3c8a38;
+$bg-linkedin: #2c567e;
 $bg-danger: #f32013;
+
+// ------Border
+
+// ------Text
+
 $text-primary: #333;
 $text-light: #999;
 $text-semi-light: #666;
@@ -20,9 +31,18 @@ $text-extra-dark: #c4c4c5;
 $text-white-dark: #eee;
 $text-white-semi: #f5f5f5;
 $text-white-light: #fff;
+
+// ------Others
+
 $hover-color: #336699;
+$hover-contrary: #3c78b4;
+$hover-dark: #1914fe;
 $btn-subscribe: #454545;
 $secondary-color: #f77c29;
+$star-uncheck: #999;
+$star-checked: #f93;
+
+// ------Filter icon
 
 $bg-icon: invert(100%) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
 
@@ -38,8 +58,12 @@ $filter-icon-hover: invert(99%) sepia(99%) saturate(0%) hue-rotate(83deg) bright
   contrast(100%);
 $filter-icon-normal: invert(60%) sepia(8%) saturate(13%) hue-rotate(339deg) brightness(100%)
   contrast(89%);
+$filter-icon-disabled: invert(39%) sepia(0%) saturate(2913%) hue-rotate(135deg) brightness(90%)
+  contrast(70%);
 $filter-arrow: invert(21%) sepia(92%) saturate(1448%) hue-rotate(199deg) brightness(92%)
   contrast(89%);
+$filter-hover-primary: invert(38%) sepia(12%) saturate(2280%) hue-rotate(169deg) brightness(96%)
+  contrast(98%);
 
 // Box shadow
 $box-shadow: 0rem 0.5rem 2rem rgba(0, 0, 0, 0.08);

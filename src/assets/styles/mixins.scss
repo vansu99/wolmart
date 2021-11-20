@@ -5,6 +5,11 @@
   justify-content: center;
   align-items: center;
 }
+@mixin flexSpaceBetween() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 @mixin flexVerticalCenter() {
   display: flex;
@@ -40,4 +45,8 @@
     width: 0;
     margin-top: calc((1 - #{$line-height}) * 0.5em);
   }
+}
+@mixin hoverIcon($hover-color) {
+  border: $hover-color;
+  background-color: $hover-color;
 }

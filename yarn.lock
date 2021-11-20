@@ -8744,6 +8744,11 @@ vue@^2.6.11:
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
 
+vueperslides@^2.15.2:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-2.15.2.tgz#ca9b2526db49c6111979b582eea614fb95b8a34e"
+  integrity sha512-vUBs3s70HWbWp/aiPE1C4hSF8zLjQhSoUEDK/FGl+ChTf7B0mXdx8YcIyxYKNVvDLNJx08/kpHRY9F8h0Fs/wQ==
+
 vuejs-datepicker@^1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/vuejs-datepicker/-/vuejs-datepicker-1.6.2.tgz#83c1e8fd4108e7f1d01c061a7e344918f25e47ae"
