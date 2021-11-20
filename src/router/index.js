@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import PublicLayout from '@/layout/default';
-import {checkAuth} from "@/utils";
+import { checkAuth } from '@/utils';
 
 Vue.use(Router);
 
@@ -42,7 +42,7 @@ const router = new Router({
         isAuth: true,
         layout: PublicLayout,
         breadcrumb: true,
-        title: 'Thông tin tài khoản'
+        title: 'Thông tin tài khoản',
       },
       children: [
         {
@@ -53,7 +53,7 @@ const router = new Router({
             isAuth: true,
             layout: PublicLayout,
             breadcrumb: true,
-            title: 'Thông tin tài khoản'
+            title: 'Thông tin tài khoản',
           },
         },
         {
@@ -64,12 +64,12 @@ const router = new Router({
             isAuth: true,
             layout: PublicLayout,
             breadcrumb: true,
-            title: 'Thông tin tài khoản'
+            title: 'Thông tin tài khoản',
           },
-        }
+        },
       ],
-      beforeEnter: checkAuth
-    }
+      beforeEnter: checkAuth,
+    },
   ],
 });
 
