@@ -46,7 +46,7 @@ export default {
       // call API to get product by product ID
       try {
         Nprogress.start();
-        const productID = Number(document.location.pathname.substring(10));
+        const productID = this.$route.params.product;
         const productData = await productApis.getProductDetail(productID);
         if (productData.status === 200) {
           this.product = productData.data;
@@ -72,6 +72,11 @@ export default {
       } finally {
         Nprogress.done();
       }
+    },
+  },
+  watch: {
+    '$route.query'() {
+      this.getProductByID();
     },
   },
 };
