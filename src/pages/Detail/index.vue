@@ -72,6 +72,8 @@ export default {
 
 <style lang="scss" scoped>
 .product-detail {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
   &__container {
     display: grid;
     grid-template-columns: 9fr 3fr;

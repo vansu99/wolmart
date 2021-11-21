@@ -14,10 +14,11 @@
               rules="required|email"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="email">Email</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 class="form-input"
                 v-model="formData.email"
@@ -31,6 +32,7 @@
               rules="required|max:32|min:6"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="email">Mật khẩu</label>
               <input
