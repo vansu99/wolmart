@@ -21,7 +21,6 @@
 
 <script>
 import mixins from '@/mixins';
-import Nprogress from 'nprogress';
 import { categoryApis } from '@/apis';
 import CustomSkeleton from '@/components/Skeleton';
 import ProductFilter from './components/product-filter';
@@ -53,7 +52,6 @@ export default {
   methods: {
     async loadCategoryById() {
       try {
-        Nprogress.start();
         this.isShow = true;
         const id = this.$route.params.categoryId;
         const query = this.$route.query;
@@ -66,7 +64,6 @@ export default {
         console.log(e);
       } finally {
         this.isShow = false;
-        Nprogress.done();
       }
     },
   },

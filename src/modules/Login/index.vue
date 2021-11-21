@@ -94,7 +94,6 @@
 
 <script>
 import { userApis } from '@/apis';
-import Nprogress from 'nprogress';
 import { TOKEN } from '@/constants';
 
 export default {
@@ -111,7 +110,6 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        Nprogress.start();
         const response = await userApis.login(this.formData);
         if (response.status === 200) {
           await this.$store.dispatch('auth/login', response.data);
@@ -119,8 +117,6 @@ export default {
         }
       } catch ({ error }) {
         this.errorMsg = error.message;
-      } finally {
-        Nprogress.done();
       }
     },
   },

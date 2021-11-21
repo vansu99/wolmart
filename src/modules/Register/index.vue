@@ -91,7 +91,6 @@
 
 <script>
 import { userApis } from '@/apis';
-import Nprogress from 'nprogress';
 
 export default {
   name: 'Register',
@@ -110,7 +109,6 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        Nprogress.start();
         const response = await userApis.register(this.formData);
         if (response.status === 200) {
           this.isSuccess = true;
@@ -118,8 +116,6 @@ export default {
         }
       } catch (error) {
         console.log(error);
-      } finally {
-        Nprogress.done();
       }
     },
     openModalLogin() {
