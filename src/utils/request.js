@@ -33,7 +33,6 @@ httpClient.interceptors.response.use(
         // logout
       }
     }
-
     return Promise.reject(error.response.data);
   }
 );

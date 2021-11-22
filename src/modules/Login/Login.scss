@@ -1,15 +1,30 @@
 .login {
   @include flexCenter;
   height: 100%;
+  background: #fff;
   &-wrapper {
+    flex-shrink: 0;
     width: 35rem;
     padding: 3rem 3.5rem;
   }
   &-heading {
     font-size: 2.6rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.3rem;
     color: $hover-color;
     font-weight: bold;
+    text-align: center;
+    & img {
+      width: 14.4rem;
+      height: auto;
+    }
+  }
+  &-description {
+    margin-bottom: 1.5rem;
+    font-family: $font-primary;
+    font-size: 1.3rem;
+    color: #c9c9c9;
+    text-align: center;
+    font-style: italic;
   }
   &-error {
     background-color: #f2dede;
@@ -22,28 +37,61 @@
   }
   &-form {
     .form-group {
+      position: relative;
       margin-bottom: 2rem;
+      .password-icon {
+        position: absolute;
+        top: 3rem;
+        right: 1rem;
+        color: #999;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
     }
     .form-label {
       display: block;
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      margin-bottom: 0.2rem;
+      color: $text-light;
     }
     .form-input {
       width: 100%;
-      padding: 10px 10px 10px 15px;
+      padding: 10px 10px 10px 40px;
       font-family: $font-primary;
-      color: $text-primary;
+      color: $text-extra-dark;
       outline: none;
-      border: 1px solid #c9c9c9;
-      border-radius: 4px;
+      border: none;
+      border-bottom: 1px solid #c9c9c9;
+      border-radius: 0;
       overflow: hidden;
       background-color: transparent;
       transition: border-color 0.2s ease-in;
       &:focus {
+        outline: none;
+        background-color: transparent;
         border-color: $hover-color;
+        color: $text-semi-light;
+        box-shadow: $box-shadow;
+      }
+      &:focus + .form-icon {
+        color: $text-semi-light;
+      }
+      &.error {
+        outline: none;
+        background-color: transparent;
+        border-color: #a94442;
+      }
+      &.input-password{
+        padding-right: 3.5rem;
       }
     }
+    .form-icon {
+        position: absolute;
+        top: 3rem;
+        left: 1rem;
+        color: $text-light;
+        font-size: 1.5rem;
+      }
     .form-error {
       display: block;
       color: $bg-danger;
@@ -52,12 +100,17 @@
       margin-top: 10px;
     }
     .form-forgot {
-      color: $text-primary;
       font-size: 1.3rem;
-      margin-bottom: 1.5rem;
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+      text-align: right;
+      color: darkslategray;
+      font-weight: normal;
+      font-style: italic;
       b {
         color: $bg-primary;
         font-weight: bold;
+        cursor: pointer;
       }
     }
     .form-button {
@@ -67,7 +120,8 @@
       font-family: $font-primary;
       display: block;
       padding: 12px;
-      background-color: $bg-primary;
+      background-color: #3eb2fd;
+      background-image: linear-gradient(1deg, #4f58fd, #149bf3 99%);
       border: 0;
       outline: 0;
       color: #fff;
@@ -83,7 +137,7 @@
   .line-text {
     text-align: center;
     position: relative;
-    padding: 1rem 0;
+    padding-top: 1rem;
     span {
       display: inline-block;
       background-color: white;
@@ -93,7 +147,7 @@
       font-weight: 600;
       font-size: 1.5rem;
       text-transform: capitalize;
-      color: $bg-second;
+      color: #999;
     }
     &:before {
       content: '';
@@ -103,26 +157,54 @@
       top: 50%;
       left: 0;
       transform: translateY(-50%);
-      background-color: $bg-second;
+      background-color: #999;
     }
   }
   &-social {
+    @include flexCenter;
     .social-item {
       cursor: pointer;
       @include flexCenter;
-      padding: 0.6rem 0;
-      font-size: 1.5rem;
+      padding: 0.6rem;
       margin-bottom: 1.2rem;
-      border-radius: 4px;
-      border: 1px solid $text-light;
-      color: $text-primary;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      font-size: 1.5rem;
+      text-align: center;
       background-color: #fff;
-      svg {
+      transition: border 0.2s ease-in-out;
+      transition: background-color 0.2s ease-in-out;
+      &:first-of-type {
         margin-right: 1rem;
       }
       &:hover {
+        box-shadow: $box-shadow;
+        border: 1px solid #ede9e9;
         background-color: #ede9e9;
       }
+      &:hover svg {
+        transition: transform 0.2s ease-in-out;
+        transform: scale(1.1);
+      }
+    }
+  }
+  &-image {
+    background: url(../../assets/images/Authentication/login.jpg);
+    flex: 1;
+    height: 75vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+  &-register {
+    font-size: 1.3rem;
+    text-align: center;
+    color: darkslategray;
+    font-weight: normal;
+    b {
+      color: $bg-primary;
+      font-weight: bold;
+      cursor: pointer;
     }
   }
 }

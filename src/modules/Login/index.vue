@@ -1,10 +1,11 @@
 <template>
   <div class="login">
     <div class="login-wrapper">
-      <h2 class="login-heading">Wolmart</h2>
+      <div class="login-heading"><img src="@/assets/images/Header/logo.png" alt="Wolmart" /></div>
       <div class="login-error" v-if="errorMsg.length > 0">
         {{ errorMsg }}
       </div>
+      <div class="login-description">Người bạn của mọi nhà</div>
       <div class="login-form">
         <ValidationObserver v-slot="{ handleSubmit }">
           <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
@@ -20,9 +21,11 @@
                 type="email"
                 id="email"
                 class="form-input"
+                :class="{ error: errors[0] }"
                 v-model="formData.email"
                 placeholder="Nhập địa chỉ email của bạn"
               />
+              <i class="fas fa-envelope form-icon"></i>
               <span class="form-error">{{ errors[0] }}</span>
             </ValidationProvider>
             <ValidationProvider
@@ -34,12 +37,16 @@
             >
               <label class="form-label" for="email">Mật khẩu</label>
               <input
-                type="password"
                 id="password"
-                class="form-input"
+                class="form-input input-password"
+                :class="{ error: errors[0] }"
                 v-model="formData.password"
                 placeholder="Nhập mật khẩu của bạn"
+                :type="hide ? 'text' : 'password'"
               />
+              <i class="fas fa-lock form-icon"></i>
+              <i class="fas fa-eye password-icon" v-if="hide" @click="hide = false"></i>
+              <i class="fas fa-eye-slash password-icon" v-else @click="hide = true"></i>
               <span class="form-error">{{ errors[0] }}</span>
             </ValidationProvider>
             <p class="form-forgot">
@@ -72,7 +79,7 @@
               d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
             ></path>
           </svg>
-          Google
+          <!-- Google -->
         </a>
         <a class="social-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 48 48">
@@ -85,10 +92,12 @@
               d="M34.368,25H31v13h-5V25h-3v-4h3v-2.41c0.002-3.508,1.459-5.59,5.592-5.59H35v4h-2.287C31.104,17,31,17.6,31,18.723V21h4L34.368,25z"
             ></path>
           </svg>
-          Facebook
+          <!-- Facebook -->
         </a>
       </div>
+      <div class="login-register">Chưa có tài khoản? <b @click="openModalRegister">Đăng ký</b></div>
     </div>
+    <div class="login-image"></div>
   </div>
 </template>
 
@@ -101,6 +110,7 @@ export default {
   name: 'Login',
   data() {
     return {
+      hide: false,
       formData: {
         email: '',
         password: '',
@@ -122,6 +132,10 @@ export default {
       } finally {
         Nprogress.done();
       }
+    },
+    openModalRegister() {
+      this.$modal.hide('login');
+      this.$modal.show('register');
     },
   },
 };
