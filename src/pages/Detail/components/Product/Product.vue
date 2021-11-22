@@ -34,6 +34,7 @@
       </div>
       <div class="product__right">
         <h2 class="product__name">{{ product.name }}</h2>
+        <p class="product__desc">{{ product.description }}</p>
         <hr class="hr-divider" />
         <div class="product__price">
           <span class="product__price--new">{{
@@ -93,7 +94,7 @@ export default {
       return (this.value = Number(this.value) + 1);
     },
     decreaseQuantity: function () {
-      if (this.value <= 0) {
+      if (this.value <= 1) {
         return this.value;
       }
       return (this.value = Number(this.value) - 1);

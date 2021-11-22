@@ -15,6 +15,7 @@
               rules="required"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="name">Họ và tên</label>
               <input
@@ -32,10 +33,11 @@
               rules="required|email"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="email">Email</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 class="form-input"
                 v-model="formData.email"
@@ -49,6 +51,7 @@
               rules="required|max:32|min:6"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="email">Mật khẩu</label>
               <input
@@ -66,6 +69,7 @@
               rules="required"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="phone">Số điện thoại</label>
               <input
@@ -91,7 +95,6 @@
 
 <script>
 import { userApis } from '@/apis';
-import Nprogress from 'nprogress';
 
 export default {
   name: 'Register',
@@ -110,7 +113,6 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        Nprogress.start();
         const response = await userApis.register(this.formData);
         if (response.status === 200) {
           this.isSuccess = true;
@@ -118,8 +120,6 @@ export default {
         }
       } catch (error) {
         console.log(error);
-      } finally {
-        Nprogress.done();
       }
     },
     openModalLogin() {

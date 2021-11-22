@@ -36,13 +36,24 @@ input[type='number'] {
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 3rem;
   }
+
+  &__right {
+    padding-top: 2rem;
+  }
+
   &__name {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     font-size: 2.4rem;
     font-weight: 600;
     color: $text-primary;
+  }
+
+  &__desc {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: $text-light;
   }
 
   &__price {
@@ -50,11 +61,11 @@ input[type='number'] {
     font-family: $font-primary;
     font-size: 3rem;
     font-weight: 700;
-    color: $text-primary;
+    color: $bg-primary;
     flex-shrink: 0;
     &--old {
       padding-left: 3rem;
-      font-size: 2.5rem;
+      font-size: 2.1rem;
       font-weight: 400;
       text-decoration: line-through;
       color: $text-light;
@@ -166,7 +177,7 @@ input[type='number'] {
   &__icon {
     font-size: 1.8rem;
     color: $bg-second;
-    transition: all 0.4s ease-in-out;
+    transition: color 0.4s ease-in-out;
     &:hover i {
       color: $bg-primary;
     }

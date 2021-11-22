@@ -17,7 +17,6 @@
 
 <script>
 import { categoryApis, productApis } from '@/apis';
-import Nprogress from 'nprogress';
 import Product from './components/Product/Product';
 import DescriptionTabs from './components/DescriptionTabs/DescriptionTabs';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
@@ -45,7 +44,6 @@ export default {
     async getProductByID() {
       // call API to get product by product ID
       try {
-        Nprogress.start();
         const productID = Number(this.$route.params.productId);
         const productData = await productApis.getProductDetail(productID);
         if (productData.status === 200) {
@@ -55,22 +53,17 @@ export default {
         }
       } catch (e) {
         console.log(e);
-      } finally {
-        Nprogress.done();
       }
     },
     async getProductList(categoryID, productID) {
       // call API to get products that belong to same category but have different ID from the original productID
       try {
-        Nprogress.start();
         const productListData = await categoryApis.getProductListBaseOnCategory(categoryID);
         if (productListData.status === 200) {
           this.productList = productListData.data.filter((item) => item.id !== productID);
         }
       } catch (e) {
         console.log(e);
-      } finally {
-        Nprogress.done();
       }
     },
   },
@@ -79,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 .product-detail {
-  padding: 3rem 0;
+  padding: 4rem 0;
   &__container {
     display: grid;
     grid-template-columns: 9fr 3fr;

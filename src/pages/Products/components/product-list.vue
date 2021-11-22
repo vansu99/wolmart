@@ -1,7 +1,13 @@
 <template>
   <div class="product-content">
     <div class="product-content-item" v-for="product in products" :key="product.id">
-      <router-link to="/" class="product-content-link">
+      <router-link
+        :to="{
+          name: 'ProductDetail',
+          params: { slug: convertSlug(product.name), productId: product.id },
+        }"
+        class="product-content-link"
+      >
         <div class="product-content-badge" v-if="product.discount > 0">
           {{ product.discount }}% off
         </div>
@@ -27,9 +33,11 @@
 </template>
 
 <script>
+import mixins from '@/mixins';
 export default {
   name: 'product-list',
   props: ['products'],
+  mixins: [mixins],
 };
 </script>
 
