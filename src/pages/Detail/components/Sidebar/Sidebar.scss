@@ -17,11 +17,10 @@
         left: 2rem;
         right: 2rem;
       }
-      & img {
-        width: 3.9rem;
-        height: 3.9rem;
+      & i {
+        font-size: 4rem;
         margin-right: 1.3rem;
-        filter: $filter-icon-disabled;
+        color: $bg-second-light;
       }
       &__description {
         font-family: $font-primary;

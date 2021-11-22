@@ -119,7 +119,7 @@ export default {
       tabClickIdx: 0,
       hoverStar: -1,
       saveChooseRating: -1,
-      ratingList: [70, 20, 30, 0, 0],
+      ratingList: [60, 20, 30, 0, 10],
     };
   },
   components: { RatingStar, ProductRating },

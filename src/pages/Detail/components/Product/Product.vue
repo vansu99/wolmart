@@ -51,11 +51,7 @@
             <button class="product__quantity-btn--plus" @click="increaseQuantity">+</button>
           </div>
           <div class="product__btn" :class="{ disabled: value === 0 }">
-            <img
-              src="@/assets/images/Shared/shopping-bag-solid.svg"
-              alt=""
-              class="product__btn-icon"
-            />
+            <i class="fas fa-shopping-bag product__btn-icon"></i>
             <div class="product__btn-text">Add to Cart</div>
           </div>
         </div>
@@ -64,8 +60,7 @@
           <span></span>
           <div class="product__icon">
             <router-link to="/wishlist" href=""
-              ><img src="@/assets/images/Shared/heart-solid.svg" alt="add-to-wishlist"
-            /></router-link>
+              ><i class="far fa-heart"></i></router-link>
           </div>
         </div>
       </div>
@@ -82,7 +77,7 @@ import Social from '@/components/SocialContact/SocialContact';
 export default {
   name: 'Product',
   data: () => ({
-    value: 0,
+    value: 1,
   }),
   props: { product: {} },
   components: {

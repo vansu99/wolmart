@@ -1,19 +1,19 @@
 <template>
   <div class="social-contact">
     <div class="facebook">
-      <a href=""><img src="@/assets/images/Shared/social/facebook.svg" alt="facebook" /></a>
+      <a href=""><i class="fab fa-facebook-f"></i></a>
     </div>
     <div class="twitter">
-      <a href=""><img src="@/assets/images/Shared/social/twitter.svg" alt="twitter" /></a>
+      <i class="fab fa-twitter"></i>
     </div>
     <div class="pinterest">
-      <a href=""><img src="@/assets/images/Shared/social/pinterest.svg" alt="pinterest" /></a>
+      <i class="fab fa-pinterest-p"></i>
     </div>
     <div class="whatsapp">
-      <a href=""><img src="@/assets/images/Shared/social/whatsapp.svg" alt="whatsapp" /></a>
+      <i class="fab fa-whatsapp"></i>
     </div>
     <div class="linkedin">
-      <a href=""><img src="@/assets/images/Shared/social/linkedin.svg" alt="linkedin" /></a>
+      <i class="fab fa-linkedin-in"></i>
     </div>
   </div>
 </template>
@@ -26,12 +26,13 @@ export default {};
 .social-contact {
   display: flex;
   & div {
+    @include flexCenter;
     margin-right: 0.8rem;
     width: 3.2rem;
     height: 3.2rem;
     border: 1px solid $bg-contrary-semi-dark;
     border-radius: 50%;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.2s ease-in;
     text-align: center;
     &:hover.facebook {
       @include hoverIcon($bg-facebook);
@@ -48,18 +49,14 @@ export default {};
     &:hover.linkedin {
       @include hoverIcon($bg-linkedin);
     }
-    &:hover img {
-      filter: $filter-icon-hover;
+    &:hover i {
+      color: $bg-contrary;
     }
     & a {
-      @include flexCenter;
-      height: 100%;
-      width: 100%;
     }
-    & img {
-      width: 1.5rem;
-      height: 1.5rem;
-      filter: $filter-icon-disabled;
+    & i {
+      font-size: 1.5rem;
+      color: $bg-second-light;
     }
   }
 }

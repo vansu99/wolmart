@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="sidebar__slogan">
       <div class="slogan" v-for="(item, index) in bannerBoxes" :key="index">
-        <img :src="require(`@/assets/images/Home/Banner/icon/${item.image}`)" :alt="item.image" />
+        <i :class="item.image"></i>
         <div class="slogan__description">
           <div class="slogan__text">{{ item.text }}</div>
           <div class="slogan__sub-text">{{ item.subText }}</div>
@@ -56,17 +56,17 @@ export default {
     return {
       bannerBoxes: [
         {
-          image: 'truck-solid.svg',
+          image: 'fas fa-truck',
           text: 'Free shipping & returns',
           subText: 'For all orders over $99',
         },
         {
-          image: 'briefcase-solid.svg',
+          image: 'fas fa-briefcase',
           text: 'Secure Payment',
           subText: 'We ensure secure payment',
         },
         {
-          image: 'hand-holding-usd-solid.svg',
+          image: 'fas fa-hand-holding-usd',
           text: 'Money Back Guarantee',
           subText: 'Any back within 30 days',
         },

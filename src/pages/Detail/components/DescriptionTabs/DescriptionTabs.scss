@@ -157,7 +157,7 @@
           & i {
             height: 1.2rem;
             padding: 0 0.05rem;
-            color: #999;
+            color: $text-primary;
             &.check {
               color: #f93;
             }
@@ -191,8 +191,15 @@
         input {
           padding: 1rem 2rem;
           width: 100%;
-          border: 1px solid #eee;
           outline: none;
+        }
+        input,
+        textarea {
+          border: 1px solid #eee;
+          border-radius: 3px;
+          &:focus {
+            border: 1px solid $hover-color;
+          }
         }
         &__summit {
           padding: 1.3rem 2.8rem;
@@ -203,6 +210,11 @@
           border: 2px solid #454545;
           background-color: #454545;
           color: #fff;
+          cursor: pointer;
+          transition: opacity 0.2s ease-in;
+          &:hover {
+            opacity: 0.8;
+          }
         }
       }
     }

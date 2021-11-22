@@ -51,7 +51,7 @@ export default {
         if (productData.status === 200) {
           this.product = productData.data;
           // call API to get product by category ID
-          this.getProductList(this.product.category_id, this.product.id);
+          await this.getProductList(this.product.category_id, this.product.id);
         }
       } catch (e) {
         console.log(e);
@@ -79,6 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .product-detail {
+  padding: 3rem 0;
   &__container {
     display: grid;
     grid-template-columns: 9fr 3fr;

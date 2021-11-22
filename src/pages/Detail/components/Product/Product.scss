@@ -127,10 +127,10 @@ input[type='number'] {
     &.disabled {
       border-color: $bg-contrary-light;
       background-color: $bg-contrary-light;
-      color: #666;
+      color: $text-semi-light;
       cursor: not-allowed;
       & .product__btn-icon {
-        filter: $filter-icon-disabled;
+        color: $bg-second-light;
       }
       &:hover {
         border-color: $bg-contrary-light;
@@ -142,10 +142,9 @@ input[type='number'] {
       background-color: $hover-contrary;
     }
     &-icon {
-      width: 1.2rem;
-      height: 1.2rem;
+      font-size: 1.2rem;
       margin-right: 0.7rem;
-      filter: $filter-icon-hover;
+      color: #fff;
     }
     &-text {
       font-family: $font-primary;
@@ -165,12 +164,11 @@ input[type='number'] {
     }
   }
   &__icon {
-    width: 1.8rem;
-    height: auto;
-    filter: $filter-icon-disabled;
+    font-size: 1.8rem;
+    color: $bg-second;
     transition: all 0.4s ease-in-out;
-    &:hover {
-      filter: $filter-hover-primary;
+    &:hover i {
+      color: $bg-primary;
     }
   }
 }
