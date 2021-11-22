@@ -77,7 +77,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 import { userApis } from '@/apis';
-import Nprogress from 'nprogress';
+
 export default {
   name: 'UserProfile',
   components: {
@@ -94,15 +94,12 @@ export default {
   methods: {
     async loadUserInfo() {
       try {
-        Nprogress.start();
         const response = await userApis.getUserInfo();
         if (response.status === 200) {
           this.userInfo = { ...response.data };
         }
       } catch (e) {
         console.log(e);
-      } finally {
-        Nprogress.done();
       }
     },
     async onSubmit() {

@@ -9,7 +9,6 @@
 
 <script>
 import { categoryApis } from '@/apis';
-import Nprogress from 'nprogress';
 import TopCategories from './components/TopCategories/TopCategories';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
@@ -38,15 +37,12 @@ export default {
     // call API to get category list
     async getCategories() {
       try {
-        Nprogress.start();
         const categoryData = await categoryApis.getCategoryList();
         if (categoryData.status === 200) {
           await this.$store.dispatch('category/getCategories', categoryData.data);
         }
       } catch {
         console.log('error!!!');
-      } finally {
-        Nprogress.done();
       }
     },
   },

@@ -15,10 +15,11 @@
               rules="required|email"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="email">Email</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 class="form-input"
                 :class="{ error: errors[0] }"
@@ -34,6 +35,7 @@
               rules="required|max:32|min:6"
               v-slot="{ errors }"
               tag="div"
+              mode="passive"
             >
               <label class="form-label" for="email">Mật khẩu</label>
               <input
@@ -103,7 +105,6 @@
 
 <script>
 import { userApis } from '@/apis';
-import Nprogress from 'nprogress';
 import { TOKEN } from '@/constants';
 
 export default {
@@ -121,7 +122,6 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        Nprogress.start();
         const response = await userApis.login(this.formData);
         if (response.status === 200) {
           await this.$store.dispatch('auth/login', response.data);
@@ -129,8 +129,6 @@ export default {
         }
       } catch ({ error }) {
         this.errorMsg = error.message;
-      } finally {
-        Nprogress.done();
       }
     },
     openModalRegister() {
