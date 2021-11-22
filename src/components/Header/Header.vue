@@ -74,20 +74,8 @@
               ><img src="../../assets/images/Header/logo.png" alt="Wolmart"
             /></router-link>
           </div>
-          <div class="form d-flex">
-            <div class="search-input">
-              <input type="text" name="" placeholder="Search in..." id="" />
-            </div>
-            <div class="btn-search">
-              <button class="search">
-                <img
-                  class="icon-search"
-                  src="../../assets/images/Header/Icon/search-solid.svg"
-                  alt=""
-                />
-              </button>
-            </div>
-          </div>
+          <!--  Search-->
+          <search @onSearch="handleSearchAll" :results="resultSearch" />
         </div>
         <div class="header-right d-flex">
           <div class="contact items d-flex">
@@ -169,14 +157,22 @@ import Login from '@/modules/Login';
 import Register from '@/modules/Register';
 import ModalRegister from './modals/modal-register';
 import { mapGetters } from 'vuex';
+import Search from "@/components/Search";
+import {productApis} from "@/apis";
 
 export default {
   name: 'Header',
   components: {
+    Search,
     Register,
     Login,
     ModalLogin,
     ModalRegister,
+  },
+  data() {
+    return {
+      resultSearch: []
+    }
   },
   computed: {
     ...mapGetters({
@@ -193,6 +189,16 @@ export default {
       localStorage.clear();
       this.$router.push({ name: 'Home' });
     },
+    async handleSearchAll(value) {
+      try {
+        const response = await productApis.searchProduct(value);
+        if(response.status === 200) {
+          this.resultSearch = [...response.data];
+        }
+      }catch (e) {
+        console.log('error ', e)
+      }
+    }
   },
   watch: {
     isAuthenticated() {

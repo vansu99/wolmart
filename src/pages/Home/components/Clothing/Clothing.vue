@@ -27,9 +27,14 @@
               :key="`${category.slug}-${index}`"
             >
               <div class="product__top">
-                <router-link :to="`/products/${item.id}`" href="" class="product__link"
-                  ><img :src="item.img_path" :alt="item.name"
-                /></router-link>
+                <router-link
+                  :to="{
+                    name: 'ProductDetail',
+                    params: { slug: item.name, categoryId: item.category_id, productId: item.id },
+                  }"
+                  class="product__link"
+                  ><img :src="item.img_path" :alt="item.name" />
+                </router-link>
                 <div class="product__btns">
                   <router-link to="/cart" class="product__btn" title="Add to cart"
                     ><img
@@ -46,7 +51,13 @@
               </div>
               <div class="product__content">
                 <div class="product__name">
-                  <router-link :to="`/products/${item.id}`">{{ item.name }}</router-link>
+                  <router-link
+                    :to="{
+                      name: 'ProductDetail',
+                      params: { slug: item.name, categoryId: item.category_id, productId: item.id },
+                    }"
+                    >{{ item.name }}</router-link
+                  >
                 </div>
                 <div class="product__rating">
                   <span class="product__stars" :star="`${star}.00`">
@@ -64,7 +75,12 @@
                       :key="n + 5"
                     />
                   </span>
-                  <router-link :to="`/products/${item.id}`" class="product__desription"
+                  <router-link
+                    :to="{
+                      name: 'ProductDetail',
+                      params: { slug: item.name, categoryId: item.category_id, productId: item.id },
+                    }"
+                    class="product__desription"
                     >({{ review }} reviews)</router-link
                   >
                 </div>

@@ -8621,6 +8621,11 @@ uuid@^3.3.2, uuid@^3.4.0:
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+v-click-outside@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/v-click-outside/-/v-click-outside-3.1.2.tgz#1dbaa14bf09a21bd16f23a38f03bfa3988f71281"
+  integrity sha512-gMdRqfRE6m6XU6SiFi3dyBlFB2MWogiXpof8Aa3LQysrl9pzTndqp/iEaAphLoadaQUFnQ0ec6fLLaxr7LiY6A==
+
 v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.npmjs.org/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz"
@@ -8708,6 +8713,11 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-multiselect@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-2.1.6.tgz#5be5d811a224804a15c43a4edbb7485028a89c7f"
+  integrity sha512-s7jmZPlm9FeueJg1RwJtnE9KNPtME/7C8uRWSfp9/yEN4M8XcS/d+bddoyVwVnvFyRh9msFo0HWeW0vTL8Qv+w==
+
 vue-router@^3.5.3:
   version "3.5.3"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.5.3.tgz"
@@ -8744,15 +8754,15 @@ vue@^2.6.11:
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
 
-vueperslides@^2.15.2:
-  version "2.15.2"
-  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-2.15.2.tgz#ca9b2526db49c6111979b582eea614fb95b8a34e"
-  integrity sha512-vUBs3s70HWbWp/aiPE1C4hSF8zLjQhSoUEDK/FGl+ChTf7B0mXdx8YcIyxYKNVvDLNJx08/kpHRY9F8h0Fs/wQ==
-
 vuejs-datepicker@^1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/vuejs-datepicker/-/vuejs-datepicker-1.6.2.tgz#83c1e8fd4108e7f1d01c061a7e344918f25e47ae"
   integrity sha512-PkC4vxzFBo7i6FSCUAJfnaWOx6VkKbOqxijSGHHlWxh8FIUKEZVtFychkonVWtK3iwWfhmYtqHcwsmgxefLpLQ==
+
+vueperslides@^2.15.2:
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/vueperslides/-/vueperslides-2.15.2.tgz#ca9b2526db49c6111979b582eea614fb95b8a34e"
+  integrity sha512-vUBs3s70HWbWp/aiPE1C4hSF8zLjQhSoUEDK/FGl+ChTf7B0mXdx8YcIyxYKNVvDLNJx08/kpHRY9F8h0Fs/wQ==
 
 vuex@^3.6.2:
   version "3.6.2"
