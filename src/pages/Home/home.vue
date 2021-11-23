@@ -16,9 +16,6 @@ import Clothing from './components/Clothing/Clothing';
 
 export default {
   name: 'home',
-  data() {
-    return {};
-  },
   components: {
     TopCategories,
     Brand,

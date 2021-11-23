@@ -38,7 +38,7 @@ const router = new Router({
       },
     },
     {
-      path: '/:slug/:productId',
+      path: '/:slug/:categoryId/:productId',
       name: 'ProductDetail',
       component: () => import('@/pages/Detail'),
       meta: {

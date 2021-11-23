@@ -147,40 +147,6 @@
       flex: 2;
       justify-content: space-between;
       align-items: center;
-      .form {
-        width: 55rem;
-        margin: 0px auto;
-        align-items: center;
-        min-width: auto;
-        max-width: 55.6rem;
-        border: 0.3rem solid #336699;
-        border-radius: 0.3rem;
-        .search-input,
-        input {
-          border: none;
-          outline: none;
-          height: 100%;
-          padding: 0 1rem;
-          display: block;
-          width: 100%;
-          color: #666;
-        }
-        .btn-search button {
-          width: 5.1rem;
-          height: 4.7rem;
-          background-color: white;
-          border: none;
-          outline: none;
-          cursor: pointer;
-          .icon-search {
-            width: 2rem;
-            height: 2rem;
-          }
-        }
-        button:hover {
-          color: red;
-        }
-      }
     }
     .logo {
       width: 14.4rem;
