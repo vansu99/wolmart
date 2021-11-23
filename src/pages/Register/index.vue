@@ -1,5 +1,17 @@
 <template>
   <div class="register">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
     <div class="register-wrapper">
       <div class="register-heading">
         <img src="@/assets/images/Header/logo.png" alt="Wolmart" />
@@ -94,7 +106,7 @@
               <i class="fas fa-phone form-icon"></i>
               <span class="form-error">{{ errors[0] }}</span>
             </ValidationProvider>
-            <button class="form-button" type="submit">đăng ký</button>
+            <Button content="đăng ký" />
           </form>
         </ValidationObserver>
         <p class="form-forgot">
@@ -108,6 +120,7 @@
 
 <script>
 import { userApis } from '@/apis';
+import Button from '@/components/ButtonPrimary/ButtonPrimary';
 
 export default {
   name: 'Register',
@@ -141,6 +154,7 @@ export default {
       this.$modal.show('login');
     },
   },
+  components: { Button },
 };
 </script>
 

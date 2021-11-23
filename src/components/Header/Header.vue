@@ -35,7 +35,7 @@
               <a class="text-decoration" href="#">Contact Us</a>
               <a class="text-decoration" href="#">My Account</a>
               <div class="account-login" v-if="isAuthenticated">
-                <div class="text-decoration account-login-wrapper" @click="openModal">
+                <div class="text-decoration account-login-wrapper">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -57,9 +57,9 @@
                 </div>
               </div>
               <div v-else>
-                <a class="text-decoration" @click="openModal('login')">Sign In</a>
+                <router-link class="text-decoration" to="/login">Sign In</router-link>
                 <span>/</span>
-                <a class="text-decoration" @click="openModal('register')">Register</a>
+                <router-link class="text-decoration" to="/register">Register</router-link>
               </div>
             </div>
           </div>
@@ -154,29 +154,15 @@
         </div>
       </div>
     </div>
-    <modal-login>
-      <Login />
-    </modal-login>
-    <modal-register>
-      <register />
-    </modal-register>
   </div>
 </template>
 
 <script>
-import ModalLogin from './modals/modal-login';
-import Login from '@/modules/Login';
-import Register from '@/modules/Register';
-import ModalRegister from './modals/modal-register';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'Header',
   components: {
-    Register,
-    Login,
-    ModalLogin,
-    ModalRegister,
   },
   computed: {
     ...mapGetters({
@@ -185,9 +171,9 @@ export default {
     }),
   },
   methods: {
-    openModal(type) {
-      this.$modal.show(type);
-    },
+    // openModal(type) {
+    //   this.$modal.show(type);
+    // },
     handleLogout() {
       this.$store.dispatch('auth/logout');
       localStorage.clear();
@@ -196,7 +182,7 @@ export default {
   },
   watch: {
     isAuthenticated() {
-      this.isAuthenticated && this.$modal.hide('login');
+      this.isAuthenticated;
     },
   },
 };
