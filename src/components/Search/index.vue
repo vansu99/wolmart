@@ -7,6 +7,7 @@
         v-model="searchText"
         @keyup.enter="handleSearch"
         @input="handleSearchAuto"
+        @focus="handleSearch"
       />
       <button type="button" class="search-btn" @click="handleSearch">
         <img class="icon-search" src="../../assets/images/Shared/search.png" alt="search-icon" />
@@ -18,14 +19,43 @@
           <router-link
             :to="{
               name: 'ProductDetail',
-              params: { slug: convertSlug(item.name), categoryId: item.category_id, productId:
-              item.id },
+              params: {
+                slug: convertSlug(item.name),
+                categoryId: item.category_id,
+                productId: item.id,
+              },
             }"
             class="search-result-item"
           >
             <img src="../../assets/images/Shared/search.png" alt="" />
             {{ item.name }}
           </router-link>
+        </div>
+        <div class="search-category">
+          <h3 class="search-category-title">Danh mục nổi bật</h3>
+          <div class="search-category-content">
+            <div
+              class="search-category-item"
+              @click.prevent="hideResult"
+              v-for="category in categories"
+              :key="category.id"
+            >
+              <router-link
+                :to="{
+                  name: 'Products',
+                  params: { slug: convertSlug(category.name), categoryId: category.id },
+                }"
+              >
+                <div class="search-category-thumbnail">
+                  <img
+                    src="https://salt.tikicdn.com/cache/280x280/ts/product/b8/43/77/e595e13e981247b15b98b420c989e6d7.jpg"
+                    alt=""
+                  />
+                </div>
+                <span class="search-category-name">{{ category.name }}</span>
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </template>
@@ -51,6 +81,9 @@ export default {
     limitResult() {
       return this.results.slice(0, this.max);
     },
+    categories() {
+      return this.$store.getters['category/categories'];
+    },
   },
   watch: {
     results(value) {
@@ -61,7 +94,7 @@ export default {
     return {
       searchText: '',
       show: false,
-      timeout: 700
+      timeout: 700,
     };
   },
   methods: {
@@ -72,7 +105,7 @@ export default {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.$emit('onSearch', e.target.value);
-      }, 700)
+      }, 700);
     },
     hideResult() {
       this.show = false;
@@ -134,8 +167,8 @@ export default {
 
     &-item {
       @include flexVerticalCenter;
-      padding: 1.5rem;
-      font-size: 1.5rem;
+      padding: 1rem 1.5rem;
+      font-size: 1.4rem;
       font-weight: 500;
       color: $text-primary;
 
@@ -143,6 +176,41 @@ export default {
         width: 2.5rem;
         height: 2.5rem;
         margin-right: 1rem;
+      }
+
+      &:hover {
+        background-color: rgba(27, 168, 255, 0.1);
+      }
+    }
+  }
+
+  .search-category {
+    border-top: 1px solid #d1d1d1;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    &-title {
+      margin-bottom: 1rem;
+      font-weight: 500;
+      font-size: 1.7rem;
+    }
+    &-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    &-item {
+      width: calc(33.333% - 2rem);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    &-thumbnail {
+      padding: 1.5rem;
+    }
+    &-name {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: $text-primary;
+      &:hover {
+        color: $bg-primary;
       }
     }
   }
