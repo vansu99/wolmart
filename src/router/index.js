@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import PublicLayout from '@/layout/default';
-import {checkAuth} from "@/utils";
+import { checkAuth } from '@/utils';
 
 Vue.use(Router);
 
@@ -15,6 +15,18 @@ const router = new Router({
       component: () => import('@/pages/Home/home'),
       meta: { layout: PublicLayout, breadcrumb: false },
       children: [],
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/pages/Login'),
+      meta: { layout: PublicLayout, breadcrumb: false },
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('@/pages/Register'),
+      meta: { layout: PublicLayout, breadcrumb: false },
     },
     {
       path: '/:slug/:categoryId',
@@ -42,7 +54,7 @@ const router = new Router({
         isAuth: true,
         layout: PublicLayout,
         breadcrumb: true,
-        title: 'Thông tin tài khoản'
+        title: 'Thông tin tài khoản',
       },
       children: [
         {
@@ -53,7 +65,7 @@ const router = new Router({
             isAuth: true,
             layout: PublicLayout,
             breadcrumb: true,
-            title: 'Thông tin tài khoản'
+            title: 'Thông tin tài khoản',
           },
         },
         {
@@ -64,12 +76,12 @@ const router = new Router({
             isAuth: true,
             layout: PublicLayout,
             breadcrumb: true,
-            title: 'Thông tin tài khoản'
+            title: 'Thông tin tài khoản',
           },
-        }
+        },
       ],
-      beforeEnter: checkAuth
-    }
+      beforeEnter: checkAuth,
+    },
   ],
 });
 
