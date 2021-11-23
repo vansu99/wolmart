@@ -19,7 +19,7 @@
       <div class="register-description">Người bạn của mọi nhà</div>
       <div class="register-success" v-if="isSuccess">
         Bạn đã đăng ký thành công với tài khoản <b>{{ accountName }}</b
-        >, bạn hãy nhấn vào <b @click="openModalLogin">đăng nhập</b>.
+        >, bạn hãy nhấn vào <router-link :to="{ name: 'Login' }">đăng nhập</router-link>.
       </div>
       <div class="register-form" v-else>
         <ValidationObserver v-slot="{ handleSubmit }">
@@ -124,6 +124,7 @@ import Button from '@/components/ButtonPrimary/ButtonPrimary';
 
 export default {
   name: 'Register',
+  components: { Button },
   data() {
     return {
       hide: false,
@@ -149,12 +150,11 @@ export default {
         console.log(error);
       }
     },
-    openModalLogin() {
-      this.$modal.hide('register');
-      this.$modal.show('login');
-    },
+    // openModalLogin() {
+    //   this.$modal.hide('register');
+    //   this.$modal.show('login');
+    // },
   },
-  components: { Button },
 };
 </script>
 

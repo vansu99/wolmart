@@ -8,17 +8,16 @@
   &-container {
     @include flexCenter;
     position: relative;
-    max-width: 80rem;
-    width: 80rem;
-    margin: auto;
+    max-width: 110rem;
+    width: 100%;
     border-radius: 1rem;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
-      rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0 4px 16px, rgba(17, 17, 26, 0.1) 0 8px 24px,
+      rgba(17, 17, 26, 0.1) 0 16px 56px;
     background: #fff;
   }
   &-wrapper {
     flex-shrink: 0;
-    width: 35rem;
+    width: 37rem;
     padding: 3rem 3.5rem;
   }
   &-heading {
@@ -120,7 +119,6 @@
       text-align: right;
       color: darkslategray;
       font-weight: normal;
-      font-style: italic;
       b {
         color: $bg-primary;
         font-weight: bold;
@@ -148,7 +146,7 @@
       width: 100%;
       height: 1px;
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 0;
       transform: translateY(-50%);
       background-color: #999;
@@ -166,8 +164,7 @@
       font-size: 1.5rem;
       text-align: center;
       background-color: #fff;
-      transition: border 0.2s ease-in-out;
-      transition: background-color 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
       &:first-of-type {
         margin-right: 1rem;
       }
@@ -183,11 +180,9 @@
     }
   }
   &-image {
-    background: url(../../assets/images/Authentication/login.jpg);
     flex: 1;
     height: 75vh;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url(../../assets/images/Authentication/login.jpg) no-repeat center;
     background-size: contain;
   }
   &-register {

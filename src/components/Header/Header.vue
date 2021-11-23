@@ -147,17 +147,18 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Search from "@/components/Search";
-import {productApis} from "@/apis";
+import Search from '@/components/Search';
+import { productApis } from '@/apis';
 
 export default {
   name: 'Header',
   components: {
+    Search,
   },
   data() {
     return {
-      resultSearch: []
-    }
+      resultSearch: [],
+    };
   },
   computed: {
     ...mapGetters({
@@ -177,13 +178,13 @@ export default {
     async handleSearchAll(value) {
       try {
         const response = await productApis.searchProduct(value);
-        if(response.status === 200) {
+        if (response.status === 200) {
           this.resultSearch = [...response.data];
         }
-      }catch (e) {
-        console.log('error ', e)
+      } catch (e) {
+        console.log('error ', e);
       }
-    }
+    },
   },
   watch: {
     isAuthenticated() {

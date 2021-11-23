@@ -13,6 +13,7 @@
       <li></li>
     </ul>
     <div class="login-container">
+      <div class="login-image"></div>
       <div class="login-wrapper">
         <div class="login-heading"><img src="@/assets/images/Header/logo.png" alt="Wolmart" /></div>
         <div class="login-error" v-if="errorMsg.length > 0">
@@ -21,7 +22,7 @@
         <div class="login-description">Người bạn của mọi nhà</div>
         <div class="login-form">
           <ValidationObserver v-slot="{ handleSubmit }">
-            <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
+            <form @submit.prevent="handleSubmit(onSubmit)">
               <ValidationProvider
                 class="form-group"
                 name="Email"
@@ -114,7 +115,6 @@
           <router-link to="/register">Chưa có tài khoản? <b>Đăng ký</b></router-link>
         </div>
       </div>
-      <div class="login-image"></div>
     </div>
   </div>
 </template>
@@ -143,6 +143,7 @@ export default {
         if (response.status === 200) {
           await this.$store.dispatch('auth/login', response.data);
           localStorage.setItem(TOKEN, response.data.token);
+          this.$router.push({ name: 'Home' });
         }
       } catch ({ error }) {
         this.errorMsg = error.message;
