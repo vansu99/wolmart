@@ -3,6 +3,7 @@
     <Banner />
     <TopCategories />
     <Clothing v-for="item in categories" :key="item.id" :category="item" />
+    <Pagination></Pagination>
     <Brand />
   </div>
 </template>
@@ -14,13 +15,14 @@ import TopCategories from './components/TopCategories/TopCategories';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
 import Clothing from './components/Clothing/Clothing';
-
+import Pagination from '@/components/Pagination/Pagination.vue';
 export default {
   name: 'home',
   data() {
     return {};
   },
   components: {
+    Pagination,
     TopCategories,
     Brand,
     Banner,
