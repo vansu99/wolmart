@@ -13,7 +13,9 @@
       <li></li>
     </ul>
     <div class="login-container">
-      <div class="login-image"></div>
+      <div class="login-image">
+        <img src="../../assets/images/Authentication/login.jpg" alt="bg-login">
+      </div>
       <div class="login-wrapper">
         <div class="login-heading"><img src="@/assets/images/Header/logo.png" alt="Wolmart" /></div>
         <div class="login-error" v-if="errorMsg.length > 0">
