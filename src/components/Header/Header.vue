@@ -185,12 +185,7 @@ export default {
         console.log('error ', e);
       }
     },
-  },
-  watch: {
-    isAuthenticated() {
-      this.isAuthenticated;
-    },
-  },
+  }
 };
 </script>
 

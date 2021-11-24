@@ -4,21 +4,25 @@
   height: 100%;
   background: #8db9fc;
   background: -webkit-linear-gradient(to left, #8db9fc, #2066db);
-  padding: 3rem;
+  padding: 6rem 0;
+
   &-container {
-    @include flexCenter;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     position: relative;
-    max-width: 110rem;
+    max-width: 100rem;
     width: 100%;
     border-radius: 1rem;
     box-shadow: rgba(17, 17, 26, 0.1) 0 4px 16px, rgba(17, 17, 26, 0.1) 0 8px 24px,
       rgba(17, 17, 26, 0.1) 0 16px 56px;
     background: #fff;
   }
+
   &-wrapper {
     flex-shrink: 0;
     width: 37rem;
-    padding: 3rem 3.5rem;
+    padding: 4rem 3.5rem;
   }
   &-heading {
     font-size: 2.6rem;
@@ -179,12 +183,7 @@
       }
     }
   }
-  &-image {
-    flex: 1;
-    height: 75vh;
-    background: url(../../assets/images/Authentication/login.jpg) no-repeat center;
-    background-size: contain;
-  }
+
   &-register {
     font-size: 1.3rem;
     text-align: center;
@@ -197,7 +196,6 @@
     }
   }
 }
-
 
 .circles {
   position: absolute;
@@ -223,14 +221,14 @@
   left: 25%;
   width: 80px;
   height: 80px;
-  transform: translateY(10px) translateX(-300px)  rotate(20deg);
+  transform: translateY(10px) translateX(-300px) rotate(20deg);
 }
 
 .circles li:nth-child(2) {
   left: 10%;
   width: 20px;
   height: 20px;
-  transform: translateY(200px) translateX(-300px)  rotate(45deg);
+  transform: translateY(200px) translateX(-300px) rotate(45deg);
 }
 
 .circles li:nth-child(3) {
@@ -258,7 +256,7 @@
   left: 75%;
   width: 110px;
   height: 110px;
-  transform: translateY(200px) translateX(30px)  rotate(45deg);
+  transform: translateY(200px) translateX(30px) rotate(45deg);
 }
 
 .circles li:nth-child(7) {
@@ -288,4 +286,3 @@
   height: 150px;
   transform: translateY(400px) rotate(80deg);
 }
-
