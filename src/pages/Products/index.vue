@@ -16,6 +16,10 @@
         </div>
       </div>
     </div>
+    <Pagination
+      :pagination="pagination"
+      v-on:changePagination="handleChangePagination"
+    ></Pagination>
   </section>
 </template>
 
@@ -27,9 +31,11 @@ import CustomSkeleton from '@/components/Skeleton';
 import ProductFilter from './components/product-filter';
 import CategoryList from '@/pages/Products/components/category-list';
 import ProductList from '@/pages/Products/components/product-list';
+import Pagination from './components/Pagination.vue';
 export default {
   name: 'products',
   components: {
+    Pagination,
     CustomSkeleton,
     ProductList,
     CategoryList,
@@ -39,11 +45,13 @@ export default {
   data() {
     return {
       products: [],
+      showListProduct: [],
+      pagination: {},
       isShow: false,
     };
   },
-  created() {
-    this.loadCategoryById();
+  async created() {
+    await this.loadCategoryById();
   },
   watch: {
     '$route.query'() {
@@ -60,14 +68,22 @@ export default {
         const response = await categoryApis.getProductListBaseOnCategory(id, query);
         if (response.status === 200) {
           this.products = [...response.data];
+          this.pagination = response.pagination;
           await this.$store.dispatch('category/getCategoryById', id);
         }
       } catch (e) {
         console.log(e);
       } finally {
-        this.isShow = false;
         Nprogress.done();
+        this.isShow = false;
       }
+    },
+    async handleChangePagination(pagination) {
+      window.scrollTo(0, 300);
+      const id = this.$route.params.categoryId;
+      const response = await categoryApis.getProductListBaseOnCategory(id, { page: pagination });
+      this.products = [...response.data];
+      this.pagination = response.pagination;
     },
   },
 };

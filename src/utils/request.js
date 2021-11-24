@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { BASE_URL } from '@/constants';
+import Nprogress from 'nprogress';
+import { BASE_URL, TOKEN } from '@/constants';
 import * as queryString from 'query-string';
 
 const httpClient = axios.create({
@@ -14,26 +15,31 @@ const httpClient = axios.create({
 // interceptor request
 httpClient.interceptors.request.use(
   (config) => {
-    const token = '';
+    Nprogress.start();
+    const token = localStorage.getItem(TOKEN);
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error) => {
+    Nprogress.done();
     return Promise.reject(error.response.data);
   }
 );
 
 // interceptor response
 httpClient.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    Nprogress.done();
+    return response.data;
+  },
   (error) => {
+    Nprogress.done();
     if (error.response) {
       //const originalRequest = error.config;
       if (error.response.status === 401 || error.response.status === 500) {
         // logout
       }
     }
-
     return Promise.reject(error.response.data);
   }
 );

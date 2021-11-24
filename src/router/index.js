@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { checkAuth } from '@/utils';
 import PublicLayout from '@/layout/default';
 
 Vue.use(Router);
-export default new Router({
+
+const router = new Router({
   mode: 'history',
   scrollBehavior: () => ({ x: 0, y: 0 }),
   routes: [
@@ -15,6 +17,18 @@ export default new Router({
       children: [],
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/pages/Login'),
+      meta: { layout: PublicLayout, breadcrumb: false },
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('@/pages/Register'),
+      meta: { layout: PublicLayout, breadcrumb: false },
+    },
+    {
       path: '/:slug/:categoryId',
       name: 'Products',
       component: () => import('@/pages/Products'),
@@ -24,7 +38,7 @@ export default new Router({
       },
     },
     {
-      path: '/:slug/:productId',
+      path: '/:slug/:categoryId/:productId',
       name: 'ProductDetail',
       component: () => import('@/pages/Detail'),
       meta: {
@@ -32,5 +46,34 @@ export default new Router({
         breadcrumb: true,
       },
     },
+    {
+      path: '/user',
+      name: 'User',
+      component: () => import('@/pages/User'),
+      meta: {
+        isAuth: true,
+        layout: PublicLayout,
+        breadcrumb: true,
+        title: 'Thông tin tài khoản',
+      },
+      children: [
+        {
+          path: 'account/profile',
+          name: 'UserProfile',
+          component: () => import('@/pages/User/components/UserProfile'),
+          meta: {
+            isAuth: true,
+            layout: PublicLayout,
+            breadcrumb: true,
+            title: 'Thông tin tài khoản',
+          },
+        },
+      ],
+      beforeEnter: checkAuth,
+    },
   ],
 });
+
+//router.beforeEach(checkAuth);
+
+export default router;

@@ -1,7 +1,29 @@
 @mixin flexCenter() {
   display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin flexSpaceBetween() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flexVerticalCenter() {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  align-items: center;
+}
+
+@mixin flexHorizontalCenter() {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  justify-content: center;
 }
 
 @mixin textClamp($rows: 1, $size: 100%) {
@@ -24,4 +46,8 @@
     width: 0;
     margin-top: calc((1 - #{$line-height}) * 0.5em);
   }
+}
+@mixin hoverIcon($hover-color) {
+  border: $hover-color;
+  background-color: $hover-color;
 }

@@ -35,7 +35,7 @@
               <a class="text-decoration" href="#">Contact Us</a>
               <a class="text-decoration" href="#">My Account</a>
               <div class="account-login" v-if="isAuthenticated">
-                <div class="text-decoration account-login-wrapper" @click="openModal">
+                <div class="text-decoration account-login-wrapper">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -49,15 +49,17 @@
                   {{ currentUser.name }}
                 </div>
                 <div class="account-login-list">
-                  <span class="account-login-item">Thông tài tài khoản</span>
-                  <span class="account-login-item">Đơn mua</span>
+                  <router-link :to="{ name: 'UserProfile' }" class="account-login-item"
+                    >Thông tài tài khoản
+                  </router-link>
+                  <router-link to="/user/purchase" class="account-login-item">Đơn mua</router-link>
                   <span class="account-login-item" @click="handleLogout">Đăng xuất</span>
                 </div>
               </div>
               <div v-else>
-                <a class="text-decoration" @click="openModal('login')">Sign In</a>
+                <router-link class="text-decoration" to="/login">Sign In</router-link>
                 <span>/</span>
-                <a class="text-decoration" @click="openModal('register')">Register</a>
+                <router-link class="text-decoration" to="/register">Register</router-link>
               </div>
             </div>
           </div>
@@ -72,20 +74,8 @@
               ><img src="../../assets/images/Header/logo.png" alt="Wolmart"
             /></router-link>
           </div>
-          <div class="form d-flex">
-            <div class="search-input">
-              <input type="text" name="" placeholder="Search in..." id="" />
-            </div>
-            <div class="btn-search">
-              <button class="search">
-                <img
-                  class="icon-search"
-                  src="../../assets/images/Header/Icon/search-solid.svg"
-                  alt=""
-                />
-              </button>
-            </div>
-          </div>
+          <!--  Search-->
+          <search @onSearch="handleSearchAll" :results="resultSearch" />
         </div>
         <div class="header-right d-flex">
           <div class="contact items d-flex">
@@ -152,28 +142,23 @@
         </div>
       </div>
     </div>
-    <modal-login>
-      <Login />
-    </modal-login>
-    <modal-register>
-      <register />
-    </modal-register>
   </div>
 </template>
 
 <script>
-import ModalLogin from './modals/modal-login';
-import Login from '@/modules/Login';
-import Register from '@/modules/Register';
-import ModalRegister from './modals/modal-register';
 import { mapGetters } from 'vuex';
+import Search from '@/components/Search';
+import { productApis } from '@/apis';
+
 export default {
   name: 'Header',
   components: {
-    Register,
-    Login,
-    ModalLogin,
-    ModalRegister,
+    Search,
+  },
+  data() {
+    return {
+      resultSearch: [],
+    };
   },
   computed: {
     ...mapGetters({
@@ -182,18 +167,25 @@ export default {
     }),
   },
   methods: {
-    openModal(type) {
-      this.$modal.show(type);
-    },
+    // openModal(type) {
+    //   this.$modal.show(type);
+    // },
     handleLogout() {
       this.$store.dispatch('auth/logout');
+      localStorage.clear();
+      this.$router.push({ name: 'Home' });
     },
-  },
-  watch: {
-    isAuthenticated() {
-      this.isAuthenticated && this.$modal.hide('login');
+    async handleSearchAll(value) {
+      try {
+        const response = await productApis.searchProduct(value);
+        if (response.status === 200) {
+          this.resultSearch = [...response.data];
+        }
+      } catch (e) {
+        console.log('error ', e);
+      }
     },
-  },
+  }
 };
 </script>
 

@@ -1,21 +1,26 @@
 <template>
   <div class="Pagination">
     <div class="container">
-      <div class="pages-start" v-if="lengthPage >= 6 && clickedPage != 1">
+      <div class="pages-start" v-if="this.pagination.totalPages >= 6 && clickedPage != 1">
         <button @click.prevent="startPagination()"><i class="fas fa-angle-double-left"></i></button>
       </div>
       <div class="pages-middle" v-for="(item, index) of showPagination" :key="index">
         <button
           @click.prevent="
+            pagination.currentPage = item;
             changePagination(index);
-            clickedPage = item;
           "
-          :class="clickedPage == item ? 'active' : ''"
+          :class="pagination.currentPage == item ? 'active' : ''"
         >
           {{ item }}
         </button>
       </div>
-      <div class="page-end" v-if="lengthPage >= 6 && clickedPage != lengthPage">
+      <div
+        class="page-end"
+        v-if="
+          this.pagination.totalPages >= 6 && pagination.currentPage != this.pagination.totalPages
+        "
+      >
         <button @click.prevent="endPagination()"><i class="fas fa-angle-double-right"></i></button>
       </div>
     </div>
@@ -23,42 +28,41 @@
 </template>
 
 <script>
-import Nprogress from 'nprogress';
-import { categoryApis } from '@/apis';
-
 export default {
   name: 'Pagination',
   data() {
     return {
-      lengthPage: 10,
       showPagination: [],
-      clickedPage: 1,
     };
   },
-  created() {
-    this.getAmountProduct();
+  props: {
+    pagination: {},
+  },
+  watch: {
+    pagination: {
+      handler() {
+        this.showPagination = [];
+        if (this.pagination.totalPages != undefined) {
+          console.log(this.pagination);
+          console.log(this.pagination.totalPages);
+          let page = this.pagination.totalPages < 5 ? this.pagination.totalPages : 5;
+          console.log('page: ' + page);
+          for (let i = 0; i < page; i++) {
+            this.showPagination[i] = i + 1;
+          }
+          console.log(this.showPagination);
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
-    async getAmountProduct() {
-      try {
-        Nprogress.start();
-        //const id = this.$route.params.categoryId;
-        const query = this.$route.query;
-        const response = await categoryApis.getProductListBaseOnCategory(1, query);
-        this.lengthPage = response.pagination.total;
-        for (let i = 0; i < (this.lengthPage <= 5 ? this.lengthPage : 5); i++) {
-          this.showPagination[i] = i + 1;
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        this.isShow = false;
-        Nprogress.done();
-      }
-    },
     changePagination(index) {
+      this.$emit('changePagination', this.pagination.currentPage); // truyền event lên cha để đổ products phù hợp
       let add = 0;
       if (index == 0 && this.showPagination[0] != 1) {
+        // nếu bấm nút đầu tiên thì dịch sang 2 giá trị (4-5-6-7-8) dịch thành (2-3-4-5-6)
         if (this.showPagination[0] - 2 >= 1) {
           add = 2;
         } else if (this.showPagination[0] - 1 >= 1) {
@@ -69,9 +73,13 @@ export default {
         }
         this.$set(this.showPagination, 0, this.showPagination[0]);
       } else if (index == this.showPagination.length - 1) {
-        if (this.showPagination[this.showPagination.length - 1] + 2 <= this.lengthPage) {
+        // nếu bấm nút cuối cùng thì dịch sang 2 giá trị dịch (2-3-4-5-6) thành (4-5-6-7-8)
+        if (this.showPagination[this.showPagination.length - 1] + 2 <= this.pagination.totalPages) {
           add = 2;
-        } else if (this.showPagination[this.showPagination.length - 1] + 1 <= this.lengthPage) {
+        } else if (
+          this.showPagination[this.showPagination.length - 1] + 1 <=
+          this.pagination.totalPages
+        ) {
           add = 1;
         }
         for (let i = 0; i < this.showPagination.length; i++) {
@@ -81,18 +89,22 @@ export default {
       }
     },
     endPagination() {
+      // nếu bấm nút cuối cùng thì show pagination cuối cùng
       for (let i = 0; i < this.showPagination.length; i++) {
-        this.showPagination[this.showPagination.length - i - 1] = this.lengthPage - i;
+        this.showPagination[this.showPagination.length - i - 1] = this.pagination.totalPages - i;
       }
-      this.clickedPage = this.lengthPage;
+      this.pagination.currentPage = this.pagination.totalPages;
       this.$set(this.showPagination, 0, this.showPagination[0]);
+      this.$emit('changePagination', this.pagination.currentPage);
     },
     startPagination() {
+      // nếu bấm về đầu tiên cùng thì show pagination (1-2-3-4-5)...
       for (let i = 0; i < this.showPagination.length; i++) {
         this.showPagination[i] = i + 1;
       }
-      this.clickedPage = 1;
+      this.pagination.currentPage = 1;
       this.$set(this.showPagination, 0, this.showPagination[0]);
+      this.$emit('changePagination', this.pagination.currentPage);
     },
   },
 };

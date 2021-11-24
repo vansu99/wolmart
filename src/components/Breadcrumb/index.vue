@@ -27,23 +27,31 @@ export default {
   watch: {
     '$route.path': {
       handler(value) {
-        this.breadcrumbs = [{ title: 'Home', path: '/' }];
+        if (this?.$route?.path !== undefined) {
+          this.breadcrumbs = [{ title: 'Home', path: '/' }];
 
-        if (this.breadcrumbs.filter((item) => item.path === value).length === 0) {
-          this.breadcrumbs.push({
-            title: titleCase(this.$route.params.slug.replace(/-/g, ' ')),
-            path: value,
-          });
-        } else {
-          this.breadcrumbs.forEach((item, index, obj) => {
-            if (item.path === value) {
-              obj.splice(index + 1, 1);
-            }
-          });
+          if (this.$route.meta.title) {
+            this.breadcrumbs.push({
+              title: this.$route.meta.title,
+              path: value,
+            });
+          }
+          if (this.breadcrumbs.filter((item) => item.path === value).length === 0) {
+            this.breadcrumbs.push({
+              title: titleCase(this?.$route?.params?.slug?.replace(/-/g, ' ')),
+              path: value,
+            });
+          } else {
+            this.breadcrumbs.forEach((item, index, obj) => {
+              if (item.path === value) {
+                obj.splice(index + 1, 1);
+              }
+            });
+          }
         }
       },
       deep: true,
-      immediate: true
+      immediate: true,
     },
   },
 };
