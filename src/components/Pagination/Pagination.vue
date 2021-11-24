@@ -43,14 +43,10 @@ export default {
       handler() {
         this.showPagination = [];
         if (this.pagination.totalPages != undefined) {
-          console.log(this.pagination);
-          console.log(this.pagination.totalPages);
           let page = this.pagination.totalPages < 5 ? this.pagination.totalPages : 5;
-          console.log('page: ' + page);
           for (let i = 0; i < page; i++) {
             this.showPagination[i] = i + 1;
           }
-          console.log(this.showPagination);
         }
       },
       deep: true,
@@ -73,7 +69,7 @@ export default {
         }
         this.$set(this.showPagination, 0, this.showPagination[0]);
       } else if (index == this.showPagination.length - 1) {
-        // nếu bấm nút cuối cùng thì dịch sang 2 giá trị dịch (2-3-4-5-6) thành (4-5-6-7-8)
+        // nếu bấm nút cuối cùng thì dịch sang 2 giá trị dịch (2-3-4-5-6) thành (4-5-6-7-8).
         if (this.showPagination[this.showPagination.length - 1] + 2 <= this.pagination.totalPages) {
           add = 2;
         } else if (
@@ -87,6 +83,7 @@ export default {
         }
         this.$set(this.showPagination, 0, this.showPagination[0]);
       }
+      this.$router.replace({ query: { page: this.pagination.currentPage } });
     },
     endPagination() {
       // nếu bấm nút cuối cùng thì show pagination cuối cùng

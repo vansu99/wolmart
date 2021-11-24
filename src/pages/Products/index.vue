@@ -31,7 +31,7 @@ import CustomSkeleton from '@/components/Skeleton';
 import ProductFilter from './components/product-filter';
 import CategoryList from '@/pages/Products/components/category-list';
 import ProductList from '@/pages/Products/components/product-list';
-import Pagination from './components/Pagination.vue';
+import Pagination from '@/components/Pagination/Pagination.vue';
 export default {
   name: 'products',
   components: {
