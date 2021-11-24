@@ -122,7 +122,7 @@ export default {
 }
 .sidebar-banner {
   height: 100%;
-  background: url('../../../assets/images/Home/CategoryProductList/banner.jpg');
+  background: url('../../../../assets/images/Home/CategoryProductList/banner.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
