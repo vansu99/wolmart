@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import { checkAuth } from '@/utils';
 import PublicLayout from '@/layout/default';
+import LayoutSecond from '@/layout/LayoutSecond';
 
 Vue.use(Router);
 
@@ -20,13 +21,13 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: () => import('@/pages/Login'),
-      meta: { layout: PublicLayout, breadcrumb: false },
+      meta: { layout: LayoutSecond, breadcrumb: false },
     },
     {
       path: '/register',
       name: 'Register',
       component: () => import('@/pages/Register'),
-      meta: { layout: PublicLayout, breadcrumb: false },
+      meta: { layout: LayoutSecond, breadcrumb: false },
     },
     {
       path: '/:slug/:categoryId',

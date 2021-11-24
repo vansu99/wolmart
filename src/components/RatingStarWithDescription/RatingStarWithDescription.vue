@@ -1,7 +1,7 @@
 <template>
   <div class="rating__container">
     <RatingStar :star="star" />
-    <a class="rating__desription">({{ review }} reviews)</a>
+    <a class="rating__description">({{ review }} Bình luận)</a>
   </div>
 </template>
 
@@ -19,9 +19,10 @@ export default {
 <style lang="scss" scoped>
 .rating {
   flex-shrink: 0;
-  &__desription {
+  &__description {
     font-size: 1.2rem;
     font-family: $font-primary;
+    text-transform: capitalize;
     color: $text-light;
     cursor: pointer;
     transition: all 0.3s ease-in-out;

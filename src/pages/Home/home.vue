@@ -12,7 +12,8 @@ import { categoryApis } from '@/apis';
 import TopCategories from './components/TopCategories/TopCategories';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
-import Clothing from './components/Clothing/Clothing';
+import Clothing from './components/CategoryProductList/CategoryProductList';
+
 export default {
   name: 'home',
   components: {

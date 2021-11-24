@@ -3,11 +3,7 @@
     <router-link
       :to="{
         name: 'ProductDetail',
-        params: {
-          slug: convertSlug(product.name),
-          categoryId: product.category_id,
-          productId: product.id,
-        },
+        params: { slug: convertSlug(product.name), categoryId: product.category_id, productId: product.id },
       }"
     >
       <div class="product__top">
@@ -21,7 +17,6 @@
           ></router-link>
         </div>
         <span class="product__sale" v-show="product.discount">{{ product.discount }}% off</span>
-        <div class="product__action--horizontal"><a href="">Quick view</a></div>
       </div>
       <div class="product__content">
         <div class="product__name">
@@ -53,8 +48,6 @@ export default {
 .product {
   &__item {
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
     & > a {
       display: flex;
       flex-direction: column;
@@ -72,7 +65,7 @@ export default {
     flex-shrink: 0;
     position: relative;
     width: 100%;
-    height: 30rem;
+    height: 24.3rem;
     overflow: hidden;
     font-size: 1rem;
     & > a {
@@ -98,30 +91,13 @@ export default {
       top: 1.5rem;
       right: 1.5rem;
     }
-    &--horizontal {
-      display: none;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      padding: 1.14em 0;
-      background-color: $hover-color;
-      text-align: center;
-      transition: all 3s;
-      & a {
-        color: $text-white-light;
-        font-size: 1.4em;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-    }
   }
   &__btn {
     @include flexCenter();
     width: 3.6rem;
     height: 3.6rem;
     margin-bottom: 0.2rem;
-    background: $bg-contrary;
+    background-color: $bg-contrary;
     border: 1px solid $bg-contrary-light;
     border-radius: 50%;
     overflow: hidden;
@@ -157,6 +133,7 @@ export default {
     flex-direction: column;
     height: 100%;
     margin-top: auto;
+    text-align: center;
     font-family: $font-primary;
   }
   &__name {
@@ -178,6 +155,7 @@ export default {
       color: $text-primary;
     }
   }
+
   &__price {
     margin-top: 0.3rem;
     font-family: $font-primary;
