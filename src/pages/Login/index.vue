@@ -22,7 +22,7 @@
         <div class="login-description">Người bạn của mọi nhà</div>
         <div class="login-form">
           <ValidationObserver v-slot="{ handleSubmit }">
-            <form @submit.prevent="handleSubmit(onSubmit)">
+            <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
               <ValidationProvider
                 class="form-group"
                 name="Email"
