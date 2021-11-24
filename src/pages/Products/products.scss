@@ -1,0 +1,16 @@
+.product-list {
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+  background-color: #ebebeb;
+  &-wrapper {
+    display: flex;
+  }
+  &-left {
+    width: 22.7rem;
+    margin-right: 1.5rem;
+    overflow: hidden;
+  }
+  &-right {
+    flex: 1 0 0;
+  }
+}

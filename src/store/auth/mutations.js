@@ -7,4 +7,10 @@ export default {
     state.isAuthenticated = false;
     state.currentUser = null;
   },
+  setToken(state, value) {
+    state.token = value;
+  },
+  setUser(state, value) {
+    state.currentUser = value;
+  },
 };

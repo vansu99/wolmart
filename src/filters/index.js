@@ -6,7 +6,11 @@ export function formatPrice(value) {
 }
 
 export function calDiscountPrice(price, discount) {
-  return (price / 100) * (100 - discount);
+  if (!price || !discount) {
+    return price;
+  } else {
+    return Math.ceil(price - (price * discount) / 100);
+  }
 }
 
 export function uppercaseFirst(string) {

@@ -7,6 +7,9 @@ const productApis = {
   getProductDetail: (id) => {
     return request.get(`/products/${id}`);
   },
+  searchProduct: text => {
+    return request.get(`/home?q=${text}`)
+  }
 };
 
 export default productApis;
