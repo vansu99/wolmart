@@ -7,6 +7,7 @@
       <router-link to="/user/account/profile" class="user-sidebar-link"
         >Thông tin tài khoản
       </router-link>
+      <router-link to="/user/account/order" class="user-sidebar-link">Đơn mua</router-link>
     </div>
   </div>
 </template>

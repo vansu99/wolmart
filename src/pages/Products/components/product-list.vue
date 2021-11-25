@@ -4,8 +4,12 @@
       <router-link
         :to="{
           name: 'ProductDetail',
-          params: { slug: convertSlug(product.name), categoryId: product.category_id, productId:
-          product.id }
+          params: {
+            slug: convertSlug(product.name),
+            categoryId: product.category_id,
+            productId: product.id,
+          },
+          query: { page: 1 },
         }"
         class="product-content-link"
       >
