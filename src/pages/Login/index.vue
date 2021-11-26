@@ -95,8 +95,8 @@
 
 <script>
 import { userApis } from '@/apis';
-import { TOKEN } from '@/constants';
 import Icon from '@/components/SvgIcons';
+import { setToken } from "@/utils/storage";
 import Button from '@/components/Button/ButtonPrimary';
 
 export default {
@@ -117,7 +117,7 @@ export default {
         const response = await userApis.login(this.formData);
         if (response.status === 200) {
           await this.$store.dispatch('auth/login', response.data);
-          localStorage.setItem(TOKEN, response.data.token);
+          setToken(response.data.token);
           await this.$router.push({ name: 'Home' });
         }
       } catch ({ error }) {

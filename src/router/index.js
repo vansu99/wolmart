@@ -98,5 +98,10 @@ const router = new Router({
 });
 
 //router.beforeEach(checkAuth);
+// router.beforeEach((from, to, next) => {
+//   const hasToken = getToken();
+//   if (hasToken && from.name === 'Login') next({ name: 'Home' });
+//   else next();
+// });
 
 export default router;
