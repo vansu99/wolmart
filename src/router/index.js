@@ -30,24 +30,6 @@ const router = new Router({
       meta: { layout: LayoutSecond, breadcrumb: false },
     },
     {
-      path: '/:slug/:categoryId',
-      name: 'Products',
-      component: () => import('@/pages/Products'),
-      meta: {
-        layout: PublicLayout,
-        breadcrumb: true,
-      },
-    },
-    {
-      path: '/:slug/:categoryId/:productId',
-      name: 'ProductDetail',
-      component: () => import('@/pages/Detail'),
-      meta: {
-        layout: PublicLayout,
-        breadcrumb: true,
-      },
-    },
-    {
       path: '/user',
       name: 'User',
       component: () => import('@/pages/User'),
@@ -69,8 +51,48 @@ const router = new Router({
             title: 'Thông tin tài khoản',
           },
         },
+        {
+          path: 'account/order',
+          name: 'UserOrder',
+          component: () => import('@/pages/User/components/UserOrder'),
+          meta: {
+            isAuth: true,
+            layout: PublicLayout,
+            breadcrumb: false,
+            title: 'Đơn mua',
+          },
+        },
+        {
+          path: 'account/order/:orderId',
+          name: 'UserOrderDetail',
+          component: () => import('@/pages/User/components/OrderDetail'),
+          meta: {
+            isAuth: true,
+            layout: PublicLayout,
+            breadcrumb: false,
+            title: 'Đơn chi tiết',
+          },
+        },
       ],
       beforeEnter: checkAuth,
+    },
+    {
+      path: '/:slug/:categoryId',
+      name: 'Products',
+      component: () => import('@/pages/Products'),
+      meta: {
+        layout: PublicLayout,
+        breadcrumb: true,
+      },
+    },
+    {
+      path: '/:slug/:categoryId/:productId',
+      name: 'ProductDetail',
+      component: () => import('@/pages/Detail'),
+      meta: {
+        layout: PublicLayout,
+        breadcrumb: true,
+      },
     },
   ],
 });

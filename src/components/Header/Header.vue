@@ -52,7 +52,9 @@
                   <router-link :to="{ name: 'UserProfile' }" class="account-login-item"
                     >Thông tài tài khoản
                   </router-link>
-                  <router-link to="/user/purchase" class="account-login-item">Đơn mua</router-link>
+                  <router-link to="/user/account/order" class="account-login-item"
+                    >Đơn mua</router-link
+                  >
                   <span class="account-login-item" @click="handleLogout">Đăng xuất</span>
                 </div>
               </div>
@@ -185,7 +187,7 @@ export default {
         console.log('error ', e);
       }
     },
-  }
+  },
 };
 </script>
 
