@@ -4,9 +4,9 @@ import mutations from './mutations';
 import { TOKEN } from '@/constants';
 
 const state = {
-  isAuthenticated: !!localStorage.getItem(TOKEN),
-  currentUser: null,
   token: null,
+  currentUser: null,
+  isAuthenticated: !!localStorage.getItem(TOKEN),
 };
 
 export default {
