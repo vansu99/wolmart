@@ -157,10 +157,10 @@ export default {
     },
     async onSubmit() {
       try {
-        if(this.isChangePwd) {
+        if (this.isChangePwd) {
           const newInfo = {
             ...this.userInfo,
-            ...this.userPwd
+            ...this.userPwd,
           };
           delete newInfo.token;
           const response = await userApis.updateUserInfo(newInfo);

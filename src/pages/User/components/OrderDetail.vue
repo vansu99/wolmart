@@ -9,21 +9,20 @@
             <th></th>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="(product, index) in orderProducts" :key="index">
               <th>
                 <div class="table__td-content">
-                  <a>Áo khoác gió</a><strong>&nbsp;x&nbsp;1</strong><br />Nhà cung cấp:<a
-                    >&nbsp;HKT</a
-                  >
+                  <a>{{ product }}</a
+                  ><strong>&nbsp;x&nbsp;1</strong><br />
                 </div>
               </th>
-              <td>{{ 400000 | formatPrice }}</td>
+              <td></td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <th>Tạm tính</th>
-              <td>{{ 1200000 | formatPrice }}</td>
+              <td>{{ Number(order.total_price) | formatPrice }}</td>
             </tr>
             <tr>
               <th>Phí vận chuyển</th>
@@ -35,12 +34,13 @@
             </tr>
             <tr class="total">
               <th>Tổng tiền</th>
-              <td>{{ 1200000 | formatPrice }}</td>
+              <td>{{ Number(order.total_price) | formatPrice }}</td>
             </tr>
           </tfoot>
         </table>
       </div>
       <h4 class="order-detail__sub-title">Đơn phụ</h4>
+
       <div class="order-detail__note">
         <p>
           <i class="fas fa-exclamation-triangle"></i>
@@ -49,34 +49,34 @@
           đơn sẽ được xử lý độc lập bởi từng nhà cung cấp riêng.
         </p>
       </div>
-      <div class="order-detail__sub-table"><order-table /></div>
+      <div class="order-detail__sub-table"><order-table :orderList="orderList" /></div>
       <div class="order-detail__address">
         <div class="address__wrapper">
           <div class="address__item">
             <h5 class="address__title">Địa chỉ đơn</h5>
             <ul class="address__info-list">
-              <li class="address__info-item">Hoàng Chiến</li>
-              <li class="address__info-item">Đường Phan Tứ</li>
-              <li class="address__info-item">Phường Hòa Minh</li>
-              <li class="address__info-item">Quãng Ngãi</li>
-              <li class="address__info-item">03545412</li>
+              <li class="address__info-item">{{ userInfo.name }}</li>
+              <li class="address__info-item">{{ userInfo.email }}</li>
+              <li class="address__info-item">{{ userInfo.address }}</li>
+              <li class="address__info-item">{{ userInfo.phone }}</li>
             </ul>
           </div>
           <div class="address__item">
             <h5 class="address__title">Địa chỉ giao hàng</h5>
             <ul class="address__info-list">
-              <li class="address__info-item">Hoàng Chiến</li>
-              <li class="address__info-item">Đường Phan Tứ</li>
-              <li class="address__info-item">Phường Hòa Minh</li>
-              <li class="address__info-item">Quãng Ngãi</li>
-              <li class="address__info-item">03545412</li>
+              <li class="address__info-item">{{ userInfo.name }}</li>
+              <li class="address__info-item">{{ userInfo.email }}</li>
+              <li class="address__info-item">{{ userInfo.address }}</li>
+              <li class="address__info-item">{{ userInfo.phone }}</li>
             </ul>
           </div>
         </div>
       </div>
       <div class="order-detail__btn">
-        <router-link :to="{name: 'UserOrder'}">
-          <button-navigating content="Trở lại trang trước" :left="true" />
+        <router-link :to="{ name: 'UserOrder' }">
+          <button-navigating class="button--opacity" :left="true"
+            >Trở lại trang trước</button-navigating
+          >
         </router-link>
       </div>
     </div>
@@ -86,19 +86,46 @@
 <script>
 import OrderTable from '@/components/OrderTable/OrderTable.vue';
 import ButtonNavigating from '@/components/Button/ButtonNavigating';
+import { userApis, orderApis } from '@/apis';
 export default {
   components: { OrderTable, ButtonNavigating },
   name: 'OrderDetail',
   data() {
     return {
-      address: [
-        {
-          id: 0,
-          title: 'Địa chỉ đơn',
-          info: ['Hoàng Chiến', 'Đường Phan Tứ', 'Phường Hòa Minh', 'Quãng Ngãi', '03545412'],
-        },
-      ],
+      orderList: [],
+      order: {},
+      orderProducts: [],
+      userInfo: {},
     };
+  },
+  created() {
+    this.loadOrder();
+    this.loadUserInfo();
+  },
+  methods: {
+    async loadOrder() {
+      try {
+        const response = await orderApis.getOrder();
+        if (response.status === 200) {
+          this.orderList = [...response.data];
+          let orderId = this.$route.params.orderId;
+          this.order = this.orderList.find((el) => el.id == orderId);
+          this.orderProducts = this.order.products.split(',');
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async loadUserInfo() {
+      try {
+        const response = await userApis.getUserInfo();
+        if (response.status === 200) {
+          this.userInfo = { ...response.data };
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
 };
 </script>
@@ -147,10 +174,13 @@ export default {
     & table {
       width: 100%;
       & th {
-        text-align: left;
+        width: 70%;
+        text-align: justify;
+        color: #333;
       }
       & td {
         text-align: right;
+        color: #666;
       }
       & thead {
         border-bottom: 1px solid #e5e5e5;
@@ -159,7 +189,6 @@ export default {
           font-family: $font-primary;
           font-size: 1.8rem;
           font-weight: bold;
-          color: #333;
         }
       }
       & tbody {
@@ -193,7 +222,6 @@ export default {
           font-family: $font-primary;
           font-weight: 600;
           font-size: 1.6rem;
-          color: #333;
         }
       }
     }
