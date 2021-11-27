@@ -2,11 +2,12 @@ import getters from './getters';
 import actions from './actions';
 import mutations from './mutations';
 import { TOKEN } from '@/constants';
+import { getToken } from "@/utils/storage";
 
 const state = {
-  isAuthenticated: !!localStorage.getItem(TOKEN),
   currentUser: null,
-  token: null,
+  token: getToken() || '',
+  isAuthenticated: !!localStorage.getItem(TOKEN),
 };
 
 export default {

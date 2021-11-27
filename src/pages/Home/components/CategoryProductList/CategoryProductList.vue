@@ -26,7 +26,7 @@
           </div>
           <div class="product-list">
             <Product
-              v-for="product in products"
+              v-for="product in discountProduct"
               :key="`home-${product.id}`"
               :product="product"
               :star="star"

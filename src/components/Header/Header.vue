@@ -52,7 +52,9 @@
                   <router-link :to="{ name: 'UserProfile' }" class="account-login-item"
                     >Thông tài tài khoản
                   </router-link>
-                  <router-link to="/user/purchase" class="account-login-item">Đơn mua</router-link>
+                  <router-link to="/user/account/order" class="account-login-item"
+                    >Đơn mua</router-link
+                  >
                   <span class="account-login-item" @click="handleLogout">Đăng xuất</span>
                 </div>
               </div>
@@ -149,6 +151,7 @@
 import { mapGetters } from 'vuex';
 import Search from '@/components/Search';
 import { productApis } from '@/apis';
+import { removeToken } from '@/utils/storage';
 
 export default {
   name: 'Header',
@@ -172,7 +175,7 @@ export default {
     // },
     handleLogout() {
       this.$store.dispatch('auth/logout');
-      localStorage.clear();
+      removeToken();
       this.$router.push({ name: 'Home' });
     },
     async handleSearchAll(value) {
@@ -185,7 +188,7 @@ export default {
         console.log('error ', e);
       }
     },
-  }
+  },
 };
 </script>
 

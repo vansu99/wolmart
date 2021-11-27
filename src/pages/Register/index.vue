@@ -120,7 +120,7 @@
 
 <script>
 import { userApis } from '@/apis';
-import Button from '@/components/ButtonPrimary/ButtonPrimary';
+import Button from '@/components/Button/ButtonPrimary';
 
 export default {
   name: 'Register',
