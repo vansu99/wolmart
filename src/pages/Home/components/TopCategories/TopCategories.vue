@@ -45,7 +45,7 @@ export default {
     categories() {
       return this.$store.getters['category/categories'];
     },
-  }
+  },
 };
 </script>
 

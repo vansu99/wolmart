@@ -77,6 +77,14 @@ const router = new Router({
       beforeEnter: checkAuth,
     },
     {
+      path: '*',
+      name: 'NotFound404',
+      component: () => import('@/components/NotFound404/NotFound404.vue'),
+      meta: {
+        layout: PublicLayout,
+        title: '404 Not Found',
+    },
+    {
       path: '/:slug/:categoryId',
       name: 'Products',
       component: () => import('@/pages/Products'),
@@ -92,7 +100,7 @@ const router = new Router({
       meta: {
         layout: PublicLayout,
         breadcrumb: true,
-      },
+     },
     },
   ],
 });
