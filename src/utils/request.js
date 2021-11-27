@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Nprogress from 'nprogress';
-import { BASE_URL, TOKEN } from '@/constants';
+import { BASE_URL } from '@/constants';
+import { getToken } from "@/utils/storage";
 import * as queryString from 'query-string';
 
 const httpClient = axios.create({
@@ -16,7 +17,7 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use(
   (config) => {
     Nprogress.start();
-    const token = localStorage.getItem(TOKEN);
+    const token = getToken();
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
