@@ -72,6 +72,15 @@ const router = new Router({
       ],
       beforeEnter: checkAuth,
     },
+    {
+      path: '*',
+      name: 'NotFound404',
+      component: () => import('@/components/NotFound404/NotFound404.vue'),
+      meta: {
+        layout: PublicLayout,
+        title: '404 Not Found',
+      },
+    },
   ],
 });
 
