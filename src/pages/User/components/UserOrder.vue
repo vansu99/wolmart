@@ -6,11 +6,11 @@
         <h3 class="order__title-text">Đơn mua</h3>
       </div>
       <div class="order__table">
-        <order-table />
+        <order-table :orderList="this.orderList" />
       </div>
       <div class="order__btn">
         <router-link :to="{ name: 'Home' }">
-          <button-navigating content="mua sắm ngay" :left="false" />
+          <button-navigating class="button--opacity" :left="false">mua sắm ngay</button-navigating>
         </router-link>
       </div>
     </div>
@@ -20,9 +20,31 @@
 <script>
 import OrderTable from '@/components/OrderTable/OrderTable';
 import ButtonNavigating from '@/components/Button/ButtonNavigating';
+import { orderApis } from '@/apis';
 export default {
   name: 'UserOrder',
+  data() {
+    return {
+      orderList: [],
+    };
+  },
   components: { OrderTable, ButtonNavigating },
+  created() {
+    this.loadOrder();
+  },
+  methods: {
+    async loadOrder() {
+      try {
+        const response = await orderApis.getOrder();
+        if (response.status === 200) {
+          this.orderList = { ...response.data };
+          console.log(this.orderList);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
 };
 </script>
 
@@ -31,7 +53,7 @@ export default {
   width: 100%;
   background: #fff;
   &__wrapper {
-    padding: 0 1.5rem;
+    padding: 3rem 1.5rem;
   }
   &__title {
     display: flex;

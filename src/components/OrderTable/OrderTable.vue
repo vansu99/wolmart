@@ -1,22 +1,25 @@
 <template>
   <table class="order-table">
     <thead>
-      <th>Đơn mua</th>
+      <th>Đơn số</th>
       <th>Thời gian</th>
       <th>Tình trạng</th>
       <th>Tổng</th>
       <th>Thao tác</th>
     </thead>
     <tbody>
-      <tr v-for="item in arr" :key="item.id">
-        <td>{{ item.id }}</td>
-        <td>{{ item.time }}</td>
-        <td>{{ item.state }}</td>
-        <td>{{ item.total | formatPrice }} cho {{ item.productAmount }} sản phẩm</td>
+      <tr v-for="item in orderList" :key="item.id">
+        <td>#{{ item.id }}</td>
+        <td>{{ item.date_buy }}</td>
+        <td>{{ status[item.status] }}</td>
         <td>
-          <router-link :to="{ name: 'UserOrderDetail', params: { orderId: 'orderId' } }"
-            ><button-fading content="Xem"
-          /></router-link>
+          <strong>{{ item.total_price | formatPrice }}</strong> cho
+          <strong>{{ item.products.split(',').length }}</strong> sản phẩm
+        </td>
+        <td>
+          <router-link :to="{ name: 'UserOrderDetail', params: { orderId: item.id } }"
+            ><button-navigating class="button--fading">Xem</button-navigating></router-link
+          >
         </td>
       </tr>
     </tbody>
@@ -24,21 +27,16 @@
 </template>
 
 <script>
-import ButtonFading from '@/components/Button/ButtonFading';
+import ButtonNavigating from '@/components/Button/ButtonNavigating';
 export default {
   name: 'OrderTable',
-  components: { ButtonFading },
+  components: { ButtonNavigating },
   data() {
     return {
-      arr: [
-        { id: 1, time: '17/12/1998', state: 'Đang giao', total: 133000, productAmount: 10 },
-        { id: 2, time: '27/5/1998', state: 'Đang giao', total: 133000, productAmount: 10 },
-        { id: 3, time: '13/3/1998', state: 'Đang giao', total: 133000, productAmount: 10 },
-        { id: 4, time: '20/9/1998', state: 'Đang giao', total: 133000, productAmount: 10 },
-        { id: 5, time: '31/4/1998', state: 'Đang giao', total: 133000, productAmount: 10 },
-      ],
+      status: ['Chưa giao', 'Đang giao', 'Đã giao'],
     };
   },
+  props: ['orderList'],
 };
 </script>
 
@@ -63,10 +61,13 @@ export default {
       border-top: 1px solid #eee;
       font-family: $font-primary;
       font-size: 1.4rem;
+      text-align: center;
       color: #666;
       &:last-of-type {
-        text-align: center;
         text-transform: uppercase;
+      }
+      & strong {
+        font-weight: 500;
       }
     }
     &:last-of-type {
