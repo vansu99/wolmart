@@ -1,7 +1,7 @@
 <template>
   <div class="Pagination">
     <div class="container">
-      <div class="pages-start" v-if="this.pagination.totalPages >= 6 && clickedPage != 1">
+      <div class="pages-start" v-if="this.pagination.totalPages >= 6 && clickedPage !== 1">
         <button @click.prevent="startPagination()"><i class="fas fa-angle-double-left"></i></button>
       </div>
       <div class="pages-middle" v-for="(item, index) of showPagination" :key="index">
@@ -10,7 +10,7 @@
             pagination.currentPage = item;
             changePagination(index);
           "
-          :class="pagination.currentPage == item ? 'active' : ''"
+          :class="pagination.currentPage === item ? 'active' : ''"
         >
           {{ item }}
         </button>
@@ -18,7 +18,7 @@
       <div
         class="page-end"
         v-if="
-          this.pagination.totalPages >= 6 && pagination.currentPage != this.pagination.totalPages
+          this.pagination.totalPages >= 6 && pagination.currentPage !== this.pagination.totalPages
         "
       >
         <button @click.prevent="endPagination()"><i class="fas fa-angle-double-right"></i></button>
@@ -42,7 +42,7 @@ export default {
     pagination: {
       handler() {
         this.showPagination = [];
-        if (this.pagination.totalPages != undefined) {
+        if (this.pagination.totalPages !== undefined) {
           let page = this.pagination.totalPages < 5 ? this.pagination.totalPages : 5;
           for (let i = 0; i < page; i++) {
             this.showPagination[i] = i + 1;
@@ -57,7 +57,7 @@ export default {
     changePagination(index) {
       this.$emit('changePagination', this.pagination.currentPage); // truyền event lên cha để đổ products phù hợp
       let add = 0;
-      if (index == 0 && this.showPagination[0] != 1) {
+      if (index === 0 && this.showPagination[0] !== 1) {
         // nếu bấm nút đầu tiên thì dịch sang 2 giá trị (4-5-6-7-8) dịch thành (2-3-4-5-6)
         if (this.showPagination[0] - 2 >= 1) {
           add = 2;
@@ -68,7 +68,7 @@ export default {
           this.showPagination[i] -= add;
         }
         this.$set(this.showPagination, 0, this.showPagination[0]);
-      } else if (index == this.showPagination.length - 1) {
+      } else if (index === this.showPagination.length - 1) {
         // nếu bấm nút cuối cùng thì dịch sang 2 giá trị dịch (2-3-4-5-6) thành (4-5-6-7-8).
         if (this.showPagination[this.showPagination.length - 1] + 2 <= this.pagination.totalPages) {
           add = 2;
@@ -107,26 +107,29 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 .Pagination {
   padding: 0.5rem 0;
   .container {
-    @include flexCenter();
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     .pages-start,
     .pages-middle,
     .page-end {
-      width: 5rem;
-      height: 5rem;
-      margin: 0px 1px;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0 4px;
       button {
         outline: none;
-        border: none;
+        border: 1px solid $bg-primary;
+        overflow: hidden;
+        border-radius: inherit;
         width: 100%;
         height: 100%;
         cursor: pointer;
-        &:hover {
-          background-color: $bg-contrary-dark;
-        }
         &.active {
           background-color: $hover-color;
           color: $text-white-light;
