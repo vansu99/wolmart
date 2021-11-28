@@ -31,12 +31,12 @@ import ButtonNavigating from '@/components/Button/ButtonNavigating';
 export default {
   name: 'OrderTable',
   components: { ButtonNavigating },
+  props: ['orderList'],
   data() {
     return {
-      status: ['Chưa giao', 'Đang giao', 'Đã giao'],
+      status: ['Chưa giao hàng', 'Đang giao hàng', 'Đã giao hàng'],
     };
   },
-  props: ['orderList'],
 };
 </script>
 
