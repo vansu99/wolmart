@@ -3,14 +3,14 @@ import App from './App.vue';
 import store from '@/store';
 import router from '@/router';
 import 'nprogress/nprogress.css';
-import '@/assets/styles/index.scss';
 import VModal from 'vue-js-modal';
 import Toasted from 'vue-toasted';
 import * as filters from '@/filters';
-import ClickOutside from 'v-click-outside'
+import ClickOutside from 'v-click-outside';
 import { ValidationObserver } from 'vee-validate';
 import VueSkeletonLoader from 'skeleton-loader-vue';
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
+import vuetify from './plugins/vuetify/vuetify'
 
 Vue.config.productionTip = false;
 Vue.use(VModal);
@@ -28,5 +28,6 @@ Object.keys(filters).forEach((key) => {
 new Vue({
   router,
   store,
-  render: (h) => h(App),
+  vuetify,
+  render: (h) => h(App)
 }).$mount('#app');

@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\""
+    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "@vee-validate/rules": "^4.5.3",
+    "@vuetify/cli-plugin-utils": "^0.0.10",
     "ap-style-title-case": "^1.1.2",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
@@ -26,9 +27,12 @@
     "vue-toasted": "^1.1.28",
     "vuejs-datepicker": "^1.6.2",
     "vueperslides": "^2.15.2",
+    "vuetify": "^2.4.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@mdi/font": "^6.5.95",
+    "@mdi/js": "^6.5.95",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
@@ -37,8 +41,11 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^6.0.1",
     "prettier": "2.4.1",
+    "sass": "~1.32.0",
     "sass-loader": "^10.1.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-cli-plugin-vuetify": "~2.4.4",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
   },
   "eslintConfig": {
     "root": true,

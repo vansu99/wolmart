@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
+  <v-app>
     <component :is="this.$route.meta.layout || 'div'">
       <router-view />
     </component>
-  </div>
+  </v-app>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
 };
 </script>
-
-<style lang="scss"></style>

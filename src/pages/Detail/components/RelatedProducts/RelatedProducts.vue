@@ -33,12 +33,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
+
 .related-product {
   &__top {
-    @include flexSpaceBetween();
+    @include flexSpaceBetween;
     & a {
       justify-content: flex-end;
-      @include flexCenter();
+      @include flexCenter;
       font-family: $font-primary;
       font-size: 1.4rem;
       font-weight: 600;

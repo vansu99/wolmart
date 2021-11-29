@@ -119,6 +119,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
 .form {
   position: relative;
   width: 55rem;
