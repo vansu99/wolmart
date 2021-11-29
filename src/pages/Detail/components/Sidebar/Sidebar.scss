@@ -1,3 +1,4 @@
+@import './src/plugins/vuetify/preset/styles/mixins';
 .sidebar {
   &__slogan {
     margin-bottom: 3rem;
@@ -95,7 +96,7 @@
   &__widget {
     .widget {
       &__top {
-        @include flexSpaceBetween();
+        @include flexSpaceBetween;
         padding: 2rem 0;
       }
       &__title {

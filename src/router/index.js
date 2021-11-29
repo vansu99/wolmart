@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { checkAuth } from '@/utils';
+//import { getToken } from '@/utils/storage';
 import PublicLayout from '@/layout/default';
 import LayoutSecond from '@/layout/LayoutSecond';
+import LayoutPrivate from "@/layout/LayoutPrivate";
 
 Vue.use(Router);
 
@@ -95,6 +97,15 @@ const router = new Router({
       },
     },
     {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('@/modules/admin'),
+      meta: {
+        layout: LayoutPrivate,
+        breadcrumb: false
+      }
+    },
+    {
       path: '*',
       name: 'NotFound',
       component: () => import('@/pages/NotFound/NotFound404.vue'),
@@ -106,11 +117,17 @@ const router = new Router({
   ],
 });
 
-//router.beforeEach(checkAuth);
 // router.beforeEach((from, to, next) => {
 //   const hasToken = getToken();
-//   if (hasToken && from.name === 'Login') next({ name: 'Home' });
-//   else next();
+//   if (hasToken) {
+//     if (from.name === 'Login') {
+//       next({ name: 'Home' });
+//     } else {
+//
+//     }
+//   } else {
+//     next();
+//   }
 // });
 
 export default router;

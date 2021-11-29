@@ -79,5 +79,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'Sidebar';
+@import './Sidebar';
 </style>

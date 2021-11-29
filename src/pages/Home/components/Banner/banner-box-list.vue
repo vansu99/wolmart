@@ -42,6 +42,7 @@ export default {
 };
 </script>
 <style  lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
 .box {
   &__item {
     @include flexCenter();

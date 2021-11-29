@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
 .product-content {
   display: flex;
   flex-wrap: wrap;

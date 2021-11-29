@@ -1,6 +1,7 @@
 // Fonts
 $font-primary: 'Roboto', sans-serif;
-
+$body-font-family: 'Roboto', sans-serif;
+$font-size-root: 62.5%;
 // Colors
 // ------Background
 $bg-primary: #336699;
@@ -66,7 +67,7 @@ $filter-hover-primary: invert(38%) sepia(12%) saturate(2280%) hue-rotate(169deg)
   contrast(98%);
 
 // Box shadow
-$box-shadow: 0rem 0.5rem 2rem rgba(0, 0, 0, 0.08);
+$box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.08);
 
 // Breakpoints
 $info-screen-1200: 'only screen and (max-width : 1199px)';

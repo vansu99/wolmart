@@ -1,3 +1,5 @@
+@import './src/plugins/vuetify/preset/styles/mixins';
+
 .tab-list {
   border-bottom: 1px solid $bg-contrary-light;
   .tab {

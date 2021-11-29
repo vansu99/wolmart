@@ -1,16 +1,16 @@
+const { mergeSassVariables } = require('@vuetify/cli-plugin-utils');
+
 module.exports = {
-  css: {
-    loaderOptions: {
-      sass: {
-        additionalData: `
-          @import "@/assets/styles/reset.scss";
-          @import "@/assets/styles/shared.scss";
-          @import "@/assets/styles/mixins.scss";
-          @import "@/assets/styles/variables.scss";
-          @import "@/assets/styles/typography.scss";
-          @import "@/assets/styles/transition.scss";
-        `,
-      },
-    },
+  chainWebpack: (config) => {
+    const modules = ['vue-modules', 'vue', 'normal-modules', 'normal'];
+    modules.forEach((match) => {
+      config.module
+        .rule('scss')
+        .oneOf(match)
+        .use('sass-loader')
+        .tap(opt => mergeSassVariables(opt, "'@/scss/variables.scss';"))
+
+    });
   },
+  transpileDependencies: ['vuetify'],
 };

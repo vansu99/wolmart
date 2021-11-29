@@ -192,6 +192,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
+
 .user-content {
   flex: 1 0 0;
   background-color: #fff;

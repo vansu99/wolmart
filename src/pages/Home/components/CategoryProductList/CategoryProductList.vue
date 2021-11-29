@@ -85,6 +85,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
+
 .category {
   padding-top: 1.5rem;
   padding-bottom: 3rem;
@@ -122,11 +124,8 @@ export default {
 }
 .sidebar-banner {
   height: 100%;
-  background: url('../../../../assets/images/Home/CategoryProductList/banner.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: $bg-second;
+  background: $bg-second url('../../../../assets/images/Home/CategoryProductList/banner.jpg') no-repeat center;
   border-radius: 0.5rem;
   &__content {
     padding: 3.7rem;

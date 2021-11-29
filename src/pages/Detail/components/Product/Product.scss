@@ -1,6 +1,5 @@
-// Hide arrows on input elements
+@import './src/plugins/vuetify/preset/styles/mixins';
 
-/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

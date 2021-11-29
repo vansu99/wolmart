@@ -50,6 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
 .product {
   &__item {
     overflow: hidden;
