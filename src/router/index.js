@@ -4,7 +4,7 @@ import { checkAuth } from '@/utils';
 //import { getToken } from '@/utils/storage';
 import PublicLayout from '@/layout/default';
 import LayoutSecond from '@/layout/LayoutSecond';
-import LayoutPrivate from "@/layout/LayoutPrivate";
+import LayoutPrivate from '@/layout/LayoutPrivate';
 
 Vue.use(Router);
 
@@ -30,6 +30,35 @@ const router = new Router({
       name: 'Register',
       component: () => import('@/pages/Register'),
       meta: { layout: LayoutSecond, breadcrumb: false },
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('@/modules/admin'),
+      meta: {
+        layout: LayoutPrivate,
+        breadcrumb: false,
+      },
+      children: [
+        {
+          path: 'dashboard',
+          name: 'AdminDashboard',
+          component: () => import('@/modules/admin/components/Tables/ProductTable'),
+          meta: {
+            layout: LayoutPrivate,
+            breadcrumb: false,
+          },
+        },
+        {
+          path: 'profile',
+          name: 'AdminProfile',
+          component: () => import('@/modules/admin/components/Settings'),
+          meta: {
+            layout: LayoutPrivate,
+            breadcrumb: false,
+          },
+        },
+      ],
     },
     {
       path: '/user',
@@ -95,15 +124,6 @@ const router = new Router({
         layout: PublicLayout,
         breadcrumb: true,
       },
-    },
-    {
-      path: '/admin',
-      name: 'Admin',
-      component: () => import('@/modules/admin'),
-      meta: {
-        layout: LayoutPrivate,
-        breadcrumb: false
-      }
     },
     {
       path: '*',

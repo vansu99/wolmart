@@ -17,12 +17,12 @@
       <nav-menu-link
         title="Dashboard"
         :icon="icons.mdiHomeOutline"
-        to="/admin"
+        to="/admin/dashboard"
       />
       <nav-menu-link
         title="Settings"
         :icon="icons.mdiAlphaTBoxOutline"
-        to="/"
+        to="/admin/profile"
       />
       <nav-menu-link
         title="Files"
