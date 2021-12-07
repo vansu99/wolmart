@@ -3,13 +3,15 @@
     <div class="category">
       <div class="container">
         <div class="category__top">
-          <h2 class="section__title">{{ category.name }}</h2>
+          <div class="category__title">
+            <h2 class="section__title">{{ category.name }}</h2>
+          </div>
           <router-link
             :to="{
               name: 'Products',
               params: { slug: convertSlug(category.name), categoryId: category.id },
             }"
-            ><div>More Products</div>
+            ><div>Xem thêm</div>
             <i class="fas fa-long-arrow-alt-right"></i>
           </router-link>
         </div>
@@ -17,11 +19,11 @@
         <div class="category__content">
           <div class="sidebar-banner">
             <div class="sidebar-banner__content">
-              <div class="sidebar-banner__subtitle">weekend sale</div>
+              <div class="sidebar-banner__subtitle">Tuần lễ giảm giá</div>
               <hr class="sidebar-banner__divider" />
-              <div class="sidebar-banner__title">new arrivals</div>
-              <div class="sidebar-banner__type">collection</div>
-              <div class="sidebar-banner__link">shop now</div>
+              <div class="sidebar-banner__title">Sản phẩm mới</div>
+              <div class="sidebar-banner__type">Xu hướng</div>
+              <div class="sidebar-banner__link">Mua sắm ngay</div>
             </div>
           </div>
           <div class="product-list">
@@ -94,9 +96,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
     & a {
       justify-content: flex-end;
       @include flexCenter();
+      flex-shrink: 0;
       font-family: $font-primary;
       font-size: 1.4rem;
       font-weight: 600;
@@ -116,16 +120,31 @@ export default {
       }
     }
   }
+  &__title {
+    @include textClamp();
+  }
   &__content {
     display: grid;
     grid-template-columns: 3fr 9fr;
     grid-gap: 2rem;
+    @media #{$info-screen-1200} {
+      grid-template-columns: 1fr 3fr;
+    }
+    @media #{$info-screen-992} {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    @media #{$info-screen-575} {
+      grid-template-columns: 1fr;
+    }
   }
 }
 .sidebar-banner {
+  min-width: 23rem;
   height: 100%;
+  background: $bg-second url('../../../../assets/images/Home/CategoryProductList/banner.jpg')
+    no-repeat center;
   background-size: cover;
-  background: $bg-second url('../../../../assets/images/Home/CategoryProductList/banner.jpg') no-repeat center;
   border-radius: 0.5rem;
   &__content {
     padding: 3.7rem;
@@ -146,15 +165,15 @@ export default {
   }
   &__title {
     font-family: $font-primary;
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: bold;
     text-transform: uppercase;
     color: $text-primary;
   }
   &__type {
-    padding-bottom: 1.9rem;
+    padding-bottom: 2.4rem;
     font-family: $font-primary;
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: capitalize;
     color: $text-primary;
   }
@@ -185,5 +204,14 @@ export default {
   grid-gap: 2rem;
   width: 100%;
   margin-right: -0.7rem;
+  @media #{$info-screen-1200} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media #{$info-screen-992} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media #{$info-screen-375} {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

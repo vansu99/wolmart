@@ -2,7 +2,7 @@
   <div class="brand">
     <div class="container">
       <div class="brand__top">
-        <h2 class="section__title">Our clients</h2>
+        <h2 class="section__title">Hợp tác</h2>
         <hr class="section__divider" />
       </div>
       <div class="brand__content">
@@ -55,8 +55,17 @@ export default {
       width: calc(100% / 6);
       border: 0.1rem solid $text-white-dark;
       overflow: hidden;
+      @media #{$info-screen-992} {
+        width: calc(100% / 4);
+      }
+      @media #{$info-screen-575} {
+        width: calc(100% / 3);
+      }
+      @media #{$info-screen-375} {
+        width: calc(100% / 2);
+      }
+      
     }
   }
 }
-
 </style>

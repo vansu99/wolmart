@@ -1,24 +1,22 @@
 <template>
-  <div class="advertisement-list">
-    <div class="advertisement-item">
+  <div class="advertisement__list">
+    <div class="advertisement__item advertisement__item--first">
+      <!-- <img src="@/assets/images/Home/Banner/banner-1.jpg" alt="banner" /> -->
       <div class="advertisement__content">
-        <div class="advertisement__sub-title">Get up to <span>20% off</span></div>
-        <div class="advertisement__title">sports oufits</div>
-        <div class="advertisement__type">collection</div>
-        <div class="advertisement__description">Starting at <span>$170.00</span></div>
+        <div class="advertisement__sub-title">Khuyến mãi lên tới <span>20%</span></div>
+        <div class="advertisement__title--black">Chăm sóc da</div>
+        <div class="advertisement__type">cao cấp</div>
+        <div class="advertisement__description">Giá cơ bản <span>{{170000 | formatPrice}}</span></div>
       </div>
-      <img src="@/assets/images/Home/Banner/banner-1.jpg" alt="banner" />
     </div>
-    <div class="advertisement-item">
-      <div class="advertisement__content white">
-        <div class="advertisement__sub-title--white capitalize">new arrivals</div>
-        <div class="advertisement__title--white">ACCESSORIES</div>
-        <div class="advertisement__type--white">collection</div>
-        <div class="advertisement__description--white capitalize">
-          only from <span>$90.00</span>
-        </div>
+    <div class="advertisement__item advertisement__item--second">
+      <!-- <img src="@/assets/images/Home/Banner/banner-2.jpg" alt="" /> -->
+      <div class="advertisement__content">
+        <div class="advertisement__sub-title--white">Mặt hàng mới</div>
+        <div class="advertisement__title--white">Dược phẩm</div>
+        <div class="advertisement__type--white">Tuyển chọn</div>
+        <div class="advertisement__description--white">Chỉ từ <span>{{90000 | formatPrice}}</span></div>
       </div>
-      <img src="@/assets/images/Home/Banner/banner-2.jpg" alt="" />
     </div>
   </div>
 </template>
@@ -29,11 +27,22 @@ export default {};
 
 <style lang="scss" scoped>
 .advertisement {
-  &-item {
+  &__item {
     position: relative;
+    min-height: 22rem;
     overflow: hidden;
+    object-fit: cover;
     background-color: $bg-contrary-dark;
     border-radius: 0.3rem;
+    @media #{$info-screen-768} {
+      margin-bottom: 3rem;
+    }
+    &--first{
+background: $bg-second url('../../../../assets/images/Home/Banner/banner-1.jpg') no-repeat center / cover;
+    }
+    &--second{
+background: $bg-second url('../../../../assets/images/Home/Banner/banner-2.jpg') no-repeat center / cover;
+    }
     & span {
       font-weight: 700;
       color: $secondary-color;
@@ -41,19 +50,18 @@ export default {};
     }
   }
 
-  &-list {
+  &__list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
     justify-content: space-between;
     overflow: hidden;
     padding: 3rem 0;
+    @media #{$info-screen-768} {
+      display: block;
+    }
   }
-  & img {
-    width: 100%;
-    height: 100%;
-    border-radius: 0.3rem;
-  }
+
   &__content {
     position: absolute;
     top: 3rem;
@@ -71,7 +79,7 @@ export default {};
     color: $text-extra-dark;
     text-transform: capitalize;
   }
-  &__title,
+  &__title--black,
   &__title--white {
     font-family: $font-primary;
     font-size: 2.6rem;

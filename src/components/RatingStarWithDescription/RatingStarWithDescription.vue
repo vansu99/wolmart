@@ -17,8 +17,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/plugins/vuetify/preset/styles/mixins';
 .rating {
-  flex-shrink: 0;
+  &__container {
+    @include textClamp();
+  }
   &__description {
     font-size: 1.2rem;
     font-family: $font-primary;

@@ -29,20 +29,18 @@
 
 .section {
   &__title {
-    padding: 1.1rem 0;
     font-size: 2rem;
     font-family: $font-primary;
     font-weight: 700;
+    line-height: 2.2;
     color: $text-primary;
+    text-transform: capitalize;
   }
   &__divider {
     margin-bottom: 2rem;
     border-top-width: 0;
     border-color: $text-white-dark;
   }
-}
-.capitalize {
-  text-transform: capitalize;
 }
 @keyframes zoom-in-out {
   0% {

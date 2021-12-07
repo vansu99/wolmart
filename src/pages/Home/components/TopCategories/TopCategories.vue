@@ -2,8 +2,38 @@
   <div class="top-categories">
     <div class="container">
       <div class="top-categories__top">
-        <h2 class="section__title">Top Categories Of The Month</h2>
+        <h2 class="section__title">Mặt hàng nổi bật trong tháng</h2>
       </div>
+      <!-- <vueper-slides
+        class="no-shadow vueperslides--2"
+        ref="vueperslides2"
+        :visible-slides="6"
+        :touchable="false"
+        fixed-height="200px"
+        :bullets="false"
+        :bulletsOutside="false"
+        :gap="1"
+        :breakpoints="breakpoints"
+      >
+        <vueper-slide v-for="(item, index) in categories" :key="item.id">
+          <template #content>
+            <div class="top-categories__card">
+              <router-link
+                :to="{
+                  name: 'Products',
+                  params: { slug: convertSlug(item.name), categoryId: item.id },
+                }"
+              >
+                <img
+                  :src="require(`@/assets/images/Home/TopCategories/${categories_img[index]}`)"
+                  :alt="item.name"
+                />
+                <div>{{ item.name }}</div>
+              </router-link>
+            </div>
+          </template>
+        </vueper-slide>
+      </vueper-slides> -->
       <div class="top-categories__content">
         <div class="top-categories__card" v-for="(item, index) in categories" :key="item.id">
           <router-link
@@ -26,6 +56,9 @@
 
 <script>
 import mixins from '@/mixins';
+// import { VueperSlides, VueperSlide } from 'vueperslides';
+// import 'vueperslides/dist/vueperslides.css';
+
 export default {
   name: 'TopCategories',
   mixins: [mixins],
@@ -41,6 +74,10 @@ export default {
       ],
     };
   },
+  // components: {
+  //   VueperSlides,
+  //   VueperSlide,
+  // },
   computed: {
     categories() {
       return this.$store.getters['category/categories'];
@@ -59,18 +96,40 @@ export default {
     padding-bottom: calc(2.5rem - 1.1rem);
   }
   &__content {
-    display: flex;
-    flex-shrink: 0;
+    // display: flex;
+    // gap: 1rem;
+    // margin-right: -1rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
-    margin-right: -1rem;
+    @media #{$info-screen-1200} {
+    grid-template-columns: repeat(5, 1fr);
+    }
+    @media #{$info-screen-992} {
+    grid-template-columns: repeat(4, 1fr);
+    }
+    @media #{$info-screen-992} {
+    grid-template-columns: repeat(4, 1fr);
+    }
+    @media #{$info-screen-992} {
+    grid-template-columns: repeat(4, 1fr);
+    }
+    @media #{$info-screen-768} {
+    grid-template-columns: repeat(3, 1fr);
+    }
+    @media #{$info-screen-575} {
+    grid-template-columns: repeat(2, 1fr);
+    }
+    @media #{$info-screen-375} {
+    grid-template-columns: 1fr;
+    }
   }
   &__card {
     position: relative;
-    width: calc(100% / 6 - 1rem);
+    min-width: 15rem;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.2s ease-in;
-    flex-shrink: 1;
     background-color: $bg-contrary;
     & img {
       width: 100%;

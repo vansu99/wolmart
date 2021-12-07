@@ -18,23 +18,23 @@ export default {
       bannerBoxes: [
         {
           image: 'truck-solid.svg',
-          text: 'Free Shipping & Returns',
-          subText: 'For all orders over $99',
+          text: 'Miễn phí vận chuyển',
+          subText: 'Cho các đơn trên 3 triệu',
         },
         {
           image: 'briefcase-solid.svg',
-          text: 'Secure Payment',
-          subText: 'We ensure secure payment',
+          text: 'An toàn mua sắm',
+          subText: 'Đảm bảo thông tin',
         },
         {
           image: 'hand-holding-usd-solid.svg',
-          text: 'Money Back Guarantee',
-          subText: 'Any back within 30 days',
+          text: 'Đảm bảo hoàn tiền',
+          subText: 'Trong vòng 30 ngày',
         },
         {
           image: 'comments-solid.svg',
-          text: 'Customer Support',
-          subText: 'Call or email us 24/7',
+          text: 'Hỗ trợ khách hàng',
+          subText: 'Sẵn sàng 24/7',
         },
       ],
     };
@@ -52,6 +52,36 @@ export default {
       margin-right: 1.3rem;
       filter: $filter-banner-icon;
     }
+    &:nth-child(1),
+    &:nth-child(2) {
+      @media #{$info-screen-992} {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+    }
+    &:nth-child(3),
+    &:nth-child(4) {
+      @media #{$info-screen-992} {
+        padding-top: 1rem;
+      }
+    }
+    &:nth-child(4),
+    &:nth-child(2) {
+      @media #{$info-screen-992} {
+        border-left: 1px solid #eee;
+      }
+      @media #{$info-screen-575} {
+        border-left: none;
+      }
+    }
+    @media #{$info-screen-575} {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+    }
+    &:nth-child(4) {
+      border-bottom: none;
+    }
   }
   &__list {
     display: grid;
@@ -59,6 +89,15 @@ export default {
     margin: 3rem 0;
     padding: 2.3rem 0 2.2rem;
     border: 1px solid $text-white-dark;
+    @media #{$info-screen-992} {
+      grid-template-columns: repeat(2, 1fr);
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+    @media #{$info-screen-575} {
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
   }
   &__description {
     font-family: $font-primary;
