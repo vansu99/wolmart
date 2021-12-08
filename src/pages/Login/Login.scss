@@ -18,12 +18,26 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0 4px 16px, rgba(17, 17, 26, 0.1) 0 8px 24px,
       rgba(17, 17, 26, 0.1) 0 16px 56px;
     background: #fff;
+    @media #{$info-screen-992} {
+      width: 40rem;
+    }
+    @media #{$info-screen-500} {
+      width: 100%;
+    }
+  }
+  &-image {
+    @media #{$info-screen-992} {
+      display: none;
+    }
   }
 
   &-wrapper {
     flex-shrink: 0;
     width: 37rem;
     padding: 4rem 3.5rem;
+    @media #{$info-screen-500} {
+      width: 100%;
+    }
   }
   &-heading {
     font-size: 2.6rem;
@@ -129,8 +143,12 @@
         font-weight: bold;
         cursor: pointer;
       }
+      a {
+        color: darkslategray;
+      }
     }
   }
+
   .line-text {
     text-align: center;
     position: relative;
@@ -195,6 +213,9 @@
       font-weight: bold;
       cursor: pointer;
     }
+    a {
+        color: darkslategray;
+      }
   }
 }
 
