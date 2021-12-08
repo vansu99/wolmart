@@ -16,7 +16,7 @@
             ><i class="fas fa-heart"></i
           ></router-link>
         </div>
-        <span class="product__sale" v-show="product.discount">{{ product.discount }}% off</span>
+        <span class="product__sale" v-show="product.discount">Giảm {{ product.discount }}%</span>
       </div>
       <div class="product__content">
         <div class="product__name">

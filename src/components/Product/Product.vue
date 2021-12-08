@@ -20,8 +20,8 @@
             ><i class="fas fa-heart"></i
           ></router-link>
         </div>
-        <span class="product__sale" v-show="product.discount">{{ product.discount }}% off</span>
-        <div class="product__action--horizontal"><a href="">Quick view</a></div>
+        <span class="product__sale" v-show="product.discount">Giảm {{ product.discount }}%</span>
+        <div class="product__action--horizontal"><a href="">Xem chi tiết</a></div>
       </div>
       <div class="product__content">
         <div class="product__name">
