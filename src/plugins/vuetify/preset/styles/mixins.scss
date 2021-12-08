@@ -8,10 +8,11 @@
 
 @mixin flexSpaceBetween() {
   display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
   justify-content: space-between;
   align-items: center;
 }
-
 @mixin flexVerticalCenter() {
   display: flex;
   display: -webkit-flex;
