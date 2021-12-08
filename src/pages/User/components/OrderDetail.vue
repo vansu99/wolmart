@@ -12,11 +12,11 @@
             <tr v-for="(product, index) in orderProducts" :key="index">
               <th>
                 <div class="table__td-content">
-                  <a>{{ product }}</a
-                  ><strong>&nbsp;x&nbsp;1</strong><br />
+                  <span>{{ product }}</span>
+                  <strong>&nbsp;x&nbsp;1</strong>
+                  <br />
                 </div>
               </th>
-              <td></td>
             </tr>
           </tbody>
           <tfoot>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <th>Phương thức thanh toán</th>
-              <td>Thanh toán trực tuyến</td>
+              <td>Trực tuyến</td>
             </tr>
             <tr class="total">
               <th>Tổng tiền</th>
@@ -170,11 +170,12 @@ export default {
   &__main-table {
     margin-bottom: 2.5rem;
     padding: 0 3rem 1rem;
-    border: 1px solid #e5e5e5;
+    border: $border;
+    overflow-x: auto;
     & table {
       width: 100%;
       & th {
-        width: 70%;
+        width: 60%;
         text-align: justify;
         color: #333;
       }
@@ -202,6 +203,9 @@ export default {
           & strong {
             font-weight: bold;
           }
+          & a {
+            color: #666;
+          }
         }
       }
       & tfoot {
@@ -222,12 +226,20 @@ export default {
           font-family: $font-primary;
           font-weight: 600;
           font-size: 1.6rem;
+          white-space: nowrap;
         }
       }
     }
   }
+  &__sub-table {
+    overflow-x: auto;
+  }
   &__btn {
     margin-top: 3rem;
+    @media #{$info-screen-575} {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 .address {
@@ -237,6 +249,9 @@ export default {
     gap: 3rem;
     border-bottom: 0.1rem solid #eee;
     padding-top: 4rem;
+    @media #{$info-screen-575} {
+      display: block;
+    }
   }
   &__item {
     padding-bottom: 4rem;

@@ -20,10 +20,14 @@ export default {
 
 <style lang="scss" scoped>
 .user-sidebar {
+  min-width: 17.5rem;
   width: 22.7rem;
   margin-right: 1.5rem;
   background-color: #fff;
   margin-bottom: 1.7rem;
+  @media #{$info-screen-768} {
+      width: 100%;
+    }
   &-title {
     display: flex;
     align-items: center;

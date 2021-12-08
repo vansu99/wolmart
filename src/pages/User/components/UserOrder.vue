@@ -10,7 +10,7 @@
       </div>
       <div class="order__btn">
         <router-link :to="{ name: 'Home' }">
-          <button-navigating class="button--opacity" :left="false">mua sắm ngay</button-navigating>
+          <button-navigating class="button--opacity" :right="true">mua sắm ngay</button-navigating>
         </router-link>
       </div>
     </div>
@@ -38,7 +38,6 @@ export default {
         const response = await orderApis.getOrder();
         if (response.status === 200) {
           this.orderList = { ...response.data };
-          console.log(this.orderList);
         }
       } catch (e) {
         console.log(e);
@@ -73,11 +72,16 @@ export default {
   }
   &__table {
     margin-bottom: 3rem;
+    overflow-x: auto;
   }
   &__btn {
-    float: right;
+    display: flex;
+    justify-content: flex-end;
     padding: 0 0 4rem;
     margin-left: auto;
+    @media #{$info-screen-575}{
+      justify-content: center;
+    }
   }
 }
 </style>

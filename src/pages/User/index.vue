@@ -26,6 +26,9 @@ export default {
   background-color: #ebebeb;
   &-wrapper {
     display: flex;
+    @media #{$info-screen-768} {
+      display: block;
+    }
   }
 }
 </style>

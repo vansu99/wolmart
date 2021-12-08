@@ -43,6 +43,7 @@ export default {
 <style lang="scss" scoped>
 .order-table {
   width: 100%;
+  white-space: nowrap;
   thead {
     padding-bottom: 1.8rem;
     th {
