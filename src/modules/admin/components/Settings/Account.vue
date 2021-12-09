@@ -6,7 +6,7 @@
       </v-avatar>
       <div>
         <v-btn color="primary" class="me-3 mt-5" @click="$refs.refInputEl.click()">
-          <span class="d-none d-sm-block text-subtitle-1">Upload new photo</span>
+          <span class="d-none d-sm-block sm:text-subtitle-1">Upload new photo</span>
         </v-btn>
         <input ref="refInputEl" type="file" accept=".jpeg,.png,.jpg,GIF" :hidden="true" />
         <p class="text-sm mt-5">Allowed JPG, GIF or PNG. Max size of 800K</p>
@@ -61,44 +61,10 @@
             ></v-select>
           </v-col>
           <v-col cols="12" md="6">
-            <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              :return-value.sync="accountInfo.birthday"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="accountInfo.birthday"
-                  placeholder="24-06-1999"
-                  readonly
-                  outlined
-                  dense
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="accountInfo.birthday" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" class="text-xs" @click="menu = false"> Hủy </v-btn>
-                <v-btn
-                  text
-                  color="primary"
-                  class="text-xs"
-                  @click="$refs.menu.save(accountInfo.birthday)"
-                >
-                  Chọn
-                </v-btn>
-              </v-date-picker>
-            </v-menu>
+            <date-picker :value.sync="accountInfo.birthday" />
           </v-col>
           <v-col cols="12">
-            <v-btn color="primary" type="submit" class="me-3 mt-4 text-xs" :disabled="!valid"
-              >Cập nhật</v-btn
-            >
+            <v-btn color="primary" type="submit" class="me-3 mt-4 text-xs">Cập nhật</v-btn>
             <v-btn color="secondary" outlined class="mt-4 text-xs">Hủy</v-btn>
           </v-col>
         </v-row>
@@ -110,8 +76,10 @@
 <script>
 import { mdiAlertOutline, mdiCloudUploadOutline } from '@mdi/js';
 import { userApis } from '@/apis';
+import DatePicker from '@/components/DatePicker';
 export default {
   name: 'Account',
+  components: { DatePicker },
   data() {
     return {
       menu: false,
