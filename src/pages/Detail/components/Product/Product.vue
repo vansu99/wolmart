@@ -52,21 +52,16 @@
             <button class="product__quantity-btn--plus" @click="increaseQuantity">+</button>
           </div>
           <div class="product__btn" :class="{ disabled: value === 0 }">
-            <img
-              src="@/assets/images/Shared/shopping-bag-solid.svg"
-              alt=""
-              class="product__btn-icon"
-            />
-            <div class="product__btn-text">Add to Cart</div>
+            <i class="fas fa-shopping-bag product__btn-icon"></i>
+            <div class="product__btn-text">Thêm vào giỏ</div>
           </div>
         </div>
         <div class="product__links">
           <Social />
           <span></span>
-          <div class="product__icon">
+          <div class="product__icon" title="Thêm vào wishlist">
             <router-link to="/wishlist" href=""
-              ><img src="@/assets/images/Shared/heart-solid.svg" alt="add-to-wishlist"
-            /></router-link>
+              ><i class="far fa-heart"></i></router-link>
           </div>
         </div>
       </div>

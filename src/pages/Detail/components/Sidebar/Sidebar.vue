@@ -2,7 +2,7 @@
   <div class="sidebar">
     <div class="sidebar__slogan">
       <div class="slogan" v-for="(item, index) in bannerBoxes" :key="index">
-        <img :src="require(`@/assets/images/Home/Banner/icon/${item.image}`)" :alt="item.image" />
+        <i :class="item.image"></i>
         <div class="slogan__description">
           <div class="slogan__text">{{ item.text }}</div>
           <div class="slogan__sub-text">{{ item.subText }}</div>
@@ -19,17 +19,17 @@
             <span class="banner__number">40</span>
             <div class="banner__unit">
               <div class="banner__percent">%</div>
-              <div class="banner__state">off</div>
+              <div class="banner__state">Giảm</div>
             </div>
           </div>
-          <div class="banner__text">Ultimate sale</div>
+          <div class="banner__text">Sale siêu khủng</div>
         </div>
       </div>
     </div>
     <div class="sidebar__widget">
       <div class="widget">
         <div class="widget__top">
-          <h2 class="widget__title">More products</h2>
+          <h2 class="widget__title">Sản phẩm khác</h2>
         </div>
         <hr class="hr-divider" />
         <div class="widget__bottom">
@@ -56,19 +56,19 @@ export default {
     return {
       bannerBoxes: [
         {
-          image: 'truck-solid.svg',
-          text: 'Free shipping & returns',
-          subText: 'For all orders over $99',
+          image: 'fas fa-truck',
+          text: 'Miễn Phí Vận Chuyển',
+          subText: 'Cho các đơn trên 3 triệu',
         },
         {
-          image: 'briefcase-solid.svg',
-          text: 'Secure Payment',
-          subText: 'We ensure secure payment',
+          image: 'fas fa-briefcase',
+          text: 'An Toàn Mua Sắm',
+          subText: 'An Toàn Mua Sắm',
         },
         {
-          image: 'hand-holding-usd-solid.svg',
-          text: 'Money Back Guarantee',
-          subText: 'Any back within 30 days',
+          image: 'fas fa-hand-holding-usd',
+          text: 'Đảm Bảo Hoàn Tiền',
+          subText: 'Trong vòng 30 ngày',
         },
       ],
     };

@@ -69,6 +69,9 @@
       display: flex;
       list-style: revert;
       gap: 2.5rem;
+      @media #{$info-screen-575} {
+        display: block;
+      }
       & li {
         font-family: $font-primary;
         font-size: 1.4rem;
@@ -82,12 +85,19 @@
       & li {
         display: grid;
         grid-template-columns: 20rem auto;
+        @media #{$info-screen-575} {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
     }
     &--description {
       display: grid;
       grid-template-columns: 1fr 2fr;
       gap: 2rem;
+      @media #{$info-screen-768} {
+        display: block;
+      }
+
       .rating {
         &__avg {
           display: flex;
@@ -159,10 +169,15 @@
           & i {
             height: 1.2rem;
             padding: 0 0.05rem;
-            color: #999;
+            color: $text-primary;
             &.check {
               color: #f93;
             }
+          }
+          @media #{$info-screen-575} {
+            display: block;
+            margin: 0 auto;
+            margin-top: 1rem;
           }
         }
         &__heading {
@@ -177,6 +192,13 @@
           margin-bottom: 2.3rem;
           display: flex;
           gap: 2rem;
+          @media #{$info-screen-575} {
+            display: block;
+          }
+
+          input:first-child {
+            margin-bottom: 2rem;
+          }
         }
         textarea {
           min-width: 100%;
@@ -193,8 +215,15 @@
         input {
           padding: 1rem 2rem;
           width: 100%;
-          border: 1px solid #eee;
           outline: none;
+        }
+        input,
+        textarea {
+          border: 1px solid #eee;
+          border-radius: 3px;
+          &:focus {
+            border: 1px solid $hover-color;
+          }
         }
         &__summit {
           padding: 1.3rem 2.8rem;
@@ -203,8 +232,14 @@
           text-transform: uppercase;
           text-align: center;
           border: 2px solid #454545;
+          border-radius: 3px;
           background-color: #454545;
           color: #fff;
+          cursor: pointer;
+          transition: opacity 0.2s ease-in;
+          &:hover {
+            opacity: 0.8;
+          }
         }
       }
     }
