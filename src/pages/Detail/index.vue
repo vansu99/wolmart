@@ -81,8 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 .product-detail {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding: 4rem 0;
   &__container {
     display: flex;
     gap: 3rem;
