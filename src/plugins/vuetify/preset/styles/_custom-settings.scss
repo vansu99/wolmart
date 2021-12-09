@@ -1,0 +1,21 @@
+$body-font-family: 'Roboto', sans-serif;
+$font-size-root: 62.5%;
+$line-height-root: 1.4;
+$border-radius-root: 4px;
+
+$headings: (
+  'h1': (
+    'size': 3.5rem,
+  ),
+  'h2': (
+    'size': 2.7rem,
+  ),
+  'h3': (
+    'size': 2.2rem
+  ),
+  'subtitle-1': (
+    'size': 1.3rem,
+    'letter-spacing': 1px,
+    'line-height': $line-height-root
+  )
+);

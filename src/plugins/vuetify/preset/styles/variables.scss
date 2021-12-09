@@ -1,7 +1,6 @@
 // Fonts
 $font-primary: 'Roboto', sans-serif;
-$body-font-family: 'Roboto', sans-serif;
-$font-size-root: 62.5%;
+
 // Colors
 // ------Background
 $bg-primary: #336699;
@@ -72,3 +71,7 @@ $info-screen-768: 'only screen and (max-width : 767px)';
 $info-screen-575: 'only screen and (max-width : 575px)';
 $info-screen-500: 'only screen and (max-width : 500px)';
 $info-screen-375: 'only screen and (max-width : 375px)';
+
+// Vuetify Custom Variables
+@import './custom-table';
+@import './custom-settings';

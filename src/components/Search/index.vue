@@ -64,6 +64,7 @@
 
 <script>
 import mixins from '@/mixins';
+import { categoryApis } from '@/apis';
 export default {
   name: 'Search',
   mixins: [mixins],
@@ -89,6 +90,14 @@ export default {
     results(value) {
       this.show = value.length > 0;
     },
+    categories: {
+      handler() {
+        if (this.categories.length === 0) {
+          this.getCategories();
+        }
+      },
+      immediate: true,
+    },
   },
   data() {
     return {
@@ -106,6 +115,16 @@ export default {
       this.timeout = setTimeout(() => {
         this.$emit('onSearch', e.target.value);
       }, 700);
+    },
+    async getCategories() {
+      try {
+        const response = await categoryApis.getCategoryList();
+        if (response.status === 200) {
+          await this.$store.dispatch('category/getCategories', response.data);
+        }
+      } catch (e) {
+        throw Error(e);
+      }
     },
     hideResult() {
       this.show = false;

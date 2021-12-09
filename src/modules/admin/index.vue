@@ -13,20 +13,12 @@
             hide-details
           />
           <v-spacer />
-          <a
-            href="https://github.com/themeselection/materio-vuetify-vuejs-admin-template-free"
-            target="_blank"
-            rel="nofollow"
-          >
+          <a href="https://github.com/vansu99/wolmart" target="_blank" rel="nofollow">
             <v-icon class="ms-6 me-4">
               {{ icons.mdiGithub }}
             </v-icon>
           </a>
-          <v-btn
-            icon
-            small
-            class="ms-3"
-          >
+          <v-btn icon small class="ms-3">
             <v-icon>
               {{ icons.mdiBellOutline }}
             </v-icon>
@@ -36,15 +28,17 @@
       </div>
     </v-app-bar>
     <v-main>
-      <router-view />
+      <div class="ad-container pa-6">
+        <router-view />
+      </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Sidebar from './components/sidebar';
+import Sidebar from './components/Navigate/sidebar';
 import { mdiMagnify, mdiGithub, mdiBellOutline } from '@mdi/js';
-import AppBarUserMenus from "@/modules/admin/components/AppBarUserMenus";
+import AppBarUserMenus from '@/modules/admin/components/Navigate/AppBarUserMenus';
 export default {
   name: 'admin',
   components: { AppBarUserMenus, Sidebar },
