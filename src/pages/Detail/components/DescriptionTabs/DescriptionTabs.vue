@@ -1,10 +1,10 @@
 <template>
   <div class="description-tabs">
     <ul class="tab-list">
-      <li class="tab" @click="tabClickIdx = 0" :class="{ active: tabClickIdx === 0 }">Description</li>
-      <li class="tab" @click="tabClickIdx = 1" :class="{ active: tabClickIdx === 1 }">Specification</li>
+      <li class="tab" @click="tabClickIdx = 0" :class="{ active: tabClickIdx === 0 }">Chi tiết</li>
+      <li class="tab" @click="tabClickIdx = 1" :class="{ active: tabClickIdx === 1 }">Đặc tả</li>
       <li class="tab" @click="tabClickIdx = 2" :class="{ active: tabClickIdx === 2 }">
-        Customer Review ({{ review}})
+        Nhận xét của khách hàng ({{ review}})
       </li>
     </ul>
 
@@ -24,16 +24,16 @@
         </ul>
         <ol>
           <li>
-            <p class="tab__sub-title">Free Shipping & Return</p>
-            <p class="tab__detail">We offer free shipping for products on orders above 50$ and offer free delivery for all orders in US.</p>
+            <p class="tab__sub-title">Vận chuyển miễn phí</p>
+            <p class="tab__detail">Chúng tôi cung cấp dịch vụ miễn phí vận chuyển cho những sản phẩm thuộc đơn trị giá trên 3 triệu trên toàn lãnh thổ Việt Nam.</p>
           </li>
           <li>
-            <p class="tab__sub-title">Free and Easy Returns</p>
-            <p class="tab__detail">We guarantee our products and you could get back all of your money anytime you want in 30 days.</p>
+            <p class="tab__sub-title">Hoàn tiền dễ dàng</p>
+            <p class="tab__detail">Chúng tôi đảm bảo về chất lượng sản phẩm và bạn có thể nhận lại 100% số tiền của bạn trong vòng 30 ngày phản hồi.</p>
           </li>
           <li>
-            <p class="tab__sub-title">Special Financing</p>
-            <p class="tab__detail">Get 20%-50% off items over 50$ for a month or over 250$ for a year with our special credit card.</p>
+            <p class="tab__sub-title">Đăng ký thành viên</p>
+            <p class="tab__detail">Cơ hội được giảm từ 20%-50% với những sản phẩm trên 3 triệu trong 1 tháng và trên 10 triệu đồng 1 năm với thẻ thành viên của chúng tôi.</p>
           </li>
         </ol>
       </div>
@@ -42,20 +42,20 @@
       <p class="tab__text tab__text--specification">
         <ul>
           <li>
-            <h6>Model</h6>
+            <h6>Mẫu</h6>
             <p>Skysuite 320</p>
           </li>
           <li>
-            <h6>Color</h6>
-            <p>Black</p>
+            <h6>Màu sắc</h6>
+            <p>Đen</p>
           </li>
           <li>
-            <h6>Size</h6>
-            <p>Large, Small</p>
+            <h6>Kích cỡ</h6>
+            <p>Lớn, Nhỏ</p>
           </li>
           <li>
-            <h6>Guarantee Time</h6>
-            <p>3 Months</p>
+            <h6>Thời hạn bảo hành</h6>
+            <p>3 tháng</p>
           </li>
         </ul>
       </p>
@@ -66,13 +66,13 @@
           <div class="rating__avg">
             <h4>3.3</h4>
             <div class="rating__avg-content">
-              <div class="rating__text">Average Rating</div>
+              <div class="rating__text">Trung bình</div>
               <ProductRating :star="star" :review="review"/>
             </div>
           </div>
           <div class="rating__recommended">
             <h5>66.7%</h5>
-            <div class="rating__text">Recommended <span class="rating__description">(2 of 3)</span></div>
+            <div class="rating__text">Được đề xuất <span class="rating__description">(2 trên 3)</span></div>
           </div>
           <div class="rating__graph" v-for="(rating, starRating) in ratingList" 
               :key="`rating-${starRating}`">
@@ -81,9 +81,9 @@
           </div>
         </div>
         <div class="review">
-          <h2 class="review__heading">Submit Your Review</h2>
-          <div class="review__description">Your email address will not be published. Required fields are marked *</div>
-          <div class="review__own-rating">Your Rating Of This Product : 
+          <h2 class="review__heading">Gửi nhận xét của bạn</h2>
+          <div class="review__description">Địa chỉ email của bạn sẽ không được công khai. Những trường bắt buộc sẽ được đánh dấu *</div>
+          <div class="review__own-rating">Bình chọn của bạn cho sản phẩm này: 
             <span class="review__stars">
               <span 
                 v-for="index in 5" :key="index"
@@ -97,12 +97,12 @@
               </span>
             </span>
           </div>
-          <textarea type="text" class="review__input" placeholder="Write Your Review Here..." ></textarea>
+          <textarea type="text" class="review__input" placeholder="Viết nhận xét ở đây..." ></textarea>
           <div class="review__info">
-            <input type="text" class="review__name" placeholder="Your Name">
-            <input type="email" class="review__email" placeholder="Your Email">
+            <input type="text" class="review__name" placeholder="Tên của bạn:">
+            <input type="email" class="review__email" placeholder="Email của bạn:">
           </div>
-          <button class="review__summit">Summit review</button>
+          <button class="review__summit">Gửi nhận xét</button>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ export default {
       tabClickIdx: 0,
       hoverStar: -1,
       saveChooseRating: -1,
-      ratingList: [70, 20, 30, 0, 0],
+      ratingList: [60, 20, 30, 0, 10],
     };
   },
   components: { RatingStar, ProductRating },

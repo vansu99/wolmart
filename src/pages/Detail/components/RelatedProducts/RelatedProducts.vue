@@ -1,9 +1,9 @@
 <template>
   <div class="related-product">
     <div class="related-product__top">
-      <h2 class="related-product__title">Our clients</h2>
+      <h2 class="related-product__title">Sản phẩm tương tự</h2>
       <router-link to="/categories/${category.slug}"
-        ><div>More Products</div>
+        ><div>Xem thêm</div>
         <img src="@/assets/images/Shared/arrow-right-solid.svg" alt="arrow" />
       </router-link>
     </div>
@@ -80,5 +80,11 @@ export default {
   grid-gap: 2rem;
   width: 100%;
   margin-right: -0.7rem;
+  @media #{$info-screen-575} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media #{$info-screen-375} {
+    display: block;
+  }
 }
 </style>

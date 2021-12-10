@@ -36,6 +36,10 @@ input[type='number'] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
+    @media #{$info-screen-768} {
+      display: block;
+      margin-bottom: 3rem;
+    }
   }
 
   &__right {
@@ -74,6 +78,9 @@ input[type='number'] {
     @include flexSpaceBetween();
     gap: 2rem;
     margin: 2.5rem 0;
+    @media #{$info-screen-375} {
+      display: block;
+    }
   }
   &__quantity {
     display: flex;
@@ -82,6 +89,9 @@ input[type='number'] {
     position: relative;
     width: 14rem;
     height: 4.4rem;
+    @media #{$info-screen-375} {
+      margin: 0 auto 2rem;
+    }
     & input {
       width: 100%;
       height: 4.2rem;
@@ -137,10 +147,10 @@ input[type='number'] {
     &.disabled {
       border-color: $bg-contrary-light;
       background-color: $bg-contrary-light;
-      color: #666;
+      color: $text-semi-light;
       cursor: not-allowed;
       & .product__btn-icon {
-        filter: $filter-icon-disabled;
+        color: $bg-second-light;
       }
       &:hover {
         border-color: $bg-contrary-light;
@@ -152,10 +162,9 @@ input[type='number'] {
       background-color: $hover-contrary;
     }
     &-icon {
-      width: 1.2rem;
-      height: 1.2rem;
+      font-size: 1.2rem;
       margin-right: 0.7rem;
-      filter: $filter-icon-hover;
+      color: #fff;
     }
     &-text {
       font-family: $font-primary;
@@ -175,12 +184,13 @@ input[type='number'] {
     }
   }
   &__icon {
-    width: 1.8rem;
-    height: auto;
-    filter: $filter-icon-disabled;
-    transition: filter 0.25s ease;
-    &:hover {
-      filter: $filter-hover-primary;
+    i {
+      font-size: 1.8rem;
+      color: #666;
+      transition: color 0.25s ease;
+      &:hover {
+        color: $bg-primary;
+      }
     }
   }
 }
