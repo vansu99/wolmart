@@ -81,7 +81,7 @@ export default {
   &__card {
     position: relative;
     min-width: 15rem;
-    
+
     overflow: hidden;
     cursor: pointer;
     transition: all 0.2s ease-in;

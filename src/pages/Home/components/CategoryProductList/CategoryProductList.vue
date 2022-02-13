@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="product-list">
-          <Product
+          <product
             v-for="product in discountProduct"
             :key="`home-${product.id}`"
             :product="product"

@@ -1,21 +1,23 @@
 <template>
   <div class="advertisement__list">
     <div class="advertisement__item advertisement__item--first">
-      <!-- <img src="@/assets/images/Home/Banner/banner-1.jpg" alt="banner" /> -->
       <div class="advertisement__content">
         <div class="advertisement__sub-title">Khuyến mãi lên tới <span>20%</span></div>
         <div class="advertisement__title--black">Chăm sóc da</div>
         <div class="advertisement__type">cao cấp</div>
-        <div class="advertisement__description">Giá cơ bản <span>{{170000 | formatPrice}}</span></div>
+        <div class="advertisement__description">
+          Giá cơ bản <span>{{ 170000 | formatPrice }}</span>
+        </div>
       </div>
     </div>
     <div class="advertisement__item advertisement__item--second">
-      <!-- <img src="@/assets/images/Home/Banner/banner-2.jpg" alt="" /> -->
       <div class="advertisement__content">
         <div class="advertisement__sub-title--white">Mặt hàng mới</div>
         <div class="advertisement__title--white">Dược phẩm</div>
         <div class="advertisement__type--white">Tuyển chọn</div>
-        <div class="advertisement__description--white">Chỉ từ <span>{{90000 | formatPrice}}</span></div>
+        <div class="advertisement__description--white">
+          Chỉ từ <span>{{ 90000 | formatPrice }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -37,11 +39,13 @@ export default {};
     @media #{$info-screen-768} {
       margin-bottom: 3rem;
     }
-    &--first{
-background: $bg-second url('../../../../assets/images/Home/Banner/banner-1.jpg') no-repeat center / cover;
+    &--first {
+      background: $bg-second url('../../../../assets/images/Home/Banner/banner-1.jpg') no-repeat
+        center / cover;
     }
-    &--second{
-background: $bg-second url('../../../../assets/images/Home/Banner/banner-2.jpg') no-repeat center / cover;
+    &--second {
+      background: $bg-second url('../../../../assets/images/Home/Banner/banner-2.jpg') no-repeat
+        center / cover;
     }
     & span {
       font-weight: 700;
@@ -49,7 +53,6 @@ background: $bg-second url('../../../../assets/images/Home/Banner/banner-2.jpg')
       text-transform: uppercase;
     }
   }
-
   &__list {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -61,13 +64,11 @@ background: $bg-second url('../../../../assets/images/Home/Banner/banner-2.jpg')
       display: block;
     }
   }
-
   &__content {
     position: absolute;
     top: 3rem;
     left: 3.5rem;
   }
-
   &__sub-title,
   &__sub-title--white {
     padding-bottom: 0.7rem;

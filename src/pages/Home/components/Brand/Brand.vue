@@ -68,7 +68,6 @@ export default {
       @media #{$info-screen-375} {
         width: calc(100% / 1);
       }
-      
     }
   }
 }

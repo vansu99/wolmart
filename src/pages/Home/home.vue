@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Banner />
+    <banner />
     <template v-if="isShow">
       <div class="container">
         <category-skeleton :count="6" :category="true" />
@@ -9,11 +9,11 @@
     <category-list v-else />
     <template v-if="isShow">
       <div class="container">
-        <product-skeleton :count="6" :category="true" />
+        <product-skeleton />
       </div>
     </template>
-    <ProductList v-else v-for="item in categories" :key="item.id" :category="item" />
-    <Brand />
+    <product-list v-else v-for="item in categories" :key="item.id" :category="item" />
+    <brand />
   </div>
 </template>
 
@@ -32,7 +32,6 @@ export default {
       isShow: false,
     };
   },
-
   components: {
     CategorySkeleton,
     ProductSkeleton,
@@ -67,5 +66,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

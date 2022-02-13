@@ -4,7 +4,7 @@
       <div class="home-skeleton__title">
         <vue-skeleton-loader width="100%" height="50px" rounded />
       </div>
-      <div><vue-skeleton-loader width="150px" height="30px" rounded /></div>
+      <div><vue-skeleton-loader width="100px" height="30px" rounded /></div>
     </div>
     <div class="home-skeleton__bottom">
       <div class="home-skeleton__sidebar">
@@ -21,7 +21,6 @@
 import Skeleton from '@/components/Skeleton';
 export default {
   name: 'CustomSkeleton',
-  props: {},
   components: { Skeleton },
 };
 </script>
@@ -48,7 +47,6 @@ export default {
     @media #{$info-screen-992} {
       grid-template-columns: 1fr 2fr;
     }
-
     @media #{$info-screen-575} {
       grid-template-columns: 1fr;
     }
@@ -57,8 +55,6 @@ export default {
     @media #{$info-screen-575} {
       height: 30rem;
     }
-  }
-  &__content {
   }
 }
 </style>
