@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { checkAuth } from '@/utils';
-//import { getToken } from '@/utils/storage';
+import { getToken } from '@/utils/storage';
 import PublicLayout from '@/layout/default';
 import LayoutSecond from '@/layout/LayoutSecond';
 import LayoutPrivate from '@/layout/LayoutPrivate';
@@ -137,17 +137,14 @@ const router = new Router({
   ],
 });
 
-// router.beforeEach((from, to, next) => {
-//   const hasToken = getToken();
-//   if (hasToken) {
-//     if (from.name === 'Login') {
-//       next({ name: 'Home' });
-//     } else {
-//
-//     }
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((from, to, next) => {
+  const isLoggedIn = getToken()
+  if(to.matched.some(record => record.meta.isAuth) && !isLoggedIn) {
+    // chua login
+    next('/')
+  } else {
+    next()
+  }
+});
 
 export default router;
