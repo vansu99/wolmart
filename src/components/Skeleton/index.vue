@@ -4,9 +4,24 @@
       <vue-skeleton-loader width="100%" height="60px" rounded />
     </div>
     <div class="skeleton-list">
-      <div class="skeleton-item" v-for="(item, index) in count" :key="index">
-        <vue-skeleton-loader width="100%" height="160px" style="margin-bottom: 15px" rounded />
-        <vue-skeleton-loader width="100%" height="15px" style="margin-bottom: 15px" rounded />
+      <div
+        class="skeleton-item"
+        v-for="(item, index) in count"
+        :key="index"
+        :class="{ row3: row3 }"
+      >
+        <vue-skeleton-loader
+          width="100%"
+          height="160px"
+          style="margin-bottom: 15px"
+          rounded
+        />
+        <vue-skeleton-loader
+          width="100%"
+          height="15px"
+          style="margin-bottom: 15px"
+          rounded
+        />
         <vue-skeleton-loader width="100%" height="15px" rounded />
       </div>
     </div>
@@ -16,7 +31,7 @@
 <script>
 export default {
   name: 'CustomSkeleton',
-  props: { count: Number, category: Boolean },
+  props: { count: Number, category: Boolean, row3: Boolean },
 };
 </script>
 
@@ -56,7 +71,7 @@ export default {
         width: calc(100% / 2 - 1.5rem);
       }
       @media #{$info-screen-375} {
-        width: calc(100% / 1 - 1.5rem);
+        width: calc(100% - 1.5rem);
       }
     }
   }
@@ -71,10 +86,13 @@ export default {
     margin-right: 1.5rem;
     margin-bottom: 1.5rem;
     padding: 1.5rem;
-    &.category {
-      width: calc(100% / 6 - 1.5rem);
-      & div:nth-child(3) {
-        display: none;
+    &.row3 {
+      width: calc(33% - 1.5rem);
+      @media #{$info-screen-575} {
+        width: calc(100% / 2 - 1.5rem);
+      }
+      @media #{$info-screen-375} {
+        width: calc(100% - 1.5rem);
       }
     }
     @media #{$info-screen-1200} {
@@ -84,7 +102,7 @@ export default {
       width: calc(100% / 2 - 1.5rem);
     }
     @media #{$info-screen-375} {
-      width: calc(100% / 1 - 1.5rem);
+      width: calc(100% - 1.5rem);
     }
   }
 }

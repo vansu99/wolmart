@@ -1,27 +1,42 @@
 <template>
-  <div class="product">
-    <div class="product__left">
-      <router-link :to="`/products/${product.id}`" class="product__link"
-        ><img :src="product.img_path" :alt="product.name"
-      /></router-link>
-    </div>
-    <div class="product__content">
-      <div class="product__name">
-        <a>{{ product.name }}</a>
+  <div class="sidebar-product">
+    <router-link
+      :to="{
+        name: 'ProductDetail',
+        params: {
+          slug: convertSlug(product.name),
+          categoryId: product.category_id,
+          productId: product.id,
+        },
+      }"
+    >
+      <div class="product">
+        <div class="product__left">
+          <div class="product__link">
+            <img :src="product.img_path" :alt="product.name" />
+          </div>
+        </div>
+        <div class="product__content">
+          <div class="product__name">
+            <span>{{ product.name }}</span>
+          </div>
+          <ProductRating :star="star" :review="review" />
+          <div class="product__price">
+            <span class="product__price--new">{{
+              product.original_price | calDiscountPrice(product.discount) | formatPrice
+            }}</span>
+          </div>
+        </div>
       </div>
-      <ProductRating :star="star" :review="review" />
-      <div class="product__price">
-        <span class="product__price--new">{{
-          product.original_price | calDiscountPrice(product.discount) | formatPrice
-        }}</span>
-      </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
 <script>
 import ProductRating from '@/components/RatingStarWithDescription/RatingStarWithDescription';
+import mixins from '@/mixins';
 export default {
+  mixins: [mixins],
   components: { ProductRating },
   props: { product: Object, star: Number, review: Number },
 };

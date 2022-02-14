@@ -27,7 +27,6 @@ export default {
     font-family: $font-primary;
     text-transform: capitalize;
     color: $text-light;
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
     &:hover {
       color: $hover-color;

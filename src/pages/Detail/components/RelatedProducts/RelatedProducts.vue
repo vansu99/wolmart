@@ -2,33 +2,34 @@
   <div class="related-product">
     <div class="related-product__top">
       <h2 class="related-product__title">Sản phẩm tương tự</h2>
-      <router-link to="/categories/${category.slug}"
-        ><div>Xem thêm</div>
+      <router-link :to="`/category/${productList[0].category_id}`" v-if="!isLoading">
+        <span>Xem thêm</span>
         <img src="@/assets/images/Shared/arrow-right-solid.svg" alt="arrow" />
       </router-link>
     </div>
     <hr class="hr-divider" />
-    <div class="product__list">
-      <Product
-        v-for="product in productList"
-        :key="`rl-p-${product.id}`"
-        :product="product"
-        :star="star"
-        :review="review"
-      />
-    </div>
+    <template v-if="isLoading"><skeleton :count="6" :row3="true" /></template>
+    <template v-else>
+      <div class="product__list">
+        <Product
+          v-for="product in productList.slice(0, 6)"
+          :key="`rl-p-${product.id}`"
+          :product="product"
+          :star="star"
+          :review="review"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 import Product from '@/components/Product/Product';
+import Skeleton from '@/components/Skeleton';
 export default {
   name: 'RelatedProducts',
-  data() {
-    return {};
-  },
-  props: { productList: Array, star: Number, review: Number },
-  components: { Product },
+  props: { isLoading: Boolean, productList: Array, star: Number, review: Number },
+  components: { Product, Skeleton },
 };
 </script>
 

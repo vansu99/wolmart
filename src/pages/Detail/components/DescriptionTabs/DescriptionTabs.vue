@@ -14,14 +14,6 @@
         <p class="tab__description">
           {{ product.description }}
         </p>
-        <ul>
-          <li>
-            <i class="fas fa-check"></i> Nunc nec porttitor turpis. In eu risus enim. In vitae
-            mollis elit.
-          </li>
-          <li><i class="fas fa-check"></i>Vivamus finibus vel mauris ut vehicula.</li>
-          <li><i class="fas fa-check"></i>Vivamus finibus vel mauris ut vehicula.</li>
-        </ul>
         <ol>
           <li>
             <p class="tab__sub-title">Vận chuyển miễn phí</p>

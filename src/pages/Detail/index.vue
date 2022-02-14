@@ -1,24 +1,37 @@
 <template>
-  <div class="product-detail">
-    <div class="container">
-      <div class="product-detail__container">
-        <div class="product-detail__left">
-          <Product :product="product" />
-          <DescriptionTabs :product="product" :star="star" :review="review" />
-          <RelatedProducts :productList="productList" :star="star" :review="review" />
-          <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
-            <i class="fas fa-angle-left"></i>
+  <div class="product-detail container">
+    <div class="product-detail__container">
+      <div class="product-detail__left">
+        <template v-if="isProductShow">
+          <product-skeleton style="width: 100%" />
+        </template>
+        <template v-else>
+          <product :product="product" />
+          <description-tabs :product="product" :star="star" :review="review" />
+        </template>
+        <related-products
+          :isLoading="isProductListShow"
+          :productList="productList"
+          :star="star"
+          :review="review"
+        />
+        <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
+          <i class="fas fa-angle-left"></i>
+        </button>
+      </div>
+      <transition name="fadeIn">
+        <div class="product-detail__right" :class="hide ? 'hide' : 'show'">
+          <sidebar
+            :isLoading="isProductListShow"
+            :productList="productList"
+            :star="star"
+            :review="review"
+          />
+          <button class="sidebar__close-btn" @click="hide = !hide">
+            <i class="fas fa-times"></i>
           </button>
         </div>
-        <transition name="fadeIn">
-          <div class="product-detail__right" :class="hide ? 'hide' : 'show'">
-            <Sidebar :productList="productList" :star="star" :review="review" />
-            <button class="sidebar__close-btn" @click="hide = !hide">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </transition>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -26,6 +39,7 @@
 <script>
 import { categoryApis, productApis } from '@/apis';
 import Product from './components/Product/Product';
+import ProductSkeleton from './components/Product/ProductSkeleton';
 import DescriptionTabs from './components/DescriptionTabs/DescriptionTabs';
 import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -38,6 +52,8 @@ export default {
       product: {},
       productList: [],
       hide: false,
+      isProductShow: false,
+      isProductListShow: true,
     };
   },
   components: {
@@ -45,6 +61,7 @@ export default {
     DescriptionTabs,
     RelatedProducts,
     Sidebar,
+    ProductSkeleton,
   },
   created() {
     this.getProductByID();
@@ -53,6 +70,7 @@ export default {
     async getProductByID() {
       // call API to get product by product ID
       try {
+        this.isProductShow = true;
         const productID = Number(this.$route.params.productId);
         const productData = await productApis.getProductDetail(productID);
         if (productData.status === 200) {
@@ -62,19 +80,32 @@ export default {
         }
       } catch (e) {
         console.log(e);
+      } finally {
+        this.isProductShow = false;
       }
     },
     async getProductList(categoryID, productID) {
       // call API to get products that belong to same category but have different ID from the original productID
       try {
-        const productListData = await categoryApis.getProductListBaseOnCategory(categoryID);
+        this.isProductListShow = true;
+        const productListData = await categoryApis.getProductListBaseOnCategory(
+          categoryID
+        );
         if (productListData.status === 200) {
           this.productList = productListData.data.filter((item) => item.id !== productID);
         }
       } catch (e) {
         console.log(e);
+      } finally {
+        this.isProductListShow = false;
       }
-    }
+    },
+  },
+  watch: {
+    '$route.query'() {
+      this.getProductByID();
+      this.getProductList()
+    },
   },
 };
 </script>
@@ -87,9 +118,7 @@ export default {
     gap: 3rem;
   }
   &__left {
-    @media #{$info-screen-768} {
-      width: 100%;
-    }
+    width: 100%;
   }
   &__right {
     flex-shrink: 0;
