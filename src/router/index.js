@@ -119,10 +119,27 @@ const router = new Router({
     {
       path: '/:slug/:categoryId/:productId',
       name: 'ProductDetail',
-      component: () => import('@/pages/Detail'),
+      component: () => import('@/pages/Products/components/ProductDetail'),
       meta: {
         layout: PublicLayout,
         breadcrumb: true,
+      },
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: () => import('@/pages/Cart'),
+      meta: {
+        isAuth: true,
+        layout: PublicLayout,
+      },
+    },
+    {
+      path: '/cart-empty',
+      name: 'CartEmpty',
+      component: () => import('@/pages/Cart/CartEmpty'),
+      meta: {
+        layout: PublicLayout,
       },
     },
     {
@@ -138,12 +155,12 @@ const router = new Router({
 });
 
 router.beforeEach((from, to, next) => {
-  const isLoggedIn = getToken()
-  if(to.matched.some(record => record.meta.isAuth) && !isLoggedIn) {
+  const isLoggedIn = getToken();
+  if (to.matched.some((record) => record.meta.isAuth) && !isLoggedIn) {
     // chua login
-    next('/')
+    next('/');
   } else {
-    next()
+    next();
   }
 });
 

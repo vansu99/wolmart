@@ -1,27 +1,27 @@
 <template>
-  <div class="product-detail container">
-    <div class="product-detail__container">
-      <div class="product-detail__left">
-        <template v-if="isProductShow">
-          <product-skeleton style="width: 100%" />
-        </template>
-        <template v-else>
-          <product :product="product" />
-          <description-tabs :product="product" :star="star" :review="review" />
-        </template>
-        <related-products
-          :isLoading="isProductListShow"
-          :productList="productList"
-          :star="star"
-          :review="review"
-        />
-        <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
-          <i class="fas fa-angle-left"></i>
-        </button>
-      </div>
-      <transition name="fadeIn">
+  <transition name="fadeIn">
+    <div class="product-detail container">
+      <div class="product-detail__container">
+        <div class="product-detail__left">
+          <template v-if="isProductShow">
+            <product-skeleton style="width: 100%" />
+          </template>
+          <template v-else>
+            <ProductInfo :product="product" />
+            <DescriptionTabs :product="product" :star="star" :review="review" />
+          </template>
+          <RelatedProducts
+            :isLoading="isProductListShow"
+            :productList="productList"
+            :star="star"
+            :review="review"
+          />
+          <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
+            <i class="fas fa-angle-left"></i>
+          </button>
+        </div>
         <div class="product-detail__right" :class="hide ? 'hide' : 'show'">
-          <sidebar
+          <Sidebar
             :isLoading="isProductListShow"
             :productList="productList"
             :star="star"
@@ -31,20 +31,21 @@
             <i class="fas fa-times"></i>
           </button>
         </div>
-      </transition>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
-import { categoryApis, productApis } from '@/apis';
-import Product from './components/Product/Product';
-import ProductSkeleton from './components/Product/ProductSkeleton';
-import DescriptionTabs from './components/DescriptionTabs/DescriptionTabs';
-import RelatedProducts from './components/RelatedProducts/RelatedProducts';
 import Sidebar from './components/Sidebar/Sidebar';
+import { categoryApis, productApis } from '@/apis';
+import ProductInfo from './components/ProductInfo';
+import ProductSkeleton from './components/ProductInfo/ProductSkeleton';
+import DescriptionTabs from './components/DescriptionTabs';
+import RelatedProducts from './components/RelatedProducts';
+
 export default {
-  name: 'Detail',
+  name: 'ProductDetail',
   data() {
     return {
       star: 3,
@@ -57,7 +58,7 @@ export default {
     };
   },
   components: {
-    Product,
+    ProductInfo,
     DescriptionTabs,
     RelatedProducts,
     Sidebar,
@@ -67,8 +68,8 @@ export default {
     this.getProductByID();
   },
   methods: {
+    // call API to get product by product ID
     async getProductByID() {
-      // call API to get product by product ID
       try {
         this.isProductShow = true;
         const productID = Number(this.$route.params.productId);
@@ -79,15 +80,14 @@ export default {
           await this.getProductList(this.product.category_id, this.product.id);
         }
       } catch (e) {
-        console.log(e);
+        throw new Error('Something went wrong.');
       } finally {
         this.isProductShow = false;
       }
     },
+    // call API to get products that belong to same category but have different ID from the original productID
     async getProductList(categoryID, productID) {
-      // call API to get products that belong to same category but have different ID from the original productID
       try {
-        this.isProductListShow = true;
         const productListData = await categoryApis.getProductListBaseOnCategory(
           categoryID
         );
@@ -95,7 +95,7 @@ export default {
           this.productList = productListData.data.filter((item) => item.id !== productID);
         }
       } catch (e) {
-        console.log(e);
+        throw new Error('Something went wrong.');
       } finally {
         this.isProductListShow = false;
       }
@@ -104,7 +104,7 @@ export default {
   watch: {
     '$route.query'() {
       this.getProductByID();
-      this.getProductList()
+      this.getProductList();
     },
   },
 };
@@ -113,6 +113,7 @@ export default {
 <style lang="scss" scoped>
 .product-detail {
   padding: 4rem 0;
+
   &__container {
     display: flex;
     gap: 3rem;

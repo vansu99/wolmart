@@ -66,7 +66,7 @@
             <h5>66.7%</h5>
             <div class="rating__text">Được đề xuất <span class="rating__description">(2 trên 3)</span></div>
           </div>
-          <div class="rating__graph" v-for="(rating, starRating) in ratingList" 
+          <div class="rating__graph" v-for="(rating, starRating) in ratingList"
               :key="`rating-${starRating}`">
             <RatingStar :star="5 - starRating"/>
               <div class="rating__progress-bar" ><span :style="`width:${rating}%`"></span></div>
@@ -75,15 +75,15 @@
         <div class="review">
           <h2 class="review__heading">Gửi nhận xét của bạn</h2>
           <div class="review__description">Địa chỉ email của bạn sẽ không được công khai. Những trường bắt buộc sẽ được đánh dấu *</div>
-          <div class="review__own-rating">Bình chọn của bạn cho sản phẩm này: 
+          <div class="review__own-rating">Bình chọn của bạn cho sản phẩm này:
             <span class="review__stars">
-              <span 
+              <span
                 v-for="index in 5" :key="index"
                 @mouseover="hoverStar = index" @mouseleave="hoverStar = -1"
                 @click="
                 saveChooseRating == index ? saveChooseRating = -1 : saveChooseRating = index; "
               >  <!-- Your Rating Of This Product -->
-                <i class="fas fa-star" 
+                <i class="fas fa-star"
                 :class="(saveChooseRating >= index || hoverStar >= index) ? 'check' : ''"
               ></i>
               </span>

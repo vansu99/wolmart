@@ -83,7 +83,7 @@ export default {
   props: {
     name: { type: String },
     width: { type: Number, default: 25 },
-    height: { type: Number, default: 25 }
+    height: { type: Number, default: 25 },
   },
 };
 </script>

@@ -52,8 +52,8 @@
 </template>
 
 <script>
-import ProductSidebar from '@/components/ProductSidebar/ProductSidebar';
-import SidebarProductSkeleton from '@/components/Skeleton/SidebarProductSkeleton.vue';
+import SidebarProductSkeleton from '@/components/Skeleton/SidebarProductSkeleton';
+import ProductSidebar from '../ProductSidebar';
 export default {
   name: 'sidebar',
   data() {

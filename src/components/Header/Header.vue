@@ -72,7 +72,9 @@
         </div>
         <div class="header-right d-flex">
           <div class="contact items d-flex">
-            <div><img src="../../assets/images/Header/Icon/phone-volume-solid.svg" alt="" /></div>
+            <div>
+              <img src="../../assets/images/Header/Icon/phone-volume-solid.svg" alt="" />
+            </div>
             <div>
               <a class="text-decoration live-chat" href="">Live Chat </a>
               <span> or : </span>
@@ -89,18 +91,18 @@
           </div>
           <div class="compare items">
             <a class="text-decoration" href="">
-              <img src="../../assets/images/Header/Icon/balance-scale-solid.svg" alt="" /><span
-                class="d-block"
-                >Compare</span
-              ></a
+              <img
+                src="../../assets/images/Header/Icon/balance-scale-solid.svg"
+                alt=""
+              /><span class="d-block">Compare</span></a
             >
           </div>
-          <div class="cart items" values="2">
+          <div class="cart items" :values="cart && cart.length">
             <a class="text-decoration" href="">
-              <img src="../../assets/images/Header/Icon/shopping-bag-solid.svg" alt="" /><span
-                class="d-block"
-                >Cart</span
-              ></a
+              <img
+                src="../../assets/images/Header/Icon/shopping-bag-solid.svg"
+                alt=""
+              /><span class="d-block">Cart</span></a
             >
           </div>
         </div>
@@ -142,7 +144,7 @@
 import { mapGetters } from 'vuex';
 import { productApis } from '@/apis';
 import Search from '@/components/Search';
-import Icon from "@/components/SvgIcons";
+import Icon from '@/components/SvgIcons';
 import { removeToken } from '@/utils/storage';
 
 export default {
@@ -158,6 +160,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      cart: 'auth/cart',
       currentUser: 'auth/currentUser',
       isAuthenticated: 'auth/isAuthenticated',
     }),

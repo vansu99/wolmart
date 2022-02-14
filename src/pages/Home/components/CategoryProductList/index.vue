@@ -8,7 +8,7 @@
     <div v-else :class="category.slug">
       <div class="category__top">
         <div class="category__title">
-          <h2 class="section__title">{{ category.name }}</h2>
+          <h2>{{ category.name }}</h2>
         </div>
         <router-link
           :to="{
@@ -48,7 +48,7 @@
 import mixins from '@/mixins';
 import { categoryApis } from '@/apis/';
 import Product from '@/components/Product/ProductHome';
-import Skeleton from '@/components/Skeleton/HomeSkeleton';
+import Skeleton from '../HomeSkeleton.vue';
 
 export default {
   name: 'CategoryProductList',
@@ -99,28 +99,33 @@ export default {
 @import './src/plugins/vuetify/preset/styles/mixins';
 
 .category {
-  padding-top: 1.5rem;
+  padding-top: 5rem;
   padding-bottom: 3rem;
+
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    padding-bottom: 1.5rem;
+
     & a {
       justify-content: flex-end;
       @include flexCenter();
       flex-shrink: 0;
       font-family: $font-primary;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 600;
       text-decoration: none;
       color: $text-primary;
       transition: all 0.3s ease-in-out;
       cursor: pointer;
+
       & i {
-        margin: 0.5rem;
-        font-size: 1.4rem;
+        margin-left: .7rem;
+        font-size: 1.5rem;
       }
+
       &:hover {
         color: $bg-facebook;
         &:hover i {
@@ -130,8 +135,12 @@ export default {
     }
   }
   &__title {
-    @include textClamp();
+    h2 {
+      font-size: 2.4rem;
+      color: #333;
+    }
   }
+
   &__content {
     display: grid;
     grid-template-columns: 3fr 9fr;
@@ -155,15 +164,18 @@ export default {
     no-repeat center;
   background-size: cover;
   border-radius: 0.5rem;
+
   &__content {
     padding: 3.7rem;
   }
+
   &__subtitle {
     font-family: $font-primary;
     font-size: 1.8rem;
     text-transform: capitalize;
     color: $text-primary;
   }
+
   &__divider {
     margin: 0.5rem 0;
     width: 3.5rem;
@@ -172,6 +184,7 @@ export default {
     border-right-width: 0;
     border-left-width: 0;
   }
+
   &__title {
     font-family: $font-primary;
     font-size: 2.4rem;
@@ -179,6 +192,7 @@ export default {
     text-transform: uppercase;
     color: $text-primary;
   }
+
   &__type {
     padding-bottom: 2.4rem;
     font-family: $font-primary;
@@ -186,6 +200,7 @@ export default {
     text-transform: capitalize;
     color: $text-primary;
   }
+
   &__link {
     padding: 1rem 1.8rem;
     width: fit-content;
@@ -207,6 +222,7 @@ export default {
     }
   }
 }
+
 .product-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
