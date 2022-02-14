@@ -5,6 +5,7 @@ import { TOKEN } from '@/constants';
 import { getToken } from "@/utils/storage";
 
 const state = {
+  cart: [],
   currentUser: null,
   token: getToken() || '',
   isAuthenticated: !!localStorage.getItem(TOKEN),

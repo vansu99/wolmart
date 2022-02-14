@@ -34,10 +34,10 @@ export default {
       try {
         const categoryData = await categoryApis.getCategoryList();
         if (categoryData.status === 200) {
-          this.categories = categoryData.data;
+          this.categories = [...categoryData.data];
         }
-      } catch {
-        console.log('error!!!');
+      } catch(e) {
+        throw new Error("Something went wrong")
       }
     },
   },
