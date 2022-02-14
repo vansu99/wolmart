@@ -1,40 +1,43 @@
 <template>
-  <div :class="category.slug">
-    <div class="category">
+  <div class="category container">
+    <template v-if="isShow">
       <div class="container">
-        <div class="category__top">
-          <div class="category__title">
-            <h2 class="section__title">{{ category.name }}</h2>
-          </div>
-          <router-link
-            :to="{
-              name: 'Products',
-              params: { slug: convertSlug(category.name), categoryId: category.id },
-            }"
-            ><div>Xem thêm</div>
-            <i class="fas fa-long-arrow-alt-right"></i>
-          </router-link>
+        <skeleton :count="6" :category="true" />
+      </div>
+    </template>
+    <div v-else :class="category.slug">
+      <div class="category__top">
+        <div class="category__title">
+          <h2 class="section__title">{{ category.name }}</h2>
         </div>
-        <hr class="section__divider" />
-        <div class="category__content">
-          <div class="sidebar-banner">
-            <div class="sidebar-banner__content">
-              <div class="sidebar-banner__subtitle">Tuần lễ giảm giá</div>
-              <hr class="sidebar-banner__divider" />
-              <div class="sidebar-banner__title">Sản phẩm mới</div>
-              <div class="sidebar-banner__type">Xu hướng</div>
-              <div class="sidebar-banner__link">Mua sắm ngay</div>
-            </div>
+        <router-link
+          :to="{
+            name: 'Products',
+            params: { slug: convertSlug(category.name), categoryId: category.id },
+          }"
+          ><div>Xem thêm</div>
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </router-link>
+      </div>
+      <hr class="section__divider" />
+      <div class="category__content">
+        <div class="sidebar-banner">
+          <div class="sidebar-banner__content">
+            <div class="sidebar-banner__subtitle">Tuần lễ giảm giá</div>
+            <hr class="sidebar-banner__divider" />
+            <div class="sidebar-banner__title">Sản phẩm mới</div>
+            <div class="sidebar-banner__type">Xu hướng</div>
+            <div class="sidebar-banner__link">Mua sắm ngay</div>
           </div>
-          <div class="product-list">
-            <Product
-              v-for="product in discountProduct"
-              :key="`home-${product.id}`"
-              :product="product"
-              :star="star"
-              :review="review"
-            />
-          </div>
+        </div>
+        <div class="product-list">
+          <product
+            v-for="product in discountProduct"
+            :key="`home-${product.id}`"
+            :product="product"
+            :star="star"
+            :review="review"
+          />
         </div>
       </div>
     </div>
@@ -45,6 +48,7 @@
 import mixins from '@/mixins';
 import { categoryApis } from '@/apis/';
 import Product from '@/components/Product/ProductHome';
+import Skeleton from '@/components/Skeleton/HomeSkeleton';
 
 export default {
   name: 'CategoryProductList',
@@ -54,6 +58,7 @@ export default {
       products: [],
       star: 3,
       review: 12,
+      isShow: false,
     };
   },
   props: {
@@ -71,17 +76,21 @@ export default {
     async getProducts() {
       // call API to get product list
       try {
+        this.isShow = true;
         const productData = await categoryApis.getProductListBaseOnCategory(this.category.id);
         if (productData.status === 200) {
           this.products = productData.data;
         }
       } catch {
         console.log('getProducts error!!!');
+      } finally {
+        this.isShow = false;
       }
     },
   },
   components: {
     Product,
+    Skeleton,
   },
 };
 </script>

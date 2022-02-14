@@ -6,8 +6,8 @@
           <img :src="require('@/assets/images/banner1.jpg')" alt="" />
         </div>
       </div>
-      <BoxList />
-      <Advertisement />
+      <box-list />
+      <advertisement />
     </div>
   </div>
 </template>

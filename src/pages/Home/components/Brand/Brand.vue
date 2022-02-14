@@ -58,13 +58,16 @@ export default {
       @media #{$info-screen-992} {
         width: calc(100% / 4);
       }
-      @media #{$info-screen-575} {
+      overflow: hidden;
+      @media #{$info-screen-768} {
         width: calc(100% / 3);
       }
-      @media #{$info-screen-375} {
+      @media #{$info-screen-575} {
         width: calc(100% / 2);
       }
-      
+      @media #{$info-screen-375} {
+        width: calc(100% / 1);
+      }
     }
   }
 }
