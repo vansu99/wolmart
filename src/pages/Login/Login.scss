@@ -1,11 +1,15 @@
 @import './src/plugins/vuetify/preset/styles/mixins';
+
 .login {
   position: relative;
   @include flexCenter;
-  height: 100%;
-  background: #8db9fc;
-  background: -webkit-linear-gradient(to left, #8db9fc, #2066db);
-  padding: 6rem 0;
+  padding: 4rem 0;
+  background: linear-gradient(to left, #8db9fc, #2066db);
+
+  @media #{$info-screen-992} {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 
   &-container {
     display: flex;
@@ -18,6 +22,7 @@
     box-shadow: rgba(17, 17, 26, 0.1) 0 4px 16px, rgba(17, 17, 26, 0.1) 0 8px 24px,
       rgba(17, 17, 26, 0.1) 0 16px 56px;
     background: #fff;
+
     @media #{$info-screen-992} {
       width: 40rem;
     }
@@ -25,6 +30,7 @@
       width: 100%;
     }
   }
+
   &-image {
     @media #{$info-screen-992} {
       display: none;
@@ -39,6 +45,7 @@
       width: 100%;
     }
   }
+
   &-heading {
     font-size: 2.6rem;
     margin-bottom: 0.3rem;
@@ -50,6 +57,7 @@
       height: auto;
     }
   }
+
   &-description {
     margin-bottom: 1.5rem;
     font-family: $font-primary;
@@ -58,6 +66,7 @@
     text-align: center;
     font-style: italic;
   }
+
   &-error {
     background-color: #f2dede;
     border-color: #ebccd1;
@@ -67,6 +76,7 @@
     font-size: 1.3rem;
     padding: 10px;
   }
+  
   &-form {
     .form-group {
       position: relative;
@@ -80,12 +90,14 @@
         cursor: pointer;
       }
     }
+
     .form-label {
       display: block;
       font-size: 1.3rem;
       margin-bottom: 0.2rem;
       color: $text-light;
     }
+
     .form-input {
       width: 100%;
       padding: 10px 10px 10px 40px;
@@ -98,6 +110,7 @@
       overflow: hidden;
       background-color: transparent;
       transition: border-color 0.2s ease-in;
+
       &:focus {
         outline: none;
         background-color: transparent;
@@ -105,14 +118,17 @@
         color: $text-semi-light;
         box-shadow: $box-shadow;
       }
+
       &:focus + .form-icon {
         color: $text-semi-light;
       }
+
       &.error {
         outline: none;
-        background-color: transparent;
+        background-color: transparent !important;
         border-color: #a94442;
       }
+
       &.input-password {
         padding-right: 3.5rem;
       }
@@ -214,97 +230,7 @@
       cursor: pointer;
     }
     a {
-        color: darkslategray;
-      }
+      color: darkslategray;
+    }
   }
-}
-
-.circles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.circles li {
-  position: absolute;
-  display: block;
-  list-style: none;
-  border-radius: 0.5rem;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(35deg);
-}
-
-.circles li:nth-child(1) {
-  left: 25%;
-  width: 80px;
-  height: 80px;
-  transform: translateY(10px) translateX(-300px) rotate(20deg);
-}
-
-.circles li:nth-child(2) {
-  left: 10%;
-  width: 20px;
-  height: 20px;
-  transform: translateY(200px) translateX(-300px) rotate(45deg);
-}
-
-.circles li:nth-child(3) {
-  left: 70%;
-  width: 20px;
-  height: 20px;
-  transform: translateY(50px) translateX(200px) rotate(25deg);
-}
-
-.circles li:nth-child(4) {
-  left: 40%;
-  width: 60px;
-  height: 60px;
-  transform: translateY(380px) translateX(-400px) rotate(15deg);
-}
-
-.circles li:nth-child(5) {
-  left: 65%;
-  width: 20px;
-  height: 20px;
-  transform: translateY(120px) translateX(350px) rotate(75deg);
-}
-
-.circles li:nth-child(6) {
-  left: 75%;
-  width: 110px;
-  height: 110px;
-  transform: translateY(200px) translateX(30px) rotate(45deg);
-}
-
-.circles li:nth-child(7) {
-  left: 35%;
-  width: 150px;
-  height: 150px;
-  transform: translateY(400px) translateX(-500px) rotate(35deg);
-}
-
-.circles li:nth-child(8) {
-  left: 50%;
-  width: 25px;
-  height: 25px;
-  transform: translateY(350px) translateX(500px) rotate(85deg);
-}
-
-.circles li:nth-child(9) {
-  left: 20%;
-  width: 15px;
-  height: 15px;
-  transform: translateY(200px) rotate(25deg);
-}
-
-.circles li:nth-child(10) {
-  left: 85%;
-  width: 150px;
-  height: 150px;
-  transform: translateY(400px) rotate(80deg);
 }

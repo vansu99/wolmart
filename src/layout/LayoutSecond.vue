@@ -24,13 +24,13 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  padding: 2rem 0;
+  padding: 1rem 0;
   width: 100%;
-  max-width: 130rem;
+  max-width: 120rem;
   margin: 0 auto;
 
   &-logo {
-    width: 15rem;
+    width: 10rem;
     img {
       object-fit: cover;
     }

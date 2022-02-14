@@ -1,17 +1,5 @@
 <template>
   <div class="login">
-    <ul class="circles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
     <div class="login-container">
       <div class="login-image">
         <img src="../../assets/images/Authentication/login.jpg" alt="bg-login" />
