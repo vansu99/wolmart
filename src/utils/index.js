@@ -3,4 +3,4 @@ export { default as isArray } from './isArray';
 export { default as isString } from './isString';
 export { default as checkAuth } from './checkAuth';
 export { default as isEmptyObject } from './emptyObject';
-
+export { default as getPage } from './calPaginate';

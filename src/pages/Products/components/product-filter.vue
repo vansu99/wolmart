@@ -29,25 +29,14 @@ export default {
       isActive: '',
     };
   },
-  watch: {
-    '$route.query': {
-      handler(value) {
-        this.isActive = value.sort || '';
-      },
-      immediate: true,
-    },
-  },
   methods: {
     async sortProduct(type) {
-      //const path = this.$route.path.substring(1).split('/')[0];
-      // const result =
-      //   path.replace(path, this.$route.params.slug) + `/${this.$route.params.categoryId}`;
       switch (type) {
         case 'asc':
           this.isActive = 'asc';
           await this.$router.replace({
             query: {
-              page: '1',
+              ...this.$route.query,
               sort: type,
             },
           });
@@ -56,7 +45,7 @@ export default {
           this.isActive = 'desc';
           await this.$router.replace({
             query: {
-              page: '1',
+              ...this.$route.query,
               sort: type,
             },
           });
