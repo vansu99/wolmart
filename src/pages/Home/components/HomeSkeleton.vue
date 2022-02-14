@@ -19,8 +19,9 @@
 
 <script>
 import Skeleton from '@/components/Skeleton';
+
 export default {
-  name: 'CustomSkeleton',
+  name: 'HomeSkeleton',
   components: { Skeleton },
 };
 </script>

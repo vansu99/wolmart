@@ -119,7 +119,7 @@ const router = new Router({
     {
       path: '/:slug/:categoryId/:productId',
       name: 'ProductDetail',
-      component: () => import('@/pages/Detail'),
+      component: () => import('@/pages/Products/components/ProductDetail'),
       meta: {
         layout: PublicLayout,
         breadcrumb: true,
