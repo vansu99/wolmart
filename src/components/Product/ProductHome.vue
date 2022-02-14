@@ -37,6 +37,7 @@
 <script>
 import RatingStar from '@/components/RatingStarWithDescription/RatingStarWithDescription';
 import mixins from '@/mixins';
+
 export default {
   mixins: [mixins],
   components: { RatingStar },

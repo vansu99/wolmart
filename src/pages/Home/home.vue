@@ -19,26 +19,27 @@
 
 <script>
 import { categoryApis } from '@/apis';
-import CategorySkeleton from '@/components/Skeleton';
-import ProductSkeleton from '@/components/Skeleton/HomeSkeleton';
-import CategoryList from './components/TopCategories/TopCategories';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
-import ProductList from './components/CategoryProductList/CategoryProductList';
+import CategorySkeleton from '@/components/Skeleton';
+import CategoryList from './components/TopCategories';
+import ProductSkeleton from './components/HomeSkeleton';
+import ProductList from './components/CategoryProductList';
+
 export default {
-  name: 'home',
+  name: 'HomePage',
   data() {
     return {
       isShow: false,
     };
   },
   components: {
-    CategorySkeleton,
-    ProductSkeleton,
-    CategoryList,
     Brand,
     Banner,
     ProductList,
+    CategoryList,
+    CategorySkeleton,
+    ProductSkeleton,
   },
   computed: {
     categories() {
@@ -57,8 +58,8 @@ export default {
         if (categoryData.status === 200) {
           await this.$store.dispatch('category/getCategories', categoryData.data);
         }
-      } catch {
-        console.log('error!!!');
+      } catch(e) {
+        throw new Error("Something went wrong.")
       } finally {
         this.isShow = false;
       }

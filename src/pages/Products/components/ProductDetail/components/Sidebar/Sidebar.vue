@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import ProductSidebar from '@/components/ProductSidebar/ProductSidebar';
+import ProductSidebar from '../ProductSidebar';
 export default {
   name: 'sidebar',
   data() {
