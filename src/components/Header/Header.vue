@@ -172,7 +172,7 @@ export default {
     handleLogout() {
       this.$store.dispatch('auth/logout');
       removeToken();
-      this.$router.push({ name: 'Home' });
+      this.$router.replace('/')
     },
     async handleSearchAll(value) {
       try {
@@ -181,7 +181,7 @@ export default {
           this.resultSearch = [...response.data];
         }
       } catch (e) {
-        console.log('error ', e);
+        throw new Error("Something went wrong.")
       }
     },
   },

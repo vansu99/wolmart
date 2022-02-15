@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { checkAuth } from '@/utils';
-import { getToken } from '@/utils/storage';
 import PublicLayout from '@/layout/default';
 import LayoutSecond from '@/layout/LayoutSecond';
 import LayoutPrivate from '@/layout/LayoutPrivate';
+import store from '@/store';
+import { isEmptyObject } from '@/utils';
 
 Vue.use(Router);
 
@@ -67,8 +67,6 @@ const router = new Router({
       meta: {
         isAuth: true,
         layout: PublicLayout,
-        breadcrumb: true,
-        title: 'Thông tin tài khoản',
       },
       children: [
         {
@@ -105,7 +103,6 @@ const router = new Router({
           },
         },
       ],
-      beforeEnter: checkAuth,
     },
     {
       path: '/:slug/:categoryId',
@@ -154,11 +151,22 @@ const router = new Router({
   ],
 });
 
-router.beforeEach((from, to, next) => {
-  const isLoggedIn = getToken();
-  if (to.matched.some((record) => record.meta.isAuth) && !isLoggedIn) {
+router.beforeEach((to, from, next) => {
+  const currentUser = store.getters['auth/currentUser'];
+
+  if (to.matched.some((record) => record.meta.isAuth) && isEmptyObject(currentUser)) {
     // chua login
     next('/');
+  } else if (!isEmptyObject(currentUser)) {
+    switch (to.name) {
+      case 'Login' || 'Register':
+        next({ path: '/' });
+        break;
+
+      default:
+        next();
+        break;
+    }
   } else {
     next();
   }

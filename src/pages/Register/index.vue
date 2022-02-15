@@ -1,17 +1,5 @@
 <template>
   <div class="register">
-    <ul class="circles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
     <div class="register-wrapper">
       <div class="register-heading">
         <img src="@/assets/images/Header/logo.png" alt="Wolmart" />
