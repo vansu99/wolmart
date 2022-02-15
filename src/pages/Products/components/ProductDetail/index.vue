@@ -1,23 +1,35 @@
 <template>
   <transition name="fadeIn">
-    <div class="product-detail">
-      <div class="container">
-        <div class="product-detail__container">
-          <div class="product-detail__left">
+    <div class="product-detail container">
+      <div class="product-detail__container">
+        <div class="product-detail__left">
+          <template v-if="isProductShow">
+            <product-skeleton style="width: 100%" />
+          </template>
+          <template v-else>
             <ProductInfo :product="product" />
             <DescriptionTabs :product="product" :star="star" :review="review" />
-            <RelatedProducts :productList="productList" :star="star" :review="review" />
-            <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
-              <i class="fas fa-angle-left"></i>
-            </button>
-          </div>
-
-          <div class="product-detail__right" :class="hide ? 'hide' : 'show'">
-            <Sidebar :productList="productList" :star="star" :review="review" />
-            <button class="sidebar__close-btn" @click="hide = !hide">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
+          </template>
+          <RelatedProducts
+            :isLoading="isProductListShow"
+            :productList="productList"
+            :star="star"
+            :review="review"
+          />
+          <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
+            <i class="fas fa-angle-left"></i>
+          </button>
+        </div>
+        <div class="product-detail__right" :class="hide ? 'hide' : 'show'">
+          <Sidebar
+            :isLoading="isProductListShow"
+            :productList="productList"
+            :star="star"
+            :review="review"
+          />
+          <button class="sidebar__close-btn" @click="hide = !hide">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -28,6 +40,7 @@
 import Sidebar from './components/Sidebar/Sidebar';
 import { categoryApis, productApis } from '@/apis';
 import ProductInfo from './components/ProductInfo';
+import ProductSkeleton from './components/ProductInfo/ProductSkeleton';
 import DescriptionTabs from './components/DescriptionTabs';
 import RelatedProducts from './components/RelatedProducts';
 
@@ -40,6 +53,8 @@ export default {
       product: {},
       productList: [],
       hide: false,
+      isProductShow: false,
+      isProductListShow: true,
     };
   },
   components: {
@@ -47,6 +62,7 @@ export default {
     DescriptionTabs,
     RelatedProducts,
     Sidebar,
+    ProductSkeleton,
   },
   created() {
     this.getProductByID();
@@ -55,6 +71,7 @@ export default {
     // call API to get product by product ID
     async getProductByID() {
       try {
+        this.isProductShow = true;
         const productID = Number(this.$route.params.productId);
         const productData = await productApis.getProductDetail(productID);
         if (productData.status === 200) {
@@ -64,6 +81,8 @@ export default {
         }
       } catch (e) {
         throw new Error('Something went wrong.');
+      } finally {
+        this.isProductShow = false;
       }
     },
     // call API to get products that belong to same category but have different ID from the original productID
@@ -77,7 +96,15 @@ export default {
         }
       } catch (e) {
         throw new Error('Something went wrong.');
+      } finally {
+        this.isProductListShow = false;
       }
+    },
+  },
+  watch: {
+    '$route.query'() {
+      this.getProductByID();
+      this.getProductList();
     },
   },
 };
@@ -92,9 +119,7 @@ export default {
     gap: 3rem;
   }
   &__left {
-    @media #{$info-screen-768} {
-      width: 100%;
-    }
+    width: 100%;
   }
   &__right {
     flex-shrink: 0;

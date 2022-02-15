@@ -33,15 +33,18 @@
         </div>
         <hr class="hr-divider" />
         <div class="widget__bottom">
-          <div class="product-list">
-            <ProductSidebar
-              v-for="product in productList.slice(-3)"
-              :key="`sb-${product.id}`"
-              :product="product"
-              :star="star"
-              :review="review"
-            />
-          </div>
+          <template v-if="isLoading"><sidebar-product-skeleton /></template>
+          <template v-else>
+            <div class="product-list">
+              <ProductSidebar
+                v-for="product in productList.slice(-3)"
+                :key="`sb-${product.id}`"
+                :product="product"
+                :star="star"
+                :review="review"
+              />
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -49,6 +52,7 @@
 </template>
 
 <script>
+import SidebarProductSkeleton from '@/components/Skeleton/SidebarProductSkeleton';
 import ProductSidebar from '../ProductSidebar';
 export default {
   name: 'sidebar',
@@ -73,8 +77,8 @@ export default {
       ],
     };
   },
-  props: { productList: Array, star: Number, review: Number },
-  components: { ProductSidebar },
+  props: { productList: Array, star: Number, review: Number, isLoading: Boolean },
+  components: { ProductSidebar, SidebarProductSkeleton },
 };
 </script>
 
