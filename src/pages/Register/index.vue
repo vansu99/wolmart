@@ -94,7 +94,7 @@
               <i class="fas fa-phone form-icon"></i>
               <span class="form-error">{{ errors[0] }}</span>
             </ValidationProvider>
-            <Button content="đăng ký" />
+            <Button typeBtn="submit" wFull content="đăng ký" />
           </form>
         </ValidationObserver>
         <p class="form-forgot">

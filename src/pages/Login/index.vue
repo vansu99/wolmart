@@ -58,7 +58,7 @@
               <p class="form-forgot">
                 Quên mật khẩu? <a>Nhấn vào <b>đây</b></a>
               </p>
-              <Button content="đăng nhập" />
+              <Button typeBtn="submit" wFull size="medium" content="đăng nhập" />
             </form>
           </ValidationObserver>
         </div>
