@@ -59,13 +59,13 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumb {
-  padding: 2rem 0;
+  padding: 1rem 0;
   background-color: #e2e3e4;
   &-list {
     display: flex;
   }
   &-link {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: $text-primary;
     position: relative;
     padding-right: 2rem;

@@ -148,6 +148,7 @@ export default {
   max-width: 55.6rem;
   border: 0.3rem solid #336699;
   border-radius: 0.3rem;
+
   .search-input {
     width: 100%;
     @include flexSpaceBetween;
@@ -163,7 +164,7 @@ export default {
     }
     .search-btn {
       width: 5rem;
-      height: 4.7rem;
+      height: 4rem;
       background-color: white;
       border: none;
       outline: none;

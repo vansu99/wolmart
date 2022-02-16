@@ -306,6 +306,7 @@ export default {
   .user-button {
     width: 12rem;
     display: inline-block;
+    color: #fff;
   }
 }
 </style>

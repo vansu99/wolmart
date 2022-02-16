@@ -7,29 +7,6 @@
             <p class="welcome-msg">Welcome to Wolmart Store message or remove it!</p>
           </div>
           <div class="header-right d-flex">
-            <div class="item drop-down">
-              <p class="selected-lang">USD</p>
-              <div class="select-box">
-                <p class="type-money">USD</p>
-                <p class="type-money">EUR</p>
-              </div>
-            </div>
-            <div class="item drop-down">
-              <div class="select-lang">
-                <img src="../../assets/images/Header/eng.png" alt="" />
-                <span class="language">USD</span>
-              </div>
-              <div class="select-box">
-                <div class="type-langs">
-                  <img src="../../assets/images/Header/eng.png" alt="" />
-                  <span class="language">USD</span>
-                </div>
-                <div class="type-langs">
-                  <img src="../../assets/images/Header/fra.png" alt="" />
-                  <span class="language">FRA</span>
-                </div>
-              </div>
-            </div>
             <div class="item menu">
               <a class="text-decoration" href="#">Blogs</a>
               <a class="text-decoration" href="#">Contact Us</a>
@@ -172,7 +149,7 @@ export default {
     handleLogout() {
       this.$store.dispatch('auth/logout');
       removeToken();
-      this.$router.replace('/')
+      this.$router.replace('/');
     },
     async handleSearchAll(value) {
       try {
@@ -181,7 +158,7 @@ export default {
           this.resultSearch = [...response.data];
         }
       } catch (e) {
-        throw new Error("Something went wrong.")
+        throw new Error('Something went wrong.');
       }
     },
   },
