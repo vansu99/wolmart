@@ -3,7 +3,7 @@
     <div class="container">
       <div class="banner-list">
         <div class="banner-item">
-          <img :src="require('@/assets/images/banner1.jpg')" alt="" />
+          <img :src="require('@/assets/images/banner2.jpg')" alt="" />
         </div>
       </div>
       <box-list />
@@ -27,10 +27,10 @@ export default {
 <style lang="scss" scoped>
 .banner {
   &-list {
-    padding: 0 0 3rem;
+    padding: 3rem 0 3rem;
   }
   &-item {
-    height: 28.3rem;
+    height: 45rem;
     img {
       width: 100%;
       height: 100%;

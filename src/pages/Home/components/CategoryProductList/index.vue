@@ -159,10 +159,9 @@ export default {
 }
 .sidebar-banner {
   min-width: 23rem;
-  height: 100%;
-  background: $bg-second url('../../../../assets/images/Home/CategoryProductList/banner.jpg')
-    no-repeat center;
-  background-size: cover;
+  height: auto;
+  background: $bg-second url('../../../../assets/images/Home/CategoryProductList/banner_1.jpg')
+    no-repeat center / cover;
   border-radius: 0.5rem;
 
   &__content {
