@@ -8,6 +8,7 @@
         :headers="headers"
         :items="lists"
         item-key="id"
+        :items-per-page="15"
         height="65vh"
       >
         <template v-slot:top>
@@ -212,7 +213,7 @@
 
         <template #[`item.description`]="{ item }">
           <div class="info-cell">
-            <span class="text-xs">{{ item.description }}</span>
+            <span class="text-xs text-clamp">{{ item.description }}</span>
           </div>
         </template>
 
@@ -243,7 +244,8 @@
           v-model="page"
           :total-visible="5"
           class="text-xs"
-          :length="lists.length"
+          circle
+          :length="5"
         ></v-pagination>
       </div>
     </v-col>
@@ -363,7 +365,7 @@ export default {
       width: 22rem;
     }
     &:nth-child(5) {
-      width: 29rem;
+      width: 24rem;
     }
   }
 }
@@ -391,6 +393,9 @@ export default {
 .info-cell {
   height: 100%;
   padding: 1.5rem 0;
+}
+.text-clamp {
+  @include textClamp(3);
 }
 .table-footer {
   margin-top: 3rem;

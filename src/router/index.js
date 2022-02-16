@@ -32,6 +32,14 @@ const router = new Router({
       meta: { layout: LayoutSecond, breadcrumb: false },
     },
     {
+      path: '/admin/login',
+      name: 'AdminLogin',
+      component: () => import('@/modules/admin/components/Login'),
+      meta: {
+        layout: LayoutSecond,
+      },
+    },
+    {
       path: '/admin',
       name: 'Admin',
       component: () => import('@/modules/admin'),
@@ -160,6 +168,9 @@ router.beforeEach((to, from, next) => {
   } else if (!isEmptyObject(currentUser)) {
     switch (to.name) {
       case 'Login' || 'Register':
+        next({ path: '/' });
+        break;
+      case 'Admin':
         next({ path: '/' });
         break;
 

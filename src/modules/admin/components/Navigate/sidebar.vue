@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer floating app width="260" class="app-navigation-menu">
+  <v-navigation-drawer floating app width="220" class="app-navigation-menu">
     <div class="vertical-nav-header d-flex items-center ps-6 pe-5 pt-5 pb-2">
       <router-link to="/" class="d-flex align-center text-decoration-none">
         <v-img
@@ -13,7 +13,7 @@
         />
       </router-link>
     </div>
-    <v-list expand shaped class="vertical-nav-menu-items pr-5">
+    <v-list expand shaped class="vertical-nav-menu-items pr-3">
       <nav-menu-link
         title="Dashboard"
         :icon="icons.mdiHomeOutline"
