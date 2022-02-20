@@ -35,15 +35,12 @@
               <label class="form-label" for="email">Mật khẩu</label>
               <input
                 id="password"
-                class="form-input input-password"
-                :class="{ error: errors[0] }"
+                type="password"
                 v-model="formData.password"
+                :class="{ error: errors[0] }"
+                class="form-input input-password"
                 placeholder="Nhập mật khẩu của bạn"
-                :type="hide ? 'text' : 'password'"
               />
-              <icon name="pwd" class="form-icon" />
-              <i class="fas fa-eye password-icon" v-if="hide" @click="hide = false"></i>
-              <i class="fas fa-eye-slash password-icon" v-else @click="hide = true"></i>
               <span class="form-error">{{ errors[0] }}</span>
             </ValidationProvider>
             <button type="submit" class="login-admin-btn">Đăng nhập</button>
@@ -56,15 +53,12 @@
 
 <script>
 import { userApis } from '@/apis';
-import Icon from '@/components/SvgIcons';
-import { setToken } from "@/utils/storage";
+import { setToken } from '@/utils/storage';
 
 export default {
   name: 'LoginAdmin',
-  components: {Icon},
   data() {
     return {
-      hide: false,
       formData: {
         email: '',
         password: '',

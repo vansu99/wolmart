@@ -13,168 +13,41 @@
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <v-dialog v-model="dialog" max-width="700">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn color="primary" class="ml-auto text-xs" v-bind="attrs" v-on="on"
-                  >Thêm sản phẩm</v-btn
-                >
-              </template>
-              <v-card>
-                <v-card-title
-                  ><span class="text-md-h4">{{ formTitle }}</span></v-card-title
-                >
-                <v-divider></v-divider>
-                <v-card-text class="pt-4 px-3">
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-text-field
-                          single-line
-                          dense
-                          hide-details="auto"
-                          outlined
-                          label="Nhập tên sản phẩm"
-                          v-model="editItem.name"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-text-field
-                          single-line
-                          dense
-                          hide-details="auto"
-                          outlined
-                          label="Nhập giá sản phẩm"
-                          v-model="editItem.original_price"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-file-input
-                          multiple
-                          single-line
-                          :prepend-icon="null"
-                          label="Hình ảnh sản phẩm"
-                          hide-details="auto"
-                          outlined
-                          dense
-                        ></v-file-input>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-text-field
-                          single-line
-                          dense
-                          hide-details="auto"
-                          outlined
-                          label="Số lượng sản phẩm"
-                          value="0"
-                          v-model="editItem.quantity"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-select
-                          single-line
-                          dense
-                          hide-details="auto"
-                          outlined
-                          label="Giảm giá"
-                          :items="discounts"
-                          v-model="editItem.discount"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-select
-                          single-line
-                          dense
-                          hide-details="auto"
-                          outlined
-                          label="Danh mục sản phẩm"
-                          :items="categories"
-                          item-text="name"
-                          item-value="id"
-                          v-model="editItem.category_id"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-select
-                          single-line
-                          dense
-                          hide-details="auto"
-                          outlined
-                          label="Tình trạng sản phẩm"
-                          :items="status"
-                          item-text="name"
-                          item-value="id"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <div class="d-flex">
-                          <v-checkbox
-                            class="mr-3"
-                            dense
-                            label="Miễn phí ship"
-                            v-model="editItem.is_free_shipping"
-                          ></v-checkbox>
-                          <v-checkbox
-                            dense
-                            label="Quà tặng"
-                            v-model="editItem.is_gift"
-                          ></v-checkbox>
-                        </div>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-textarea
-                          single-line
-                          dense
-                          auto-grow
-                          outlined
-                          hide-details="auto"
-                          label="Mô tả sản phẩm"
-                          v-model="editItem.description"
-                        ></v-textarea>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    color="secondary"
-                    outlined
-                    class="text-xs mr-3"
-                    @click="closeModal('MODAL_ITEM')"
-                    >Hủy
-                  </v-btn>
-                  <v-btn color="primary" class="text-xs" @click="save">Lưu</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+            <v-btn
+              color="primary"
+              class="ml-auto text-xs"
+              @click="isOpenAddProductModal = true"
+              >Thêm sản phẩm</v-btn
+            >
+            <!-- modal add product -->
+            <AddProductModal
+              :categories="categories"
+              :dialog.sync="isOpenAddProductModal"
+            />
 
-            <!-- dialog delete-->
-            <v-dialog v-model="dialogDelete" max-width="350">
-              <v-card>
-                <v-card-title class="text-sm">Bạn có chắc muốn xóa sản phẩm này?</v-card-title>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    color="blue darken-1"
-                    class="text-xs"
-                    text
-                    @click="closeModal('MODAL_DELETE')"
-                    >Hủy
-                  </v-btn>
-                  <v-btn color="blue darken-1" class="text-xs" text @click="deleteConfirm"
-                    >Xóa
-                  </v-btn>
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+            <!-- modal edit product -->
+            <EditProductModal
+              :items="editItem"
+              :categories="categories"
+              :dialog.sync="isOpenEditProductModal"
+            />
+
+            <!-- modal delete product -->
+            <RemoveProductModal
+              :product-id="removeProductId"
+              :dialog.sync="isOpenDeleteModal"
+            />
           </v-toolbar>
         </template>
 
         <template #[`header`]="{ props: { headers } }">
           <thead class="custom-header">
             <tr class="custom-header">
-              <th class="custom-header-item" v-for="(item, index) in headers" :key="index">
+              <th
+                class="custom-header-item"
+                v-for="(item, index) in headers"
+                :key="index"
+              >
                 <div class="sort-cell">
                   {{ item.text }}
                   <div v-if="item.sortable" class="sort-control">
@@ -234,7 +107,7 @@
         <template #[`item.actions`]="{ item }">
           <div class="centered-cell info-cell">
             <v-icon class="mr-2" @click="showEditItem(item)"> mdi-pencil </v-icon>
-            <v-icon @click="deleteItem"> mdi-delete </v-icon>
+            <v-icon @click="deleteItem(item)"> mdi-delete </v-icon>
           </div>
         </template>
       </v-data-table>
@@ -254,15 +127,22 @@
 
 <script>
 import { categoryApis, productApis } from '@/apis';
-import { MODAL_ITEM, MODAL_DELETE } from '@/constants';
+import AddProductModal from './Modals/AddProductModal.vue';
+import EditProductModal from './Modals/EditProductModal.vue';
+import RemoveProductModal from './Modals/RemoveProductModal.vue';
 
 export default {
   name: 'ProductTable',
+  components: {
+    AddProductModal,
+    EditProductModal,
+    RemoveProductModal,
+  },
   data() {
     return {
-      dialog: false,
-      dialogDelete: false,
-      editedIndex: -1,
+      isOpenAddProductModal: false,
+      isOpenEditProductModal: false,
+      isOpenDeleteModal: false,
       page: 1,
       headers: [
         { text: 'SKU', value: 'id', sortable: true },
@@ -274,10 +154,20 @@ export default {
         { text: 'Giảm giá', value: 'discount', sortable: true },
         { text: 'Actions', value: 'actions', sortable: true },
       ],
-      discounts: [0, 5, 10, 15, 20, 25, 30],
-      status: ['Còn hàng', 'Hết hàng'],
+      editItem: {
+        name: '',
+        image: null,
+        status: '',
+        is_gift: false,
+        discount: 0,
+        quantity: 0,
+        category_id: '',
+        description: '',
+        original_price: 0,
+        is_free_shipping: false,
+      },
+      removeProductId: null,
       lists: [],
-      editItem: {},
       categories: [],
     };
   },
@@ -292,9 +182,6 @@ export default {
       } else {
         return 'warning';
       }
-    },
-    formTitle() {
-      return this.editedIndex === -1 ? 'Thêm sản phẩm' : 'Sửa sản phẩm';
     },
   },
   methods: {
@@ -318,35 +205,15 @@ export default {
         throw Error('Invalid Token');
       }
     },
-    closeModal(type) {
-      switch (type) {
-        case MODAL_ITEM:
-          this.dialog = false;
-          this.$nextTick(() => {
-            this.editedIndex = -1;
-          });
-          break;
-        case MODAL_DELETE:
-          this.dialogDelete = false;
-          this.$nextTick(() => {
-            this.editedIndex = -1;
-          });
-          break;
-        default:
-          return;
-      }
+    deleteItem(item) {
+      this.isOpenDeleteModal = true;
+      this.removeProductId = item.id;
     },
-    deleteItem() {
-      this.dialogDelete = true;
-    },
-    deleteConfirm() {
-      this.closeModal(MODAL_DELETE);
-    },
+
     showEditItem(item) {
-      this.dialog = true;
-      this.editItem = { ...item };
+      this.isOpenEditProductModal = true;
+      this.editItem = { ...item, status: item.quantity > 1 ? 'Còn hàng' : 'Hết hàng' };
     },
-    save() {},
   },
 };
 </script>
