@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { userApis } from '@/apis';
+import { isEmptyObject } from '@/utils';
+import { getToken } from '@/utils/storage';
 import PublicLayout from '@/layout/default';
 import LayoutSecond from '@/layout/LayoutSecond';
 import LayoutPrivate from '@/layout/LayoutPrivate';
 import store from '@/store';
-import { isEmptyObject } from '@/utils';
 
 Vue.use(Router);
 
@@ -160,16 +162,41 @@ const router = new Router({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+async function getUserInfo() {
+  try {
+    if (getToken()) {
+      const response = await userApis.getUserInfo();
+      if (response.status === 200) {
+        store.dispatch('auth/setUserInfo', response.data);
+      }
+    }
+  } catch (error) {
+    throw new Error('Something went wrong.');
+  }
+}
+
+router.beforeEach(async (to, from, next) => {
+  const token = getToken();
+  if (token) {
+    await getUserInfo();
+  }
   const currentUser = store.getters['auth/currentUser'];
 
-  if (to.matched.some((record) => record.meta.isAuth) && isEmptyObject(currentUser)) {
+  if (
+    to.matched.some((record) => record.meta.isAuth) &&
+    isEmptyObject(currentUser) &&
+    !token
+  ) {
     // chua login
     next('/');
-  } else if (!isEmptyObject(currentUser)) {
+  } else if (token && !isEmptyObject(currentUser)) {
+    // da login
     switch (to.name) {
       case 'Login' || 'Register':
         next({ path: '/' });
+        break;
+      case 'AdminLogin':
+        next({ path: '/admin/dashboard' });
         break;
 
       default:

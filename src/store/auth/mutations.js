@@ -11,6 +11,7 @@ export default {
     state.token = value;
   },
   setUser(state, value) {
+    state.isAuthenticated = true;
     state.currentUser = value;
   },
 };

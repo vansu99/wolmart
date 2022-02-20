@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Nprogress from 'nprogress';
 import { BASE_URL } from '@/constants';
-import { getToken } from "@/utils/storage";
+import { getToken, removeToken } from '@/utils/storage';
 import * as queryString from 'query-string';
 
 const httpClient = axios.create({
@@ -36,9 +36,9 @@ httpClient.interceptors.response.use(
   (error) => {
     Nprogress.done();
     if (error.response) {
-      //const originalRequest = error.config;
       if (error.response.status === 401 || error.response.status === 500) {
         // logout
+        removeToken();
       }
     }
     return Promise.reject(error.response.data);

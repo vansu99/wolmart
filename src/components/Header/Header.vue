@@ -143,13 +143,12 @@ export default {
     }),
   },
   methods: {
-    // openModal(type) {
-    //   this.$modal.show(type);
-    // },
     handleLogout() {
       this.$store.dispatch('auth/logout');
       removeToken();
-      this.$router.replace('/');
+      if (this.$router.currentRoute.name !== 'Home') {
+        this.$router.replace('/');
+      }
     },
     async handleSearchAll(value) {
       try {
