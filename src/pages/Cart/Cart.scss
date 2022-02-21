@@ -1,0 +1,278 @@
+.cart {
+  background: #ccc;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    padding: 5rem 0;
+  }
+  &__card {
+    background: #fff;
+    border-radius: 0.5rem;
+  }
+  &__left {
+    position: relative;
+    display: flex;
+    & .cart__card {
+      flex: 1;
+    }
+  }
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .card {
+    padding: 2rem;
+    &__label {
+      position: absolute;
+      top: -0.8rem;
+      left: 5rem;
+      padding: 1rem 4rem;
+      background: $bg-primary;
+      border-end-end-radius: 0.5rem;
+      border-end-start-radius: 0.5rem;
+      text-align: center;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -1.6rem;
+        border-top: 0.8rem solid transparent;
+        border-right: 1.6rem solid #555;
+        border-left-color: transparent;
+      }
+      &-text {
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      &-description {
+        font-size: 1.4rem;
+        color: $secondary-color;
+      }
+    }
+    &__title {
+      font-size: 1.6rem;
+      font-weight: 500;
+      padding-bottom: 1rem;
+    }
+    &__discount {
+      display: flex;
+      padding-bottom: 1rem;
+    }
+    &__input {
+      flex: 1;
+      input {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        outline: none;
+        border: 1px solid #c4c4c4;
+        font-size: 1.6rem;
+        &:focus {
+          border: 1px solid $hover-color;
+        }
+      }
+    }
+    &__btn {
+      flex-shrink: 0;
+    }
+    &__table {
+      padding: 8rem 0 3rem;
+      & thead {
+        & th {
+          text-align: center;
+          color: $text-semi-light;
+        }
+      }
+      & tr {
+        border-bottom: $border;
+      }
+      & tbody {
+        .price__wrapper {
+          display: flex;
+          flex-direction: column;
+        }
+        .quantity__wrapper {
+          display: flex;
+          justify-content: center;
+        }
+        & th {
+          padding: 1rem 2rem;
+        }
+        & td {
+          vertical-align: middle;
+          height: 100%;
+          text-align: center;
+        }
+        .product {
+          overflow: hidden;
+          display: flex;
+          gap: 2rem;
+          &__left {
+            display: flex;
+            flex-shrink: 0;
+            overflow: hidden;
+            font-size: 1rem;
+            & > a {
+              display: flex;
+              width: 100%;
+              height: 100%;
+              color: $text-primary;
+            }
+            & img {
+              margin: auto 0;
+              width: 10rem;
+              height: 11.3rem;
+              object-fit: contain;
+              cursor: pointer;
+            }
+          }
+          &__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          &__name {
+            padding-bottom: 2rem;
+            @include textClamp(2);
+            font-weight: 500;
+            font-size: 1.4rem;
+            text-transform: capitalize;
+            color: $text-primary;
+            transition: all 0.2s ease-in;
+            transition: all 0.5s ease-out;
+            cursor: pointer;
+            &:hover {
+              color: $bg-facebook;
+            }
+            & > a {
+              color: $text-primary;
+            }
+          }
+          &__delete {
+            font-size: 1.3rem;
+            & i {
+              transition: color 0.2s ease;
+              cursor: pointer;
+              &:hover {
+                color: $hight-light;
+              }
+            }
+          }
+          &__quantity {
+            @include flexCenter();
+            border: 1px solid $bg-contrary-dark;
+            border-radius: 0.5rem;
+            & input {
+              width: 3.5rem;
+              height: 3.5rem;
+              border-radius: 3px;
+              background-color: transparent;
+              font-family: $font-primary;
+              font-size: 1.3rem;
+              font-weight: 400;
+              text-align: center;
+              color: $text-semi-light;
+              outline: none;
+              -webkit-appearance: none;
+            }
+          }
+          &__quantity-btn {
+            &--minus,
+            &--plus {
+              width: 3.5rem;
+              height: 3.5rem;
+              border: none;
+              background-color: $bg-contrary-light;
+              font-family: $font-primary;
+              font-size: 2rem;
+              font-weight: 100;
+              color: $text-semi-light;
+              user-select: none;
+              cursor: pointer;
+            }
+            &--minus {
+              border-top-left-radius: 0.5rem;
+              border-end-start-radius: 0.5rem;
+            }
+            &--plus {
+              border-top-right-radius: 0.5rem;
+              border-end-end-radius: 0.5rem;
+            }
+          }
+          &__price {
+            &--new {
+              font-size: 2.2rem;
+              font-weight: 500;
+              color: $text-primary;
+            }
+            &--old {
+              font-size: 1.4rem;
+              font-style: italic;
+              color: $text-semi-light;
+              text-decoration: line-through;
+            }
+          }
+          &__discount {
+            position: relative;
+            padding: 0.3rem;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            font-style: italic;
+            background-color: $hight-light;
+            color: #fff;
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              right: -1rem;
+              border-bottom: 1.3rem solid transparent;
+              border-left: 1rem solid $hight-light;
+            }
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              right: -1rem;
+              border-top: 1.3rem solid transparent;
+              border-left: 1rem solid $hight-light;
+            }
+          }
+        }
+      }
+    }
+  }
+  table {
+    width: 100%;
+    & th,
+    td {
+      font-size: 1.6rem;
+      font-weight: normal;
+      padding: 1rem 0;
+    }
+    & th {
+      text-align: justify;
+    }
+    & td {
+      text-align: right;
+    }
+    .total {
+      padding-top: 5rem;
+      border-top: $border;
+      thead {
+        border-bottom: $border;
+      }
+      & th,
+      td {
+        padding-top: 3rem;
+      }
+      & td {
+        font-size: 2rem;
+        font-weight: 600;
+        color: $hight-light;
+      }
+    }
+  }
+}

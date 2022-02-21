@@ -113,6 +113,31 @@ const router = new Router({
       ],
     },
     {
+      path: '/cart',
+      name: 'Cart',
+      component: () => import('@/pages/Cart'),
+      meta: {
+        isAuth: false,
+        layout: PublicLayout,
+      },
+    },
+    {
+      path: '/cart-empty',
+      name: 'CartEmpty',
+      component: () => import('@/pages/Cart/CartEmpty'),
+      meta: {
+        layout: PublicLayout,
+      },
+    },
+    {
+      path: '/checkout/:state',
+      name: 'CheckOut',
+      component: () => import('@/pages/Cart/CheckOut'),
+      meta: {
+        layout: PublicLayout,
+      },
+    },
+    {
       path: '/:slug/:categoryId',
       name: 'Products',
       component: () => import('@/pages/Products'),
@@ -128,23 +153,6 @@ const router = new Router({
       meta: {
         layout: PublicLayout,
         breadcrumb: true,
-      },
-    },
-    {
-      path: '/cart',
-      name: 'Cart',
-      component: () => import('@/pages/Cart'),
-      meta: {
-        isAuth: true,
-        layout: PublicLayout,
-      },
-    },
-    {
-      path: '/cart-empty',
-      name: 'CartEmpty',
-      component: () => import('@/pages/Cart/CartEmpty'),
-      meta: {
-        layout: PublicLayout,
       },
     },
     {
