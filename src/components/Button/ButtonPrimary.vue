@@ -40,13 +40,18 @@ export default {
       type: String,
       default: 'button',
     },
+    radiusNone: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     getClasses() {
       return {
         'full': this.wFull,
         outline: this.outline,
-        [this.size]: this.size
+        [this.size]: this.size,
+        radiusNone: this.radiusNone
       };
     },
   },
@@ -114,6 +119,9 @@ export default {
   &.small {
     font-size: 1.3rem;
     padding: .4rem .8rem;
+  }
+  &.radiusNone{
+    border-radius: 0;
   }
 }
 </style>
