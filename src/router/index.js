@@ -7,6 +7,8 @@ import PublicLayout from '@/layout/default';
 import LayoutSecond from '@/layout/LayoutSecond';
 import LayoutPrivate from '@/layout/LayoutPrivate';
 import store from '@/store';
+import { setStorage } from '@/utils/storageWeb';
+import { USER_INFO } from '@/constants';
 
 Vue.use(Router);
 
@@ -175,7 +177,7 @@ async function getUserInfo() {
     if (getToken()) {
       const response = await userApis.getUserInfo();
       if (response.status === 200) {
-        store.dispatch('auth/setUserInfo', response.data);
+        setStorage(USER_INFO, response.data);
       }
     }
   } catch (error) {
@@ -185,9 +187,11 @@ async function getUserInfo() {
 
 router.beforeEach(async (to, from, next) => {
   const token = getToken();
+
   if (token) {
     await getUserInfo();
   }
+
   const currentUser = store.getters['auth/currentUser'];
 
   if (

@@ -21,9 +21,9 @@ function subscribeTokenRefresh(cb) {
   subscribers.push(cb);
 }
 
-function onRrefreshed(token) {
-  subscribers.map((cb) => cb(token));
-}
+// function onRrefreshed(token) {
+//   subscribers.map((cb) => cb(token));
+// }
 
 // interceptor request
 httpClient.interceptors.request.use(

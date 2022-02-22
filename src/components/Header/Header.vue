@@ -123,6 +123,8 @@ import { productApis } from '@/apis';
 import Search from '@/components/Search';
 import Icon from '@/components/SvgIcons';
 import { removeToken } from '@/utils/storage';
+import { removeStorage } from '@/utils/storageWeb';
+import { USER_INFO } from '@/constants';
 
 export default {
   name: 'Header',
@@ -146,6 +148,7 @@ export default {
     handleLogout() {
       this.$store.dispatch('auth/logout');
       removeToken();
+      removeStorage(USER_INFO);
       if (this.$router.currentRoute.name !== 'Home') {
         this.$router.replace('/');
       }

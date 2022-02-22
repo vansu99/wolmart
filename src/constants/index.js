@@ -1,5 +1,5 @@
 export const TOKEN = 'token';
-export const USER_INFO = 'USER_INFO';
+export const USER_INFO = 'wolmart_user';
 export const MODAL_ITEM = 'MODAL_ITEM';
 export const MODAL_EDIT = 'MODAL_EDIT';
 export const MODAL_DELETE = 'MODAL_DELETE';
