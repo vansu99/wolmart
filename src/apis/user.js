@@ -4,6 +4,9 @@ const userApis = {
   login: (data) => {
     return request.post('/login', data);
   },
+  refreshToken: () => {
+    return request.post('/')
+  },
   register: (data) => {
     return request.post('/register', data);
   },

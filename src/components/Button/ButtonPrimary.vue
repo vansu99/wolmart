@@ -51,7 +51,7 @@ export default {
         'full': this.wFull,
         outline: this.outline,
         [this.size]: this.size,
-        radiusNone: this.radiusNone
+        'radiusNone': this.radiusNone
       };
     },
   },

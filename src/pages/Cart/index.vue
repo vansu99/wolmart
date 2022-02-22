@@ -121,7 +121,7 @@
                     <td>{{ 30000 | formatPrice }}</td>
                   </tr>
                   <tr class="total">
-                    <th>Thanh toán</th>
+                    <th><strong>Thanh toán</strong></th>
                     <td>{{ 30000 | formatPrice }}</td>
                   </tr>
                 </tbody>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Nprogress from 'nprogress';
 import { BASE_URL } from '@/constants';
-import { getToken, removeToken } from '@/utils/storage';
+import { getToken } from '@/utils/storage';
 import * as queryString from 'query-string';
 
 const httpClient = axios.create({
@@ -12,6 +12,18 @@ const httpClient = axios.create({
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });
+
+let loop = 0;
+let isRefreshing = false;
+let subscribers = [];
+
+function subscribeTokenRefresh(cb) {
+  subscribers.push(cb);
+}
+
+function onRrefreshed(token) {
+  subscribers.map((cb) => cb(token));
+}
 
 // interceptor request
 httpClient.interceptors.request.use(
@@ -35,12 +47,25 @@ httpClient.interceptors.response.use(
   },
   (error) => {
     Nprogress.done();
-    if (error.response) {
-      if (error.response.status === 401 || error.response.status === 500) {
-        // logout
-        removeToken();
+    const {
+      config: originalRequest,
+      response: { status },
+    } = error;
+
+    if (status === 401 && loop < 1) {
+      loop++;
+      if (!isRefreshing) {
+        isRefreshing = true;
       }
+
+      return new Promise((resolve) => {
+        subscribeTokenRefresh((token) => {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          resolve(axios(originalRequest));
+        });
+      });
     }
+
     return Promise.reject(error.response.data);
   }
 );

@@ -23,7 +23,7 @@
                 </div>
               </div>
               <router-link class="card__navigating" :to="{ name: 'Home' }"
-                ><AngleLeft color="#01ADAB" />Quay lại trang chủ</router-link
+                ><AngleLeft color="#336699" />Quay lại trang chủ</router-link
               >
               <div v-if="success" class="card__discription">
                 <div>

@@ -21,7 +21,7 @@
       top: -0.8rem;
       left: 35%;
       padding: 2rem;
-      background-color: $success;
+      background-color: $bg-primary;
       border-end-end-radius: 0.5rem;
       border-end-start-radius: 0.5rem;
       text-align: center;
@@ -86,17 +86,9 @@
     &__navigating {
       font-size: 2.4rem;
       font-weight: 500;
-      color: $success;
+      color: $bg-primary;
       display: flex;
       align-items: center;
-      path {
-        color: $success;
-      }
-      svg {
-        fill: $success;
-        transition: transform 0.2s ease;
-        margin-right: 0.4rem;
-      }
 
       &:hover svg {
         transform: translateX(-8px);
