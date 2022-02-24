@@ -20,6 +20,7 @@
                 v-slot="{ errors }"
                 tag="div"
                 mode="passive"
+                ref="provider"
               >
                 <label class="form-label" for="email">Email</label>
                 <input
@@ -33,15 +34,17 @@
                 <icon name="email" class="form-icon" />
                 <span class="form-error">{{ errors[0] }}</span>
               </ValidationProvider>
+
               <ValidationProvider
                 class="form-group"
-                name="password"
+                name="Password"
                 rules="required|max:32|min:6"
                 v-slot="{ errors }"
                 tag="div"
                 mode="passive"
+                ref="provider"
               >
-                <label class="form-label" for="email">Mật khẩu</label>
+                <label class="form-label" for="password">Mật khẩu</label>
                 <input
                   id="password"
                   class="form-input input-password"
@@ -55,6 +58,7 @@
                 <i class="fas fa-eye-slash password-icon" v-else @click="hide = true"></i>
                 <span class="form-error">{{ errors[0] }}</span>
               </ValidationProvider>
+
               <p class="form-forgot">
                 Quên mật khẩu? <a>Nhấn vào <b>đây</b></a>
               </p>

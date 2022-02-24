@@ -1,6 +1,7 @@
 const { mergeSassVariables } = require('@vuetify/cli-plugin-utils');
 
 module.exports = {
+  configureWebpack: {},
   chainWebpack: (config) => {
     const modules = ['vue-modules', 'vue', 'normal-modules', 'normal'];
     modules.forEach((match) => {
