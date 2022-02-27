@@ -36,6 +36,7 @@ export default {
       position: absolute;
       top: -1.6rem;
       left: 20%;
+      z-index: 10;
       white-space: nowrap;
       font-size: 1.3rem;
       font-family: $font-primary;

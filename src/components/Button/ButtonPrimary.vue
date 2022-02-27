@@ -17,7 +17,7 @@ export default {
     theme: {
       type: String,
       default: 'default',
-      validator: (val) => ~['default', 'primary', 'secondary'].indexOf(val),
+      validator: (val) => ~['default', 'primary', 'secondary', 'normal'].indexOf(val),
     },
     size: {
       type: String,
@@ -42,22 +42,22 @@ export default {
     },
     radiusNone: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     getClasses() {
       return {
-        'full': this.wFull,
+        full: this.wFull,
         outline: this.outline,
         [this.size]: this.size,
-        'radiusNone': this.radiusNone
+        radiusNone: this.radiusNone,
       };
     },
   },
   methods: {
     onClick() {
-      if(this.disabled) return;
+      if (this.disabled) return;
 
       this.$emit('click');
     },
@@ -98,6 +98,10 @@ export default {
     cursor: not-allowed;
   }
 
+  &.normal {
+    background-color: gray;
+  }
+
   &.outline {
     color: $bg-primary;
     background: transparent;
@@ -114,13 +118,13 @@ export default {
     padding: 1.2rem;
   }
   &.medium {
-    padding: .8rem 1.2rem;
+    padding: 0.8rem 1.2rem;
   }
   &.small {
     font-size: 1.3rem;
-    padding: .4rem .8rem;
+    padding: 0.4rem 0.8rem;
   }
-  &.radiusNone{
+  &.radiusNone {
     border-radius: 0;
   }
 }

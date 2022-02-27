@@ -13,14 +13,16 @@
       <div class="product__top">
         <a class="product__link"><img :src="product.img_path" :alt="product.name" /></a>
         <div class="product__action--vertical">
-          <router-link to="/cart" class="product__btn" title="Add to cart"
-            ><i class="fas fa-shopping-bag"></i
-          ></router-link>
+          <button @click.prevent="AddToCart()" class="product__btn" title="Add to cart">
+            <i class="fas fa-shopping-bag"></i>
+          </button>
           <router-link to="/wishlist" class="product__btn" title="Add to wishlist"
             ><i class="fas fa-heart"></i
           ></router-link>
         </div>
-        <span class="product__sale" v-show="product.discount">Giảm {{ product.discount }}%</span>
+        <span class="product__sale" v-show="product.discount"
+          >Giảm {{ product.discount }}%</span
+        >
         <div class="product__action--horizontal"><a href="">Xem chi tiết</a></div>
       </div>
       <div class="product__content">
@@ -32,7 +34,9 @@
           <span class="product__price--new">{{
             product.original_price | calDiscountPrice(product.discount) | formatPrice
           }}</span>
-          <span class="product__price--old">{{ product.original_price | formatPrice }}</span>
+          <span class="product__price--old">{{
+            product.original_price | formatPrice
+          }}</span>
         </div>
       </div>
     </router-link>
@@ -41,11 +45,21 @@
 
 <script>
 import RatingStar from '@/components/RatingStarWithDescription/RatingStarWithDescription';
+
 import mixins from '@/mixins';
 export default {
   mixins: [mixins],
   components: { RatingStar },
   props: { product: Object, star: Number, review: Number },
+  methods: {
+    AddToCart() {
+      const productAdded = {
+        ...this.product,
+        cart_quantity: 1,
+      };
+      this.$emit('showCartPreview', productAdded);
+    },
+  },
 };
 </script>
 

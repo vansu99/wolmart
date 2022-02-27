@@ -37,6 +37,7 @@
             :product="product"
             :star="star"
             :review="review"
+            @showCartPreview="showCartPreview"
           />
         </div>
       </div>
@@ -77,7 +78,9 @@ export default {
       // call API to get product list
       try {
         this.isShow = true;
-        const productData = await categoryApis.getProductListBaseOnCategory(this.category.id);
+        const productData = await categoryApis.getProductListBaseOnCategory(
+          this.category.id
+        );
         if (productData.status === 200) {
           this.products = productData.data;
         }
@@ -86,6 +89,9 @@ export default {
       } finally {
         this.isShow = false;
       }
+    },
+    showCartPreview(product) {
+      this.$emit('showCartPreview', product);
     },
   },
   components: {
@@ -122,7 +128,7 @@ export default {
       cursor: pointer;
 
       & i {
-        margin-left: .7rem;
+        margin-left: 0.7rem;
         font-size: 1.5rem;
       }
 
@@ -160,8 +166,9 @@ export default {
 .sidebar-banner {
   min-width: 23rem;
   height: auto;
-  background: $bg-second url('../../../../assets/images/Home/CategoryProductList/banner_1.jpg')
-    no-repeat center / cover;
+  background: $bg-second
+    url('../../../../assets/images/Home/CategoryProductList/banner_1.jpg') no-repeat
+    center / cover;
   border-radius: 0.5rem;
 
   &__content {

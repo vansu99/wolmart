@@ -38,7 +38,9 @@
         <hr class="hr-divider" />
         <div class="product__price">
           <span class="product__price--new">{{
-            Number(product.original_price) | calDiscountPrice(product.discount) | formatPrice
+            Number(product.original_price)
+              | calDiscountPrice(product.discount)
+              | formatPrice
           }}</span>
           <span class="product__price--old">{{
             Number(product.original_price) | formatPrice
@@ -47,21 +49,28 @@
         <hr class="hr-divider" />
         <div class="product__actions">
           <div class="product__quantity">
-            <input type="number" min="1" max="10000" v-model="value" />
-            <button class="product__quantity-btn--minus" @click="decreaseQuantity">-</button>
-            <button class="product__quantity-btn--plus" @click="increaseQuantity">+</button>
+            <input type="number" min="1" max="10000" v-model="this.value" />
+            <button class="product__quantity-btn--minus" @click="decreaseQuantity">
+              -
+            </button>
+            <button class="product__quantity-btn--plus" @click="increaseQuantity">
+              +
+            </button>
           </div>
-          <div class="product__btn" :class="{ disabled: value === 0 }">
+          <button
+            class="product__btn"
+            :class="{ disabled: this.value === 0 }"
+            @click="AddToCart()"
+          >
             <i class="fas fa-shopping-bag product__btn-icon"></i>
             <div class="product__btn-text">Thêm vào giỏ</div>
-          </div>
+          </button>
         </div>
         <div class="product__links">
           <Social />
           <span></span>
           <div class="product__icon" title="Thêm vào wishlist">
-            <router-link to="/wishlist" href=""
-              ><i class="far fa-heart"></i></router-link>
+            <router-link to="/wishlist" href=""><i class="far fa-heart"></i></router-link>
           </div>
         </div>
       </div>
@@ -87,17 +96,27 @@ export default {
     Social,
   },
   methods: {
-    increaseQuantity: function () {
+    increaseQuantity() {
       if (this.value >= 10000) {
         return this.value;
       }
       return (this.value = Number(this.value) + 1);
     },
-    decreaseQuantity: function () {
+    decreaseQuantity() {
       if (this.value <= 1) {
         return this.value;
       }
       return (this.value = Number(this.value) - 1);
+    },
+    AddToCart() {
+      if (this.value > 0) {
+        console.log(this.value);
+        const productAdded = {
+          ...this.product,
+          cart_quantity: this.value,
+        };
+        this.$emit('showCartPreview', productAdded);
+      }
     },
   },
 };

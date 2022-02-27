@@ -17,6 +17,7 @@
           :product="product"
           :star="star"
           :review="review"
+          @showCartPreview="showCartPreview"
         />
       </div>
     </template>
@@ -30,6 +31,11 @@ export default {
   name: 'RelatedProducts',
   props: { isLoading: Boolean, productList: Array, star: Number, review: Number },
   components: { Product, Skeleton },
+  methods: {
+    showCartPreview(product) {
+      this.$emit('showCartPreview', product);
+    },
+  },
 };
 </script>
 

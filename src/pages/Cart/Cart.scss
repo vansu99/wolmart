@@ -1,3 +1,4 @@
+@import './src/plugins/vuetify/preset/styles/mixins';
 .cart {
   background: #ccc;
   &__wrapper {
@@ -21,6 +22,11 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+  &__actions {
+    display: flex;
+    gap: 7rem;
+    padding: 5rem 0 2rem;
   }
   .card {
     padding: 2rem;
@@ -78,6 +84,7 @@
     &__btn {
       flex-shrink: 0;
     }
+
     &__table {
       padding: 8rem 0 3rem;
       & thead {
@@ -100,6 +107,7 @@
         }
         & th {
           padding: 1rem 2rem;
+          width: 60%;
         }
         & td {
           vertical-align: middle;
@@ -153,6 +161,7 @@
           }
           &__delete {
             font-size: 1.3rem;
+            width: fit-content;
             & i {
               transition: color 0.2s ease;
               cursor: pointer;

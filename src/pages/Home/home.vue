@@ -12,25 +12,38 @@
         <product-skeleton />
       </div>
     </template>
-    <product-list v-else v-for="item in categories" :key="item.id" :category="item" />
+    <product-list
+      v-else
+      v-for="item in categories"
+      :key="item.id"
+      :category="item"
+      @showCartPreview="showCartPreview"
+    />
     <brand />
+    <modal-cart><cart-product :product="cart_product" /></modal-cart>
   </div>
 </template>
 
 <script>
 import { categoryApis } from '@/apis';
+import { CART_INFO } from '@/constants';
+import { setStorage } from '@/utils/storageWeb';
+import { mapGetters } from 'vuex';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
 import CategorySkeleton from '@/components/Skeleton';
 import CategoryList from './components/TopCategories';
 import ProductSkeleton from './components/HomeSkeleton';
 import ProductList from './components/CategoryProductList';
+import ModalCart from '@/components/Modal/ModalCart';
+import CartProduct from '@/components/Product/ProductCart';
 
 export default {
   name: 'HomePage',
   data() {
     return {
       isShow: false,
+      cart_product: {},
     };
   },
   components: {
@@ -40,12 +53,13 @@ export default {
     CategoryList,
     CategorySkeleton,
     ProductSkeleton,
+    ModalCart,
+    CartProduct,
   },
-  computed: {
-    categories() {
-      return this.$store.getters['category/categories'];
-    },
-  },
+  computed: mapGetters({
+    categories: 'category/categories',
+    cart: 'auth/cart'
+  }),
   created() {
     this.getCategories();
   },
@@ -58,11 +72,17 @@ export default {
         if (categoryData.status === 200) {
           await this.$store.dispatch('category/getCategories', categoryData.data);
         }
-      } catch(e) {
-        throw new Error("Something went wrong.")
+      } catch (e) {
+        throw new Error('Something went wrong.');
       } finally {
         this.isShow = false;
       }
+    },
+    showCartPreview(product) {
+      this.$store.dispatch('auth/addProductToCart', product);
+      setStorage(CART_INFO, this.cart);
+      this.cart_product = product;
+      this.$modal.show('cart');
     },
   },
 };
