@@ -23,9 +23,7 @@ exports[`Login.vue #mounted should render component 1`] = `
       </a> <a class="social-item">
         <icon-stub name="facebook" width="25" height="25"></icon-stub>
       </a></div>
-    <div class="login-register">
-      <router-link-stub to="/register" tag="a" ariacurrentvalue="page" event="click">Chưa có tài khoản? <b>Đăng ký</b></router-link-stub>
-    </div>
+    <div class="login-register"><a>Chưa có tài khoản? <b>Đăng ký</b></a></div>
   </div>
 </div>
 </div>
