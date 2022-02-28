@@ -1,14 +1,12 @@
 import Vue from 'vue';
-import Vuetify from 'vuetify';
 import Vuex from 'vuex';
-import VueRouter from 'vue-router';
-import { ValidationObserver, ValidationProvider, extend, localize } from 'vee-validate';
+import Vuetify from 'vuetify';
 import * as rules from 'vee-validate/dist/rules';
 import en from 'vee-validate/dist/locale/en.json';
+import { ValidationObserver, ValidationProvider, extend, localize } from 'vee-validate';
 
 Vue.use(Vuetify);
 Vue.use(Vuex);
-Vue.use(VueRouter);
 
 Object.keys(rules).forEach((rule) => {
   extend(rule, rules[rule]);

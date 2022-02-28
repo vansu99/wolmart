@@ -110,7 +110,7 @@ export default {
         if (response.status === 200) {
           await this.$store.dispatch('auth/login', response.data);
           setToken(response.data.token);
-          await this.$router.push({ name: 'Home' });
+          await this.$router.push('/');
         }
       } catch ({ error }) {
         this.errorMsg = error.message;
