@@ -29,7 +29,7 @@
                             :to="{
                               name: 'ProductDetail',
                               params: {
-                                slug: product.name,
+                                slug: convertSlug(product.name),
                                 categoryId: product.category_id,
                                 productId: product.id,
                               },
@@ -44,7 +44,7 @@
                             :to="{
                               name: 'ProductDetail',
                               params: {
-                                slug: product.name,
+                                slug: convertSlug(product.name),
                                 categoryId: product.category_id,
                                 productId: product.id,
                               },
@@ -65,9 +65,7 @@
                     <td>
                       <div class="price__wrapper">
                         <span class="product__price--new">{{
-                          Number(product.original_price)
-                            | calDiscountPrice(product.discount)
-                            | formatPrice
+                          product.price | formatPrice
                         }}</span>
                         <div>
                           <span class="product__discount" v-show="product.discount > 0"
@@ -95,6 +93,7 @@
                             min="1"
                             max="10000"
                             v-model="product.cart_quantity"
+                            @input="setQuantity(product)"
                           />
                           <button
                             class="product__quantity-btn--plus"
@@ -144,14 +143,14 @@
                   </tr>
                   <tr class="total">
                     <th><strong>Thanh toán</strong></th>
-                    <td>{{ (totalPrice + transferFee - discount) | formatPrice }}</td>
+                    <td>{{ totalPaid | formatPrice }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <Button
-            @click="onClick"
+            @click="onClick()"
             content="Tiến hành đặt hàng"
             radiusNone
             wFull
@@ -175,11 +174,11 @@
 
 <script>
 import Button from '@/components/Button/ButtonPrimary';
-import { setStorage, removeStorage } from '@/utils/storageWeb';
-import { CART_INFO } from '@/constants';
+import { removeStorage } from '@/utils/storageWeb';
+import { mapActions, mapGetters } from 'vuex';
+import { orderApis } from '@/apis';
 import CartEmpty from './CartEmpty';
 import mixins from '@/mixins';
-import { mapActions, mapGetters } from 'vuex';
 import ModalCart from '@/components/Modal/ModalCart.vue';
 export default {
   name: 'Cart',
@@ -190,31 +189,50 @@ export default {
   }),
   methods: {
     ...mapActions({
+      setQuantity: 'auth/setProductQuantity',
       increaseQuantity: 'auth/increaseProductQuantity',
       decreaseQuantity: 'auth/decreaseProductQuantity',
       deleteProductFromCart: 'auth/deleteProductFromCart',
     }),
-    onClick() {
+    async onClick() {
       // call POST API
-      // remove storage and cart
-      this.$store.dispatch('auth/setCart', []);
-      removeStorage('wolmartCart');
-      var success = true;
-      // navigating to Checkout Page
-      if (success) {
-        this.$router.push({
-          name: 'CheckOut',
-          params: {
-            state: 'success',
-          },
-        });
+      if (this.$store.getters['auth/isAuthenticated']) {
+        try {
+          let newCart = this.cart.map(
+            (item) =>
+              (item = {
+                ...item,
+                quantity: item.cart_quantity,
+              })
+          );
+          let orderData = {
+            carts: newCart,
+            tempPrice: this.totalPaid,
+            total: this.totalPrice,
+          };
+          // console.log(JSON.stringify(orderData));
+          let response = await orderApis.createOrder(orderData);
+          if (response.status == '200') {
+            this.$store.dispatch('auth/setCart', []);
+            removeStorage('wolmartCart');
+            this.$router.push({
+              name: 'CheckOut',
+              params: {
+                state: 'success',
+              },
+            });
+          }
+        } catch (e) {
+          console.log(e);
+          this.$router.push({
+            name: 'CheckOut',
+            params: {
+              state: 'fail',
+            },
+          });
+        }
       } else {
-        this.$router.push({
-          name: 'CheckOut',
-          params: {
-            state: 'fail',
-          },
-        });
+        this.$router.push({ name: 'Login' });
       }
     },
     showDeleteModal(product) {
@@ -223,7 +241,6 @@ export default {
     },
     deleteProduct() {
       this.deleteProductFromCart(this.productDeleted);
-      setStorage(CART_INFO, this.cart);
       this.$modal.hide('cart');
     },
     closeModal() {
@@ -233,26 +250,23 @@ export default {
   computed: {
     ...mapGetters({ cart: 'auth/cart' }),
     totalPrice() {
-      let total = this.cart.reduce(
+      return this.cart.reduce(
         (previousValue, currentValue) =>
-          previousValue +
-          Math.ceil(
-            currentValue.original_price -
-              (currentValue.original_price * currentValue.discount) / 100
-          ) *
-            currentValue.cart_quantity,
+          previousValue + currentValue.price * currentValue.cart_quantity,
         0
       );
-      return total;
     },
     transferFee() {
-      return this.cart.reduce((previousValue, currentValue) => {
-        if (currentValue.is_free_shipping == 0) return previousValue + 13300;
-        else return previousValue;
-      }, 0);
+      let fee = this.cart.some((currentValue) => currentValue.is_free_shipping == 0)
+        ? 15000
+        : 0;
+      return fee;
     },
     discount() {
       return 0;
+    },
+    totalPaid() {
+      return this.totalPrice + this.transferFee - this.discount;
     },
   },
   components: {

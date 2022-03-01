@@ -44,38 +44,37 @@
                 <thead>
                   <tr>
                     <th>
-                      <div class="card__title">Đơn hàng (1 sản phẩm)</div>
+                      <div class="card__title">
+                        Đơn hàng ({{ success ? order.length : cart.length }} sản phẩm)
+                      </div>
                     </th>
-                    <td>
-                      <router-link :to="{ name: 'Cart' }"
-                        ><i class="fas fa-pen"></i
-                      ></router-link>
-                    </td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="i in 3" :key="i">
+                  <tr v-for="item in cart" :key="item.id">
                     <th>
                       <div class="product__info">
-                        <div class="product__quantity">1x</div>
-                        <div class="product__name">Thuốc chữa dạ dày tá tràng</div>
+                        <div class="product__quantity">{{ item.quantity }}x</div>
+                        <div class="product__name">{{ item.name }}</div>
                       </div>
                     </th>
-                    <td>{{ 30000 | formatPrice }}</td>
+                    <td>
+                      {{ item.price | formatPrice }}
+                    </td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
                     <th>Tạm tính</th>
-                    <td>{{ 30000 | formatPrice }}</td>
+                    <td>{{ Number(totalPrice) | formatPrice }}</td>
                   </tr>
                   <tr>
                     <th>Phí vận chuyển</th>
-                    <td>{{ 30000 | formatPrice }}</td>
+                    <td>{{ Number(transferFee) | formatPrice }}</td>
                   </tr>
                   <tr class="total">
                     <th>Thanh toán</th>
-                    <td>{{ 30000 | formatPrice }}</td>
+                    <td>{{ Number(totalPrice + transferFee) | formatPrice }}</td>
                   </tr>
                 </tfoot>
               </table>
@@ -89,22 +88,41 @@
 
 <script>
 import AngleLeft from '@/components/SvgIcons/angle-left';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Checkout',
-  data() {
-    return {
-      success: true,
-    };
-  },
-  methods: {
-    init() {
+  computed: {
+    success: function () {
       if (this.$route.params.state === 'fail') {
-        this.success = false;
-      }
+        return false;
+      } else return true;
     },
-  },
-  created() {
-    this.init();
+    order: function () {
+      if (this.$route.params.state === 'fail') {
+        return this.cart;
+      } else return [];
+    },
+    ...mapGetters({
+      cart: 'auth/cart',
+    }),
+    totalPrice() {
+      return this.order.reduce(
+        (previousValue, currentValue) =>
+          previousValue +
+          Math.ceil(
+            currentValue.original_price -
+              (currentValue.original_price * currentValue.discount) / 100
+          ) *
+            currentValue.cart_quantity,
+        0
+      );
+    },
+    transferFee() {
+      let fee = this.order.some((currentValue) => currentValue.is_free_shipping == 0)
+        ? 15000
+        : 0;
+      return fee;
+    },
   },
   components: { AngleLeft },
 };

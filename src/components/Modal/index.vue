@@ -11,7 +11,6 @@
         <slot></slot>
       </v-sheet>
     </v-sheet>
-
     <div class="modal-action" :class="`justify-${modalPosition}`">
       <div v-for="(item, index) in modalButton" :key="index" class="mr-5">
         <v-btn
@@ -19,7 +18,7 @@
           :outlined="item.outlined"
           :color="item.color"
           @click="clickEvent(item.methods)"
-          >{{item.title}}</v-btn
+          >{{ item.title }}</v-btn
         >
       </div>
     </div>
@@ -36,14 +35,14 @@ export default {
     modalActive: Boolean,
     modalPosition: String,
     modalButton: Array,
-    modalKey: String
+    modalKey: String,
   },
   methods: {
     clickEvent(event) {
       this.$emit(event);
     },
     closeModal() {
-      this.$emit('closeModal')
+      this.$emit('closeModal');
     },
   },
 };

@@ -37,7 +37,6 @@
             :product="product"
             :star="star"
             :review="review"
-            @showCartPreview="showCartPreview"
           />
         </div>
       </div>
@@ -48,9 +47,8 @@
 <script>
 import mixins from '@/mixins';
 import { categoryApis } from '@/apis/';
-import Product from '@/components/Product/ProductHome';
+import Product from './ProductHome';
 import Skeleton from '../HomeSkeleton.vue';
-
 export default {
   name: 'CategoryProductList',
   mixins: [mixins],
@@ -89,9 +87,6 @@ export default {
       } finally {
         this.isShow = false;
       }
-    },
-    showCartPreview(product) {
-      this.$emit('showCartPreview', product);
     },
   },
   components: {

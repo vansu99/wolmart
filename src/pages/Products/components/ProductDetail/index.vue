@@ -7,7 +7,7 @@
             <product-skeleton style="width: 100%" />
           </template>
           <template v-else>
-            <ProductInfo :product="product" @showCartPreview="showCartPreview" />
+            <ProductInfo :product="product" />
             <DescriptionTabs :product="product" :star="star" :review="review" />
           </template>
           <RelatedProducts
@@ -15,7 +15,6 @@
             :productList="productList"
             :star="star"
             :review="review"
-            @showCartPreview="showCartPreview"
           />
           <button class="sidebar__open-btn" @click="hide = !hide" v-show="hide">
             <i class="fas fa-angle-left"></i>
@@ -33,7 +32,6 @@
           </button>
         </div>
       </div>
-      <modal-cart><CartProduct :product="cart_product" /></modal-cart>
     </div>
   </transition>
 </template>
@@ -41,15 +39,10 @@
 <script>
 import Sidebar from './components/Sidebar/Sidebar';
 import { categoryApis, productApis } from '@/apis';
-import { CART_INFO } from '@/constants';
-import { setStorage } from '@/utils/storageWeb';
 import ProductInfo from './components/ProductInfo';
 import ProductSkeleton from './components/ProductInfo/ProductSkeleton';
 import DescriptionTabs from './components/DescriptionTabs';
 import RelatedProducts from './components/RelatedProducts';
-import ModalCart from '@/components/Modal/ModalCart';
-import CartProduct from '@/components/Product/ProductCart';
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProductDetail',
@@ -59,7 +52,6 @@ export default {
       review: 13,
       product: {},
       productList: [],
-      cart_product: {},
       hide: false,
       isProductShow: false,
       isProductListShow: true,
@@ -71,8 +63,6 @@ export default {
     RelatedProducts,
     Sidebar,
     ProductSkeleton,
-    ModalCart,
-    CartProduct,
   },
   created() {
     this.getProductByID();
@@ -86,6 +76,7 @@ export default {
         const productData = await productApis.getProductDetail(productID);
         if (productData.status === 200) {
           this.product = productData.data;
+          console.log(this.product);
           // call API to get product by category ID
           await this.getProductList(this.product.category_id, this.product.id);
         }
@@ -110,14 +101,7 @@ export default {
         this.isProductListShow = false;
       }
     },
-    showCartPreview(product) {
-      this.$store.dispatch('auth/addProductToCart', product);
-      setStorage(CART_INFO, this.cart);
-      this.cart_product = product;
-      this.$modal.show('cart');
-    },
   },
-  computed: mapGetters({ cart: 'auth/cart' }),
   watch: {
     '$route.query'() {
       this.getProductByID();
@@ -130,7 +114,6 @@ export default {
 <style lang="scss" scoped>
 .product-detail {
   padding: 4rem 0;
-
   &__container {
     display: flex;
     gap: 3rem;
@@ -159,7 +142,6 @@ export default {
         display: flex;
       }
     }
-
     .sidebar__close-btn {
       display: none;
       position: fixed;

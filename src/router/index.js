@@ -139,6 +139,7 @@ const router = new Router({
       name: 'CheckOut',
       component: () => import('@/pages/Cart/CheckOut'),
       meta: {
+        isAuth: true,
         layout: PublicLayout,
       },
     },

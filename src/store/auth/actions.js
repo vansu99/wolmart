@@ -9,10 +9,13 @@ export default {
     commit('setUser', value);
   },
   setCart({ commit }, value) {
-    commit('setCartData', value)
+    commit('setCartData', value);
   },
   addProductToCart({ commit }, value) {
     commit('addToCart', value);
+  },
+  setProductQuantity({ commit }, value) {
+    commit('setQuantity', value);
   },
   increaseProductQuantity({ commit }, value) {
     commit('increaseQuantity', value);

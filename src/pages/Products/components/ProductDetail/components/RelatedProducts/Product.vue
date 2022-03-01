@@ -13,16 +13,18 @@
       <div class="product__top">
         <a class="product__link"><img :src="product.img_path" :alt="product.name" /></a>
         <div class="product__action--vertical">
-          <button @click.prevent="AddToCart()" class="product__btn" title="Add to cart">
+          <button @click.prevent="addToCart()" class="product__btn" title="Add to cart">
             <i class="fas fa-shopping-bag"></i>
           </button>
           <router-link to="/wishlist" class="product__btn" title="Add to wishlist"
             ><i class="fas fa-heart"></i
           ></router-link>
         </div>
-        <span class="product__sale" v-show="product.discount"
+        <span v-if="product.quantity === 0" class="product__out">Hết</span>
+        <span v-else class="product__sale" v-show="product.discount"
           >Giảm {{ product.discount }}%</span
         >
+        <div class="product__action--horizontal">Xem chi tiết</div>
       </div>
       <div class="product__content">
         <div class="product__name">
@@ -50,12 +52,18 @@ export default {
   components: { RatingStar },
   props: { product: Object, star: Number, review: Number },
   methods: {
-    AddToCart() {
-      const productAdded = {
-        ...this.product,
-        cart_quantity: 1,
-      };
-      this.$emit('showCartPreview', productAdded);
+    addToCart() {
+      if (this.product.quantity > 0) {
+        const productAdded = {
+          ...this.product,
+          cart_quantity: 1,
+          price: Math.ceil(
+            this.product.original_price -
+              (this.product.original_price * this.product.discount) / 100
+          ),
+        };
+        this.$store.dispatch('auth/addProductToCart', productAdded);
+      }
     },
   },
 };
@@ -63,10 +71,11 @@ export default {
 
 <style lang="scss" scoped>
 @import './src/plugins/vuetify/preset/styles/mixins';
-
 .product {
   &__item {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     & > a {
       display: flex;
       flex-direction: column;
@@ -84,7 +93,7 @@ export default {
     flex-shrink: 0;
     position: relative;
     width: 100%;
-    height: 24.3rem;
+    height: 30rem;
     overflow: hidden;
     font-size: 1rem;
     & > a {
@@ -110,13 +119,28 @@ export default {
       top: 1.5rem;
       right: 1.5rem;
     }
+    &--horizontal {
+      display: none;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      padding: 1.14em 0;
+      background-color: $hover-color;
+      text-align: center;
+      transition: all 3s;
+      color: $text-white-light;
+      font-size: 1.4em;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
   }
   &__btn {
     @include flexCenter();
     width: 3.6rem;
     height: 3.6rem;
     margin-bottom: 0.2rem;
-    background-color: $bg-contrary;
+    background: $bg-contrary;
     border: 1px solid $bg-contrary-light;
     border-radius: 50%;
     overflow: hidden;
@@ -147,12 +171,37 @@ export default {
     color: $text-white-light;
     border-radius: 0.3rem;
   }
+  &__out {
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+    padding: 1.5rem 1rem 0.5rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: $text-white-light;
+    background: $fail;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -2rem;
+      left: 0;
+      border-right: 2.2rem solid transparent;
+      border-top: 2rem solid $fail;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2rem;
+      right: 0;
+      border-left: 2.2rem solid transparent;
+      border-top: 2rem solid $fail;
+    }
+  }
   &__content {
     display: flex;
     flex-direction: column;
     height: 100%;
     margin-top: auto;
-    text-align: center;
     font-family: $font-primary;
   }
   &__name {
@@ -174,7 +223,6 @@ export default {
       color: $text-primary;
     }
   }
-
   &__price {
     margin-top: 0.3rem;
     font-family: $font-primary;
