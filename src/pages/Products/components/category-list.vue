@@ -34,7 +34,7 @@
 <script>
 import mixins from '@/mixins';
 import { categoryApis } from '@/apis';
-import { cateThumbnail } from '@/mocks';
+import { cateThumbnail } from '@/mocks/cateThumbnail';
 
 export default {
   name: 'category-list',

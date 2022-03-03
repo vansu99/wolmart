@@ -89,6 +89,7 @@ export default {
     // call API to get products that belong to same category but have different ID from the original productID
     async getProductList(categoryID, productID) {
       try {
+        this.isProductListShow = true;
         const productListData = await categoryApis.getProductListBaseOnCategory(
           categoryID
         );

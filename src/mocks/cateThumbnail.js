@@ -16,4 +16,13 @@ const cateThumbnail = [
   },
 ];
 
-export default cateThumbnail;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export const methods = {
+  async get() {
+    await sleep(10)
+    return [200, cateThumbnail];
+  }
+}
+
+export default methods;
