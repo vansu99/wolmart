@@ -65,7 +65,9 @@
                     <td>
                       <div class="price__wrapper">
                         <span class="product__price--new">{{
-                          product.price | formatPrice
+                          Number(product.original_price)
+                            | calDiscountPrice(product.discount)
+                            | formatPrice
                         }}</span>
                         <div>
                           <span class="product__discount" v-show="product.discount > 0"
@@ -131,19 +133,19 @@
                 <tbody>
                   <tr>
                     <th>Tạm tính</th>
-                    <td>{{ totalPrice | formatPrice }}</td>
+                    <td>{{ Number(totalPrice) | formatPrice }}</td>
                   </tr>
                   <tr>
                     <th>Phí vận chuyển</th>
-                    <td>{{ transferFee | formatPrice }}</td>
+                    <td>{{ Number(transferFee) | formatPrice }}</td>
                   </tr>
                   <tr>
                     <th>Giảm giá</th>
-                    <td>{{ discount | formatPrice }}</td>
+                    <td>{{ Number(discount) | formatPrice }}</td>
                   </tr>
                   <tr class="total">
                     <th><strong>Thanh toán</strong></th>
-                    <td>{{ totalPaid | formatPrice }}</td>
+                    <td>{{ Number(totalPaid) | formatPrice }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -185,7 +187,6 @@ export default {
   name: 'Cart',
   mixins: [mixins],
   data: () => ({
-    value: 1,
     productDeleted: {},
   }),
   methods: {
@@ -200,38 +201,38 @@ export default {
     async handleCheckout() {
       if (this.$store.getters['auth/isAuthenticated']) {
         try {
-          let newCart = this.cart.map(
-            (item) =>
-              ({
-                discount: item.discount,
-                id: item.id,
-                price: item.price,
-                thumbnail: item.img_path,
-                original_price: item.original_price,
-                title: item.name,
-                quantity: item.cart_quantity,
-              })
-          );
+          let newCart = this.cart.map((item) => ({
+            discount: item.discount,
+            id: item.id,
+            price: Math.ceil(
+              item.original_price - (item.original_price * item.discount) / 100
+            ),
+            thumbnail: item.img_path,
+            original_price: item.original_price,
+            title: item.name,
+            quantity: item.cart_quantity,
+          }));
 
           let orderData = {
             carts: newCart,
-            tempPrice: this.totalPaid,
-            total: this.totalPrice,
+            tempPrice: this.totalPrice,
+            total: this.totalPaid,
           };
 
           let response = await orderApis.createOrder(orderData);
           if (response.status === 200) {
-            await this.$store.dispatch('auth/setCart', []);
-            removeStorage('wolmartCart');
             await this.$router.push({
               name: 'CheckOut',
               params: {
                 state: 'success',
+                orderData: response.data,
               },
             });
+            await this.$store.dispatch('auth/setCart', []);
+            removeStorage('wolmartCart');
           }
-        } catch (e) {
-          console.log(e);
+        } catch {
+          console.log('Something went wrong!');
           await this.$router.push({
             name: 'CheckOut',
             params: {
@@ -260,15 +261,19 @@ export default {
     totalPrice() {
       return this.cart.reduce(
         (previousValue, currentValue) =>
-          previousValue + currentValue.price * currentValue.cart_quantity,
+          previousValue +
+          Math.ceil(
+            currentValue.original_price -
+              (currentValue.original_price * currentValue.discount) / 100
+          ) *
+            currentValue.cart_quantity,
         0
       );
     },
     transferFee() {
-      let fee = this.cart.some((currentValue) => currentValue.is_free_shipping == 0)
+      return this.cart.some((currentValue) => currentValue.is_free_shipping == 0)
         ? 15000
         : 0;
-      return fee;
     },
     discount() {
       return 0;

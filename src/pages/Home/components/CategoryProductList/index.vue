@@ -83,7 +83,7 @@ export default {
           this.products = productData.data;
         }
       } catch {
-        console.log('getProducts error!!!');
+        console.log('Something went wrong');
       } finally {
         this.isShow = false;
       }

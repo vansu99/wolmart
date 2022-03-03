@@ -130,10 +130,6 @@ export default {
           const productAdded = {
             ...this.product,
             cart_quantity: this.value,
-            price: Math.ceil(
-              this.product.original_price -
-                (this.product.original_price * this.product.discount) / 100
-            ),
           };
           this.$store.dispatch('auth/addProductToCart', productAdded);
         }

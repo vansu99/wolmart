@@ -137,6 +137,7 @@ const router = new Router({
     {
       path: '/checkout/:state',
       name: 'CheckOut',
+      props: true,
       component: () => import('@/pages/Cart/CheckOut'),
       meta: {
         isAuth: true,
