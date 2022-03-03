@@ -150,7 +150,7 @@
             </div>
           </div>
           <Button
-            @click="onClick()"
+            @click="handleCheckout()"
             content="Tiến hành đặt hàng"
             radiusNone
             wFull
@@ -180,6 +180,7 @@ import { orderApis } from '@/apis';
 import CartEmpty from './CartEmpty';
 import mixins from '@/mixins';
 import ModalCart from '@/components/Modal/ModalCart.vue';
+
 export default {
   name: 'Cart',
   mixins: [mixins],
@@ -194,28 +195,35 @@ export default {
       decreaseQuantity: 'auth/decreaseProductQuantity',
       deleteProductFromCart: 'auth/deleteProductFromCart',
     }),
-    async onClick() {
-      // call POST API
+
+    // handle checkout
+    async handleCheckout() {
       if (this.$store.getters['auth/isAuthenticated']) {
         try {
           let newCart = this.cart.map(
             (item) =>
-              (item = {
-                ...item,
+              ({
+                discount: item.discount,
+                id: item.id,
+                price: item.price,
+                thumbnail: item.img_path,
+                original_price: item.original_price,
+                title: item.name,
                 quantity: item.cart_quantity,
               })
           );
+
           let orderData = {
             carts: newCart,
             tempPrice: this.totalPaid,
             total: this.totalPrice,
           };
-          // console.log(JSON.stringify(orderData));
+
           let response = await orderApis.createOrder(orderData);
-          if (response.status == '200') {
-            this.$store.dispatch('auth/setCart', []);
+          if (response.status === 200) {
+            await this.$store.dispatch('auth/setCart', []);
             removeStorage('wolmartCart');
-            this.$router.push({
+            await this.$router.push({
               name: 'CheckOut',
               params: {
                 state: 'success',
@@ -224,7 +232,7 @@ export default {
           }
         } catch (e) {
           console.log(e);
-          this.$router.push({
+          await this.$router.push({
             name: 'CheckOut',
             params: {
               state: 'fail',
@@ -232,7 +240,7 @@ export default {
           });
         }
       } else {
-        this.$router.push({ name: 'Login' });
+        await this.$router.push({ name: 'Login' });
       }
     },
     showDeleteModal(product) {
