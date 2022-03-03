@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import { TOKEN } from '@/constants';
 
 export function getToken() {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Product from '@/components/Product/Product';
+import Product from './Product';
 import Skeleton from '@/components/Skeleton';
 export default {
   name: 'RelatedProducts',

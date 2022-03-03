@@ -76,6 +76,7 @@ export default {
         const productData = await productApis.getProductDetail(productID);
         if (productData.status === 200) {
           this.product = productData.data;
+          console.log(this.product);
           // call API to get product by category ID
           await this.getProductList(this.product.category_id, this.product.id);
         }
@@ -114,7 +115,6 @@ export default {
 <style lang="scss" scoped>
 .product-detail {
   padding: 4rem 0;
-
   &__container {
     display: flex;
     gap: 3rem;
@@ -143,7 +143,6 @@ export default {
         display: flex;
       }
     }
-
     .sidebar__close-btn {
       display: none;
       position: fixed;

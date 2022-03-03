@@ -12,7 +12,8 @@
               <div v-if="success" class="card__anounce">
                 <div>Xin cảm ơn quý khách đã mua hàng tại <span>Wolmart</span></div>
                 <div>
-                  Đơn hàng số <strong>#13</strong> của bạn đã được đặt thành công!
+                  Đơn hàng số <strong>#{{ this.order.id }}</strong> của bạn đã được đặt
+                  thành công!
                 </div>
               </div>
               <div v-else class="card__anounce">
@@ -44,38 +45,27 @@
                 <thead>
                   <tr>
                     <th>
-                      <div class="card__title">Đơn hàng (1 sản phẩm)</div>
+                      <div class="card__title">
+                        Đơn hàng ({{ this.order.products.length }}
+                        sản phẩm)
+                      </div>
                     </th>
-                    <td>
-                      <router-link :to="{ name: 'Cart' }"
-                        ><i class="fas fa-pen"></i
-                      ></router-link>
-                    </td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="i in 3" :key="i">
-                    <th>
+                  <tr v-for="(item, index) in this.order.products" :key="index">
+                    <th colspan="2">
                       <div class="product__info">
-                        <div class="product__quantity">1x</div>
-                        <div class="product__name">Thuốc chữa dạ dày tá tràng</div>
+                        <div class="product__index">{{ index + 1 }}:</div>
+                        <div class="product__name">{{ item }}</div>
                       </div>
                     </th>
-                    <td>{{ 30000 | formatPrice }}</td>
                   </tr>
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <th>Tạm tính</th>
-                    <td>{{ 30000 | formatPrice }}</td>
-                  </tr>
-                  <tr>
-                    <th>Phí vận chuyển</th>
-                    <td>{{ 30000 | formatPrice }}</td>
-                  </tr>
                   <tr class="total">
                     <th>Thanh toán</th>
-                    <td>{{ 30000 | formatPrice }}</td>
+                    <td>{{ Number(this.order.total_price) | formatPrice }}</td>
                   </tr>
                 </tfoot>
               </table>
@@ -89,22 +79,49 @@
 
 <script>
 import AngleLeft from '@/components/SvgIcons/angle-left';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Checkout',
-  data() {
-    return {
-      success: true,
-    };
-  },
-  methods: {
-    init() {
+  props: ['orderData'],
+  computed: {
+    success: function () {
       if (this.$route.params.state === 'fail') {
-        this.success = false;
+        return false;
+      } else return true;
+    },
+    order: function () {
+      if (this.$route.params.state === 'fail') {
+        return {
+          total_price: this.totalPrice + this.transferFee,
+          products: this.cart.map((item) => item.name),
+        };
+      } else {
+        return {
+          ...this.orderData,
+          products: this.orderData.products.split(','),
+        };
       }
     },
-  },
-  created() {
-    this.init();
+    ...mapGetters({
+      cart: 'auth/cart',
+    }),
+    totalPrice() {
+      return this.cart.reduce(
+        (previousValue, currentValue) =>
+          previousValue +
+          Math.ceil(
+            currentValue.original_price -
+              (currentValue.original_price * currentValue.discount) / 100
+          ) *
+            currentValue.cart_quantity,
+        0
+      );
+    },
+    transferFee() {
+      return this.cart.some((currentValue) => currentValue.is_free_shipping == 0)
+        ? 15000
+        : 0;
+    },
   },
   components: { AngleLeft },
 };

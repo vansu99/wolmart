@@ -38,7 +38,9 @@
         <hr class="hr-divider" />
         <div class="product__price">
           <span class="product__price--new">{{
-            Number(product.original_price) | calDiscountPrice(product.discount) | formatPrice
+            Number(product.original_price)
+              | calDiscountPrice(product.discount)
+              | formatPrice
           }}</span>
           <span class="product__price--old">{{
             Number(product.original_price) | formatPrice
@@ -47,21 +49,34 @@
         <hr class="hr-divider" />
         <div class="product__actions">
           <div class="product__quantity">
-            <input type="number" min="1" max="10000" v-model="value" />
-            <button class="product__quantity-btn--minus" @click="decreaseQuantity">-</button>
-            <button class="product__quantity-btn--plus" @click="increaseQuantity">+</button>
+            <input
+              type="number"
+              min="1"
+              max="10000"
+              v-model="value"
+              @input="setQuantity"
+            />
+            <button class="product__quantity-btn--minus" @click="decreaseQuantity">
+              -
+            </button>
+            <button class="product__quantity-btn--plus" @click="increaseQuantity">
+              +
+            </button>
           </div>
-          <div class="product__btn" :class="{ disabled: value === 0 }">
+          <button
+            class="product__btn"
+            :class="{ disabled: this.value == 0 || product.quantity === 0 }"
+            @click="addToCart()"
+          >
             <i class="fas fa-shopping-bag product__btn-icon"></i>
             <div class="product__btn-text">Thêm vào giỏ</div>
-          </div>
+          </button>
         </div>
         <div class="product__links">
           <Social />
           <span></span>
           <div class="product__icon" title="Thêm vào wishlist">
-            <router-link to="/wishlist" href=""
-              ><i class="far fa-heart"></i></router-link>
+            <router-link to="/wishlist" href=""><i class="far fa-heart"></i></router-link>
           </div>
         </div>
       </div>
@@ -77,9 +92,11 @@ import Social from '@/components/SocialContact/SocialContact';
 
 export default {
   name: 'Product',
-  data: () => ({
-    value: 1,
-  }),
+  data() {
+    return {
+      value: 1,
+    };
+  },
   props: { product: {} },
   components: {
     VueperSlides,
@@ -87,17 +104,42 @@ export default {
     Social,
   },
   methods: {
-    increaseQuantity: function () {
-      if (this.value >= 10000) {
+    setQuantity() {
+      if (this.value > this.product.quantity) {
+        this.value = this.product.quantity;
+      }
+      if (this.value < 0) {
+        this.value = 0;
+      }
+    },
+    increaseQuantity() {
+      if (this.value >= this.product.quantity) {
         return this.value;
       }
       return (this.value = Number(this.value) + 1);
     },
-    decreaseQuantity: function () {
+    decreaseQuantity() {
       if (this.value <= 1) {
         return this.value;
       }
       return (this.value = Number(this.value) - 1);
+    },
+    addToCart() {
+      if (this.product.quantity > 0) {
+        if (this.value > 0) {
+          const productAdded = {
+            ...this.product,
+            cart_quantity: this.value,
+          };
+          this.$store.dispatch('auth/addProductToCart', productAdded);
+        }
+      }
+    },
+  },
+  watch: {
+    'this.value'() {
+      console.log(this.value);
+      // setQuantity();
     },
   },
 };

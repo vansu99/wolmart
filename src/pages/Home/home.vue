@@ -12,13 +12,19 @@
         <product-skeleton />
       </div>
     </template>
-    <product-list v-else v-for="item in categories" :key="item.id" :category="item" />
+    <product-list
+      v-else
+      v-for="item in categories"
+      :key="item.id"
+      :category="item"
+    />
     <brand />
   </div>
 </template>
 
 <script>
 import { categoryApis } from '@/apis';
+import { mapGetters } from 'vuex';
 import Brand from './components/Brand/Brand';
 import Banner from './components/Banner/Banner';
 import CategorySkeleton from '@/components/Skeleton';
@@ -41,11 +47,9 @@ export default {
     CategorySkeleton,
     ProductSkeleton,
   },
-  computed: {
-    categories() {
-      return this.$store.getters['category/categories'];
-    },
-  },
+  computed: mapGetters({
+    categories: 'category/categories',
+  }),
   created() {
     this.getCategories();
   },
@@ -58,8 +62,8 @@ export default {
         if (categoryData.status === 200) {
           await this.$store.dispatch('category/getCategories', categoryData.data);
         }
-      } catch(e) {
-        throw new Error("Something went wrong.")
+      } catch (e) {
+        throw new Error('Something went wrong.');
       } finally {
         this.isShow = false;
       }

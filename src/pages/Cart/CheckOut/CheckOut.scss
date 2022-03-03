@@ -89,6 +89,9 @@
       color: $bg-primary;
       display: flex;
       align-items: center;
+      svg {
+        transition: transform 0.1s ease-in-out;
+      }
 
       &:hover svg {
         transform: translateX(-8px);
@@ -115,16 +118,6 @@
       th {
         color: $text-primary;
       }
-      td {
-        i {
-          cursor: pointer;
-          color: $bg-second;
-          transition: color 0.2s ease;
-          &:hover {
-            color: $bg-primary;
-          }
-        }
-      }
     }
     tbody {
       border-bottom: $border;
@@ -132,6 +125,13 @@
         &__info {
           display: flex;
           justify-content: space-between;
+        }
+        &__index {
+          padding-right: 1rem;
+        }
+        &__name {
+          font-size: 1.3rem;
+          font-weight: 500;
         }
       }
     }

@@ -75,11 +75,11 @@
             >
           </div>
           <div class="cart items" :values="cart && cart.length">
-            <a class="text-decoration" href="">
+            <router-link class="text-decoration" :to="{ name: 'Cart' }">
               <img
                 src="../../assets/images/Header/Icon/shopping-bag-solid.svg"
                 alt=""
-              /><span class="d-block">Cart</span></a
+              /><span class="d-block">Cart</span></router-link
             >
           </div>
         </div>
